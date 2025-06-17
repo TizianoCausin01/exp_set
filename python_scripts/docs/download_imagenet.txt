@@ -1,0 +1,11 @@
+$ cd data_dir
+$ wget https://image-net.org/data/ILSVRC/2012/ILSVRC2012_img_val.tar # downloads the validation set
+$ mkdir -p ./imagenet/val
+$ tar -xf ILSVRC2012_img_val.tar -C ./imagenet/val
+$ cd imagenet/val
+$ wget https://raw.githubusercontent.com/soumith/imagenetloader.torch/master/valprep.sh # downloads the script to move the images into their folders (classes)
+$ chmod +x valprep.sh
+$ wget https://image-net.org/data/ILSVRC/2012/ILSVRC2012_devkit_t12.tar.gz # file containing the labels of the images
+$ tar -xzvf ILSVRC2012_devkit_t12.tar.gz # extract it
+$ ./valprep.sh # puts all the images in their class folder 
+
