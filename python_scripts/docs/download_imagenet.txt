@@ -8,4 +8,4 @@ $ chmod +x valprep.sh
 $ wget https://image-net.org/data/ILSVRC/2012/ILSVRC2012_devkit_t12.tar.gz # file containing the labels of the images
 $ tar -xzvf ILSVRC2012_devkit_t12.tar.gz # extract it
 $ ./valprep.sh # puts all the images in their class folder 
-
+$ mv ILSVRC2012_devkit_t12* ../
