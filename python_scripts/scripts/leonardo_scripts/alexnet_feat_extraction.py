@@ -117,7 +117,7 @@ with torch.no_grad():  # Disable gradient tracking for evaluation
         # Example: print first batch predictions
         print(preds)
 
-with h5py.File(f"{path2res}/freq_alexnet.h5", "w") as f:
+with h5py.File(f"{path2res}/feats_alexnet.h5", "w") as f:
 # Iterate over dictionary items and save them in the HDF5 file
     for key, value in feats.items():
         f.create_dataset(
