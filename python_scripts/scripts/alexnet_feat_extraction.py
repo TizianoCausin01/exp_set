@@ -5,9 +5,6 @@ from torchvision import models
 from torchvision.datasets import ImageNet
 from torchvision import transforms
 import os
-import sys
-sys.path.append("/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts/src")
-from sparsity_in_silico.sparsity_CNN import response_prob
 #import imageio
 import numpy as np
 import h5py
