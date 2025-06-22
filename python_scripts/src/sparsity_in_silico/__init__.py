@@ -1,5 +1,5 @@
 __all__ = [
-  'response_prob_np', 'response_prob_torch'
+  'response_prob', 'rust_sparseness'
   ]
 
-from .sparsity_CNN import response_prob_np, response_prob_torch
+from .sparsity_CNN import response_prob, rust_sparseness

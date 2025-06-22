@@ -1,6 +1,16 @@
 """utils module"""
 import numpy as np
 
+
+
+
+
+
+def get_data_mat(data_dict, key, dtype=np.float32):
+    data_mat = data_dict[key][:].astype(dtype)
+    data_mat = np.transpose(data_mat)
+    return data_mat
+
 """
 participation_ratio
 Computes the participation ratio of each neuron in data_mat (rows). 
