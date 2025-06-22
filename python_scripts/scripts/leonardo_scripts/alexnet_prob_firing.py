@@ -7,7 +7,10 @@ import h5py
 
 path2res = "/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico"
 with h5py.File(f"{path2res}/feats_alexnet.h5", 'r') as f:
-    p = response_prob_np(f)
+    p = {}
+    for k, v in f.items():
+        data_mat = get_data_mat(v, k) 
+        p[k] = response_prob(data_mat)
 
 with h5py.File(f"{path2res}/prob_alexnet.h5", "w") as f:
 # Iterate over dictionary items and save them in the HDF5 file
