@@ -1,6 +1,6 @@
 import sys
 sys.path.append("/leonardo/home/userexternal/tcausin0/exp_set/python_scripts/src")
-from sparsity_in_silico.sparsity_CNN import response_prob_np, rust_sparseness
+from sparsity_in_silico.sparsity_CNN import response_prob, rust_sparseness
 from sparsity_in_silico.utils import get_data_mat
 import h5py
 
