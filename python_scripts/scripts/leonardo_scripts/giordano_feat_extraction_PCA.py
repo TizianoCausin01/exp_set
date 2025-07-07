@@ -151,7 +151,7 @@ def run_pca_pipeline(model_name='resnet18', layers_to_extract=None, n_components
             num_workers=num_workers,
             pin_memory=True,
             worker_init_fn=worker_init_fn,
-            timeout=100
+            timeout=400
         )
         print(datetime.now().strftime("%H:%M:%S"), "Single-pass PCA fitting across all layers...")
         for inputs, _ in tqdm(loader, desc="Fitting PCA"):
@@ -186,9 +186,9 @@ def run_pca_pipeline(model_name='resnet18', layers_to_extract=None, n_components
                 timeout=100
             ) # shuffle=True, took out bc I want my feats aligned
             counter = 0
-            for inputs in loader:
+            for inputs, _ in loader:
                 counter+=1
-                print(f"starting batch {counter}")
+                print(datetime.now().strftime("%H:%M:%S"), f"starting batch {counter}")
                 with torch.no_grad():
                     inputs = inputs.to(device)
                     feats = feature_extractor(inputs)[layer_name]
