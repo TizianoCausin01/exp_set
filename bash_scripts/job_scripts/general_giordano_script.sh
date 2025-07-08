@@ -17,5 +17,4 @@ python giordano_feat_extraction_PCA.py \
   --model_name $1 \
   --n_components $2 \
   --batch_size 1024 \
-  --num_workers $SLURM_NTASKS \
-  --multiple_passes
+  --num_workers $SLURM_NTASKS 
