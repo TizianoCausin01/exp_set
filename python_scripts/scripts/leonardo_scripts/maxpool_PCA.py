@@ -1,7 +1,7 @@
 # from collections import defaultdict
 import sys
 sys.path.append("/leonardo/home/userexternal/tcausin0/exp_set/python_scripts/src")
-from dim_redu_anns.incremental_pca import run_ipca_pipeline
+from dim_redu_anns.incremental_pca import run_ipca_maxpool
 import argparse
 
 if __name__ == '__main__':
