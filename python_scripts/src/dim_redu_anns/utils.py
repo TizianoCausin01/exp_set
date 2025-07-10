@@ -1,4 +1,18 @@
 from datetime import datetime 
+import torch 
+from torchvision.models.feature_extraction import (
+    create_feature_extractor,
+    get_graph_node_names,
+)
+from torchvision import transforms, datasets, models
+
+import torch 
+from torchvision.models.feature_extraction import (
+            create_feature_extractor,
+                get_graph_node_names,
+                )
+from torchvision import transforms, datasets, models
+
 
 def worker_init_fn(worker_id):
     print(datetime.now().strftime("%H:%M:%S"), f":builder: Worker {worker_id} started")
@@ -83,3 +97,13 @@ def get_relevant_output_layers(model, model_name):
     #     all_nodes, _ = get_graph_node_names(model)
     #     # Keep layers that are ReLU outputs or last ReLU in a residual block
     #     return [name for name in all_nodes if name.endswith('relu_1') or name.endswith('relu')]
+
+
+def get_layer_out_shape(feature_extractor, layer_name):
+    with torch.no_grad():
+        tmp_shape = feature_extractor(torch.randn(1, 3, 224, 224))[
+            layer_name
+        ].shape [1:]
+    return tmp_shape
+
+

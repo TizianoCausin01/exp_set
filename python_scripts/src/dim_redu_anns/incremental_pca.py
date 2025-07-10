@@ -11,7 +11,7 @@ from collections import defaultdict
 from datetime import datetime
 import torch
 import os
-from .utils import get_relevant_output_layers, worker_init_fn
+from .utils import get_relevant_output_layers, worker_init_fn, get_layer_out_shape
 
 
 def run_ipca_pipeline(
@@ -24,7 +24,6 @@ def run_ipca_pipeline(
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # === Paths ===
     imagenet_path = "/leonardo_work/Sis25_piasini/tcausin/exp_set_data/imagenet"
-    alexnet = models.alexnet(weights=True).eval()
     imagenet_val_path = os.path.join(imagenet_path, "val")
     results_path = "/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico"
     # === Transforms & Dataloader ===
@@ -75,10 +74,7 @@ def run_ipca_pipeline(
         feature_extractor = create_feature_extractor(
             model, return_nodes=[layer_name]
         ).to(device)
-        with torch.no_grad():
-            tmp_shape = feature_extractor(torch.randn(1, 3, 224, 224).to(device))[
-                layer_name
-            ].shape[1:]
+        tmp_shape = get_layer_out_shape(feature_extractor, layer_name)
         n_features = np.prod(tmp_shape)  # [C, H, W] -> C*H*W
         n_components_layer = min(
             n_features, n_components
@@ -124,7 +120,6 @@ def run_ipca_maxpool(
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # === Paths ===
     imagenet_path = "/leonardo_work/Sis25_piasini/tcausin/exp_set_data/imagenet"
-    alexnet = models.alexnet(weights=True).eval()
     imagenet_val_path = os.path.join(imagenet_path, "val")
     results_path = "/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico"
     # === Transforms & Dataloader ===
@@ -175,10 +170,7 @@ def run_ipca_maxpool(
         feature_extractor = create_feature_extractor(
             model, return_nodes=[layer_name]
         ).to(device)
-        with torch.no_grad():
-            n_features = feature_extractor(torch.randn(1, 3, 224, 224).to(device))[
-                layer_name
-            ].shape[1] # takes only the second dimension, which means the channels [B, C, H, W] 
+        tmp_shape = get_layer_out_shape(feature_extractor, layer_name)
         n_components_layer = min(
             n_features, n_components
         )  # Limit to number of features
