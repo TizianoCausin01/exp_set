@@ -119,7 +119,7 @@ def run_ipca_maxpool(
     batch_size=512,
     num_workers=2,
 ):
-    if model_name == 'vit_b_16'
+    if model_name == 'vit_b_16':
         raise ValueError(f"Model {model_name} not supported in run_ipca_maxpool")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # === Paths ===
@@ -145,7 +145,7 @@ def run_ipca_maxpool(
     remaining_layers = []
     for layer in layers_to_extract:
         save_name = (
-            f"imagenet_val_{model_name}_{layer}_pca_model_{n_components}_PCs.pkl"
+            f"imagenet_val_{model_name}_{layer}_maxpool_pca_model_{n_components}_PCs.pkl"
         )
         path = os.path.join(results_path, save_name)
         if os.path.exists(path):
@@ -199,9 +199,9 @@ def run_ipca_maxpool(
                 inputs = inputs.to(device)
                 feats = feature_extractor(inputs)[layer_name].cpu().numpy()
                 if layer_name == 'avgpool' or 'classifier' in layer_name:
-                    # don't do anything, it's already flat
+                    pass # don't do anything, it's already flat
                 else:
-                    feats = np.max(feats, axis=(2,3)).shape # pools the max in the feats
+                    feats = np.max(feats, axis=(2,3)) # pools the max in the feats
                     
                 pca.partial_fit(feats)
         save_name = (

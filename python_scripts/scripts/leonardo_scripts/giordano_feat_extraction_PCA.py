@@ -10,12 +10,10 @@ if __name__ == '__main__':
     parser.add_argument('--batch_size', type=int, default=512)
     parser.add_argument('--n_components', type=int, default=1000)
     parser.add_argument('--num_workers', type=int, default=2)
-    parser.add_argument('--multiple_passes', action='store_true')  # Flag → default False
     args = parser.parse_args()
-    run_pca_pipeline(
+    run_ipca_pipeline(
         model_name=args.model_name,
         n_components=args.n_components,
         batch_size=args.batch_size,
-        num_workers=args.num_workers,
-        multiple_passes=args.multiple_passes
+        num_workers=args.num_workers
     )
