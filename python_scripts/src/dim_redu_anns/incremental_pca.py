@@ -39,7 +39,7 @@ def run_ipca_pipeline(
     model_cls = getattr(models, model_name)
     model = model_cls(pretrained=True).to(device).eval()
     if layers_to_extract is None:
-        layers_to_extract = get_relevant_output_layers(model, model_name)
+        layers_to_extract = get_relevant_output_layers(model_name)
     # Filter out already done layers
     remaining_layers = []
     for layer in layers_to_extract:
@@ -135,7 +135,7 @@ def run_ipca_maxpool(
     model_cls = getattr(models, model_name)
     model = model_cls(pretrained=True).to(device).eval()
     if layers_to_extract is None:
-        layers_to_extract = get_relevant_output_layers(model, model_name)
+        layers_to_extract = get_relevant_output_layers(model_name)
     # Filter out already done layers
     remaining_layers = []
     for layer in layers_to_extract:

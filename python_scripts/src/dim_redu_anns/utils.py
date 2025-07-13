@@ -17,7 +17,7 @@ from torchvision import transforms, datasets, models
 def worker_init_fn(worker_id):
     print(datetime.now().strftime("%H:%M:%S"), f":builder: Worker {worker_id} started")
 
-def get_relevant_output_layers(model, model_name):
+def get_relevant_output_layers(model_name):
     """
     Returns a list of brain-relevant layers to extract from a given model,
     approximately mapping to V1, V4, and IT.
