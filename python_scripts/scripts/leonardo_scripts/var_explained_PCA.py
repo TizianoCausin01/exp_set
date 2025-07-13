@@ -23,6 +23,6 @@ for m in models:
             path2file = f"{path2res}/imagenet_val_{m}_{l}_pca_model_1000_PCs.pkl"     
         print(datetime.now().strftime("%H:%M:%S"), f"processing layer {l} of model {m}")
         data = joblib.load(path2file)
-        df = pd.DataFrame(data_l0.explained_variance_ratio_)
+        df = pd.DataFrame(data.explained_variance_ratio_)
         df.to_csv(f"{path2res}/var_explained_pca_{m}_{l}_1000_PCs.csv", index=False) 
 
