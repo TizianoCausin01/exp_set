@@ -1,0 +1,719 @@
+Script started on Wed Jun 18 07:34:21 2025
+/Users/tizianocausin/.zshrc:export:27: not valid in this context: /Users/tizianocausin/.zshrc
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hlls sip  cripts[1m/[0m[0m [?2004l
+alexnet_feat_extraction.ipynb	cluster_scripts			leonardo_scripts
+alexnet_feat_extraction.py	initial_linear_regressions
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hrrm -r cluster_sc[10D[3Cscluster_sc[10D[1Ccluster_sc[10Drcluster_sc[10Dicluster_sc[10Dpcluster_sc[10Dtcluster_sc[10Dscluster_sc[10D/cluster_sc[10D[10Cripts[1m/[0m[0m [?2004l
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hjjupyte    j  ssource ~/Desktop[1m/[0m[0m/virtual_envs[1m/[0m[0m/ponce_env[1m/[0m[0m/bina [1m/[0m[0m/activate[?2004l
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hsource ~/Desktop/virtual_envs/ponce_env/bin/activate[52Drm -r scripts/cluster_scripts                       [23D[29Dls scripts                   [19D[10Dssh tcausin0@login.leonardo.cineca.it[34D-keygen -R login.leonardo.cineca.it[35D tcausin0@[P[24C [37Dls scripts                           [27D[10Drm -r scripts/cluster_scripts[29Dsource ~/Desktop/virtual_envs/ponce_env/bin/activate[52D                                                    [52Dsource ~/Desktop/virtual_envs/ponce_env/bin/activate[52Drm -r scripts/cluster_scripts                       [23D[29Dls scripts                   [19D[10Dssh tcausin0@login.leonardo.cineca.it[34D-keygen -R login.leonardo.cineca.it[38Djupyter notebook                      [22D[16Dgit push origin main[20Djupyter notebook    [?2004l
+[32m[I 2025-06-18 07:43:32.498 ServerApp](B[m jupyter_lsp | extension was successfully linked.
+[32m[I 2025-06-18 07:43:32.499 ServerApp](B[m jupyter_server_terminals | extension was successfully linked.
+[32m[I 2025-06-18 07:43:32.501 ServerApp](B[m jupyterlab | extension was successfully linked.
+[32m[I 2025-06-18 07:43:32.502 ServerApp](B[m notebook | extension was successfully linked.
+[32m[I 2025-06-18 07:43:32.681 ServerApp](B[m notebook_shim | extension was successfully linked.
+[32m[I 2025-06-18 07:43:32.712 ServerApp](B[m notebook_shim | extension was successfully loaded.
+[32m[I 2025-06-18 07:43:32.714 ServerApp](B[m jupyter_lsp | extension was successfully loaded.
+[32m[I 2025-06-18 07:43:32.716 ServerApp](B[m jupyter_server_terminals | extension was successfully loaded.
+[32m[I 2025-06-18 07:43:32.718 LabApp](B[m JupyterLab extension loaded from /Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyterlab
+[32m[I 2025-06-18 07:43:32.718 LabApp](B[m JupyterLab application directory is /Users/tizianocausin/Desktop/virtual_envs/ponce_env/share/jupyter/lab
+[32m[I 2025-06-18 07:43:32.718 LabApp](B[m Extension Manager is 'pypi'.
+[32m[I 2025-06-18 07:43:32.751 ServerApp](B[m jupyterlab | extension was successfully loaded.
+[32m[I 2025-06-18 07:43:32.753 ServerApp](B[m notebook | extension was successfully loaded.
+[32m[I 2025-06-18 07:43:32.753 ServerApp](B[m Serving notebooks from local directory: /Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts
+[32m[I 2025-06-18 07:43:32.753 ServerApp](B[m Jupyter Server 2.16.0 is running at:
+[32m[I 2025-06-18 07:43:32.753 ServerApp](B[m http://localhost:8888/tree?token=2864510906baf1895e68adb5045c9a99b679eef853063fd8
+[32m[I 2025-06-18 07:43:32.753 ServerApp](B[m     http://127.0.0.1:8888/tree?token=2864510906baf1895e68adb5045c9a99b679eef853063fd8
+[32m[I 2025-06-18 07:43:32.753 ServerApp](B[m Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[35m[C 2025-06-18 07:43:32.764 ServerApp](B[m 
+    
+    To access the server, open this file in a browser:
+        file:///Users/tizianocausin/Library/Jupyter/runtime/jpserver-39623-open.html
+    Or copy and paste one of these URLs:
+        http://localhost:8888/tree?token=2864510906baf1895e68adb5045c9a99b679eef853063fd8
+        http://127.0.0.1:8888/tree?token=2864510906baf1895e68adb5045c9a99b679eef853063fd8
+[32m[I 2025-06-18 07:43:34.216 ServerApp](B[m Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[32m[I 2025-06-18 07:43:52.756 ServerApp](B[m Kernel started: aec46fc3-6daa-49dd-addf-fffdf4609724
+[32m[I 2025-06-18 07:43:53.324 ServerApp](B[m Connecting to kernel aec46fc3-6daa-49dd-addf-fffdf4609724.
+[32m[I 2025-06-18 07:43:53.325 ServerApp](B[m Connecting to kernel aec46fc3-6daa-49dd-addf-fffdf4609724.
+[33m[W 2025-06-18 07:43:53.326 ServerApp](B[m The websocket_ping_timeout (90000) cannot be longer than the websocket_ping_interval (30000).
+    Setting websocket_ping_timeout=30000
+[32m[I 2025-06-18 07:43:53.341 ServerApp](B[m Connecting to kernel aec46fc3-6daa-49dd-addf-fffdf4609724.
+[32m[I 2025-06-18 07:43:55.978 ServerApp](B[m Connecting to kernel aec46fc3-6daa-49dd-addf-fffdf4609724.
+^C[32m[I 2025-06-18 07:55:45.753 ServerApp](B[m interrupted
+[32m[I 2025-06-18 07:55:45.757 ServerApp](B[m Serving notebooks from local directory: /Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts
+    1 active kernel
+    Jupyter Server 2.16.0 is running at:
+    http://localhost:8888/tree?token=2864510906baf1895e68adb5045c9a99b679eef853063fd8
+        http://127.0.0.1:8888/tree?token=2864510906baf1895e68adb5045c9a99b679eef853063fd8
+Shut down this Jupyter server (y/[n])? y
+[35m[C 2025-06-18 07:55:47.486 ServerApp](B[m Shutdown confirmed
+[32m[I 2025-06-18 07:55:47.494 ServerApp](B[m Shutting down 5 extensions
+[32m[I 2025-06-18 07:55:47.495 ServerApp](B[m Shutting down 1 kernel
+[32m[I 2025-06-18 07:55:47.505 ServerApp](B[m Kernel shutdown: aec46fc3-6daa-49dd-addf-fffdf4609724
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hggit fetch; git merge[?2004l
+Enter passphrase for key '/Users/tizianocausin/.ssh/id_ed25519': 
+remote: Enumerating objects: 17, done.[K
+remote: Counting objects:   5% (1/17)[Kremote: Counting objects:  11% (2/17)[Kremote: Counting objects:  17% (3/17)[Kremote: Counting objects:  23% (4/17)[Kremote: Counting objects:  29% (5/17)[Kremote: Counting objects:  35% (6/17)[Kremote: Counting objects:  41% (7/17)[Kremote: Counting objects:  47% (8/17)[Kremote: Counting objects:  52% (9/17)[Kremote: Counting objects:  58% (10/17)[Kremote: Counting objects:  64% (11/17)[Kremote: Counting objects:  70% (12/17)[Kremote: Counting objects:  76% (13/17)[Kremote: Counting objects:  82% (14/17)[Kremote: Counting objects:  88% (15/17)[Kremote: Counting objects:  94% (16/17)[Kremote: Counting objects: 100% (17/17)[Kremote: Counting objects: 100% (17/17), done.[K
+remote: Compressing objects:  16% (1/6)[Kremote: Compressing objects:  33% (2/6)[Kremote: Compressing objects:  50% (3/6)[Kremote: Compressing objects:  66% (4/6)[Kremote: Compressing objects:  83% (5/6)[Kremote: Compressing objects: 100% (6/6)[Kremote: Compressing objects: 100% (6/6), done.[K
+Unpacking objects:   9% (1/11)Unpacking objects:  18% (2/11)Unpacking objects:  27% (3/11)Unpacking objects:  36% (4/11)Unpacking objects:  45% (5/11)Unpacking objects:  54% (6/11)Unpacking objects:  63% (7/11)Unpacking objects:  72% (8/11)Unpacking objects:  81% (9/11)Unpacking objects:  90% (10/11)Unpacking objects: 100% (11/11)Unpacking objects: 100% (11/11), 4.02 KiB | 257.00 KiB/s, done.
+remote: Total 11 (delta 5), reused 11 (delta 5), pack-reused 0 (from 0)[K
+From github.com:TizianoCausin01/exp_set
+   ca7712d..bf7f6ba  main       -> origin/main
+Updating ca7712d..bf7f6ba
+Fast-forward
+ bash_scripts/alexnet_feats_job.sh                                                           |  15 [32m+++++++++++++++[m
+ python_scripts/scripts/leonardo_scripts/__pycache__/alexnet_feat_extraction.cpython-311.pyc | Bin [31m0[m -> [32m5512[m bytes
+ python_scripts/scripts/leonardo_scripts/alexnet_feat_extraction.py                          |   2 [32m+[m[31m-[m
+ python_scripts/scripts/leonardo_scripts/alexnet_prob_firing.py                              |  17 [32m+++++++++++++++++[m
+ 4 files changed, 33 insertions(+), 1 deletion(-)
+ create mode 100644 bash_scripts/alexnet_feats_job.sh
+ create mode 100644 python_scripts/scripts/leonardo_scripts/__pycache__/alexnet_feat_extraction.cpython-311.pyc
+ create mode 100644 python_scripts/scripts/leonardo_scripts/alexnet_prob_firing.py
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hccd ~/OneDrive\ -\ SISSA[1m/[0m[0m/
+[JApps/                               SIP/                                monographic_course_goldt.url*
+Attachments/                        SISSA\ study\ plan\ template.xlsx*  oneNote_notebooks/
+CAOs.url*                           armenise_harvard.url*               poster_at_CAOs.pdf*
+Icon$'\r'*                          data_repo/                          poster_at_CAOs.pptx*
+Im_selection/                       ideas_experiments.url*              unLe_data/
+Im_selection_nov24.zip*             lab_presentation.pptx               unLe_results/
+My\ Notebook\ @\ SISSA.url*         memo.url*                           [7A[0m[27m[24m[65Ccd ~/OneDrive\ -\ SISSA/[Kdata_repo[1m/[0m[0m/
+[J[JSIP_data/      SIP_results/   exp_set_data/  exp_set_res/[A[0m[27m[24m[65Ccd ~/OneDrive\ -\ SISSA/data_repo/[Kexp
+[J[A[102C_set_r set_s r     res[1m/[0m[0m/silico[1m/[0m[0m [?2004l
+[J[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/OneDrive%20-%20SISSA/data_repo/exp_set_res/silico[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin silico % [K[?2004hsscp -r [7m/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[27m[71D[27m/[27ml[27me[27mo[27mn[27ma[27mr[27md[27mo[27m_[27mw[27mo[27mr[27mk[27m/[27mS[27mi[27ms[27m2[27m5[27m_[27mp[27mi[27ma[27ms[27mi[27mn[27mi[27m/[27mt[27mc[27ma[27mu[27ms[27mi[27mn[27m/[27me[27mx[27mp[27m_[27ms[27me[27mt[27m_[27mr[27me[27ms[27m/[27ms[27mi[27ml[27mi[27mc[27mo[27m/[27mp[27mr[27mo[27mb[27m_[27ma[27ml[27me[27mx[27mn[27me[27mt[27m.[27mh[27m5[71D[3Ct/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[71Dc/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[71Da/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[71Du/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[71Ds/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[71Di/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[71Dn/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[71D0/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5 [K[A[72C@/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Cl/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Co/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Cg/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Ci/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Cn/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72C./leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Cc/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Ci/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Cn/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72C[P[61Calexnet.h5 [A[71C[P[62Clexnet.h5 [A[71C[P[63Cexnet.h5 [A[71Cl/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Ce/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Co/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Cn/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Ca/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Cr/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Cd/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Co/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72C./leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Cc/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Ci/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Cn/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Ce/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Cc/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Ca/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72C./leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Ci/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72Ct/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72C:/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5[A[72C[1B[72D .[?2004l
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the RSA key sent by the remote host is
+SHA256:HhI20YqRQTWkxb+Ry8Ra3x9aOAUDwVph1AJTfAcwPIU.
+Please contact your system administrator.
+Add correct host key in /Users/tizianocausin/.ssh/known_hosts to get rid of this message.
+Offending ED25519 key in /Users/tizianocausin/.ssh/known_hosts:15
+Host key for login.leonardo.cineca.it has changed and you have requested strict checking.
+Host key verification failed.
+scp: Connection closed
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/OneDrive%20-%20SISSA/data_repo/exp_set_res/silico[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin silico % [K[?2004hsssh-keygen -R t login.leonardo.cineca.it[?2004l
+# Host login.leonardo.cineca.it found: line 13
+# Host login.leonardo.cineca.it found: line 14
+# Host login.leonardo.cineca.it found: line 15
+/Users/tizianocausin/.ssh/known_hosts updated.
+Original contents retained as /Users/tizianocausin/.ssh/known_hosts.old
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/OneDrive%20-%20SISSA/data_repo/exp_set_res/silico[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin silico % [K[?2004hssh-keygen -R login.leonardo.cineca.it[38Dscp -r tcausin0@login.leonardo.cineca.it:/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/prob_alexnet.h5 .[K[?2004l
+The authenticity of host 'login.leonardo.cineca.it (131.175.44.7)' can't be established.
+RSA key fingerprint is SHA256:+uBYQ7DiCTIFbfvhtgnDQjw4+hkhlMBdWKHMXf4nMpo.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'login.leonardo.cineca.it' (RSA) to the list of known hosts.
+prob_alexnet.h5                                                                                                0%    0     0.0KB/s   --:-- ETAprob_alexnet.h5                                                                                              100%   43KB 282.0KB/s   00:00    
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/OneDrive%20-%20SISSA/data_repo/exp_set_res/silico[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin silico % [K[?2004hppip install matplotlib[?2004l
+Collecting matplotlib
+  Downloading matplotlib-3.10.3-cp312-cp312-macosx_11_0_arm64.whl.metadata (11 kB)
+Collecting contourpy>=1.0.1 (from matplotlib)
+  Downloading contourpy-1.3.2-cp312-cp312-macosx_11_0_arm64.whl.metadata (5.5 kB)
+Collecting cycler>=0.10 (from matplotlib)
+  Downloading cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting fonttools>=4.22.0 (from matplotlib)
+  Downloading fonttools-4.58.4-cp312-cp312-macosx_10_13_universal2.whl.metadata (106 kB)
+[?25l     [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/106.6 kB[0m [31m?[0m eta [36m-:--:--[0m[2K     [38;5;70m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m106.6/106.6 kB[0m [31m3.2 MB/s[0m eta [36m0:00:00[0m
+[?25hCollecting kiwisolver>=1.3.1 (from matplotlib)
+  Downloading kiwisolver-1.4.8-cp312-cp312-macosx_11_0_arm64.whl.metadata (6.2 kB)
+Requirement already satisfied: numpy>=1.23 in /Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages (from matplotlib) (2.3.0)
+Requirement already satisfied: packaging>=20.0 in /Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages (from matplotlib) (25.0)
+Requirement already satisfied: pillow>=8 in /Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages (from matplotlib) (11.2.1)
+Collecting pyparsing>=2.3.1 (from matplotlib)
+  Downloading pyparsing-3.2.3-py3-none-any.whl.metadata (5.0 kB)
+Requirement already satisfied: python-dateutil>=2.7 in /Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages (from matplotlib) (2.9.0.post0)
+Requirement already satisfied: six>=1.5 in /Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages (from python-dateutil>=2.7->matplotlib) (1.17.0)
+Downloading matplotlib-3.10.3-cp312-cp312-macosx_11_0_arm64.whl (8.1 MB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/8.1 MB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;5;197m━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.3/8.1 MB[0m [31m8.2 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.6/8.1 MB[0m [31m8.3 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.9/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m1.2/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━[0m[38;5;197m╸[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m1.5/8.1 MB[0m [31m8.3 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m1.9/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━[0m[38;5;197m╸[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m2.2/8.1 MB[0m [31m8.3 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m2.5/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━[0m[38;5;197m╸[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m2.8/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━[0m[38;5;197m╸[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m3.2/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━[0m [32m3.5/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━[0m [32m3.9/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━━━[0m[38;5;197m╸[0m[38;5;237m━━━━━━━━━━━━━━━━━━[0m [32m4.4/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━[0m [32m4.7/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;197m╸[0m[38;5;237m━━━━━━━━━━━━━━━[0m [32m5.0/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━[0m [32m5.3/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━[0m [32m5.7/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;197m╸[0m[38;5;237m━━━━━━━━━━[0m [32m5.9/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━[0m [32m6.3/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;197m╸[0m[38;5;237m━━━━━━━[0m [32m6.6/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━[0m [32m6.9/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━[0m [32m7.2/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;197m╸[0m[38;5;237m━━[0m [32m7.6/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m [32m7.9/8.1 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;70m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m8.1/8.1 MB[0m [31m8.2 MB/s[0m eta [36m0:00:00[0m
+[?25hDownloading contourpy-1.3.2-cp312-cp312-macosx_11_0_arm64.whl (255 kB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/255.5 kB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;5;70m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m255.5/255.5 kB[0m [31m6.8 MB/s[0m eta [36m0:00:00[0m
+[?25hDownloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Downloading fonttools-4.58.4-cp312-cp312-macosx_10_13_universal2.whl (2.8 MB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/2.8 MB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;5;197m━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.3/2.8 MB[0m [31m9.1 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━[0m[38;5;197m╸[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.7/2.8 MB[0m [31m8.7 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m1.0/2.8 MB[0m [31m8.6 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━[0m [32m1.3/2.8 MB[0m [31m8.5 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━[0m [32m1.6/2.8 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;197m╸[0m[38;5;237m━━━━━━━━━━━[0m [32m2.0/2.8 MB[0m [31m8.5 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;197m╸[0m[38;5;237m━━━━━━[0m [32m2.3/2.8 MB[0m [31m8.5 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;197m╸[0m[38;5;237m━[0m [32m2.7/2.8 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;197m╸[0m [32m2.7/2.8 MB[0m [31m8.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;70m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m2.8/2.8 MB[0m [31m7.7 MB/s[0m eta [36m0:00:00[0m
+[?25hDownloading kiwisolver-1.4.8-cp312-cp312-macosx_11_0_arm64.whl (65 kB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/65.1 kB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;5;70m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m65.1/65.1 kB[0m [31m5.6 MB/s[0m eta [36m0:00:00[0m
+[?25hDownloading pyparsing-3.2.3-py3-none-any.whl (111 kB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/111.1 kB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;5;70m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m111.1/111.1 kB[0m [31m7.7 MB/s[0m eta [36m0:00:00[0m
+[?25hInstalling collected packages: pyparsing, kiwisolver, fonttools, cycler, contourpy, matplotlib
+Successfully installed contourpy-1.3.2 cycler-0.12.1 fonttools-4.58.4 kiwisolver-1.4.8 matplotlib-3.10.3 pyparsing-3.2.3
+
+[1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m A new release of pip is available: [0m[31;49m24.0[0m[39;49m -> [0m[32;49m25.1.1[0m
+[1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m To update, run: [0m[32;49mpip install --upgrade pip[0m
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/OneDrive%20-%20SISSA/data_repo/exp_set_res/silico[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin silico % [K[?2004hccd -[?2004l
+~/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004httouch scripts[1m/[0m[0m/
+[Jalexnet_feat_extraction.ipynb  alexnet_feat_extraction.py     initial_linear_regressions/    leonardo_scripts/[A[0m[27m[24m[65Ctouch scripts/[Kplot_freq.py[?2004l
+[J[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hoopen scripts[1m/[0m[0m [?2004l
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hrrm scripts[1m/[0m[0m/plot_freq.py[1m [0m[0m [?2004l
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hjjupyter notebookù [?2004l
+[32m[I 2025-06-18 09:26:31.559 ServerApp](B[m jupyter_lsp | extension was successfully linked.
+[32m[I 2025-06-18 09:26:31.561 ServerApp](B[m jupyter_server_terminals | extension was successfully linked.
+[32m[I 2025-06-18 09:26:31.562 ServerApp](B[m jupyterlab | extension was successfully linked.
+[32m[I 2025-06-18 09:26:31.563 ServerApp](B[m notebook | extension was successfully linked.
+[32m[I 2025-06-18 09:26:31.743 ServerApp](B[m notebook_shim | extension was successfully linked.
+[32m[I 2025-06-18 09:26:31.777 ServerApp](B[m notebook_shim | extension was successfully loaded.
+[32m[I 2025-06-18 09:26:31.779 ServerApp](B[m jupyter_lsp | extension was successfully loaded.
+[32m[I 2025-06-18 09:26:31.780 ServerApp](B[m jupyter_server_terminals | extension was successfully loaded.
+[32m[I 2025-06-18 09:26:31.782 LabApp](B[m JupyterLab extension loaded from /Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyterlab
+[32m[I 2025-06-18 09:26:31.782 LabApp](B[m JupyterLab application directory is /Users/tizianocausin/Desktop/virtual_envs/ponce_env/share/jupyter/lab
+[32m[I 2025-06-18 09:26:31.782 LabApp](B[m Extension Manager is 'pypi'.
+[32m[I 2025-06-18 09:26:31.815 ServerApp](B[m jupyterlab | extension was successfully loaded.
+[32m[I 2025-06-18 09:26:31.816 ServerApp](B[m notebook | extension was successfully loaded.
+[32m[I 2025-06-18 09:26:31.817 ServerApp](B[m Serving notebooks from local directory: /Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts
+[32m[I 2025-06-18 09:26:31.817 ServerApp](B[m Jupyter Server 2.16.0 is running at:
+[32m[I 2025-06-18 09:26:31.817 ServerApp](B[m http://localhost:8888/tree?token=aa2791add5323cbb72840effd9fae7dbd237ac00a3bbba44
+[32m[I 2025-06-18 09:26:31.817 ServerApp](B[m     http://127.0.0.1:8888/tree?token=aa2791add5323cbb72840effd9fae7dbd237ac00a3bbba44
+[32m[I 2025-06-18 09:26:31.817 ServerApp](B[m Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[35m[C 2025-06-18 09:26:31.828 ServerApp](B[m 
+    
+    To access the server, open this file in a browser:
+        file:///Users/tizianocausin/Library/Jupyter/runtime/jpserver-42390-open.html
+    Or copy and paste one of these URLs:
+        http://localhost:8888/tree?token=aa2791add5323cbb72840effd9fae7dbd237ac00a3bbba44
+        http://127.0.0.1:8888/tree?token=aa2791add5323cbb72840effd9fae7dbd237ac00a3bbba44
+[32m[I 2025-06-18 09:26:33.038 ServerApp](B[m Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[33m[W 2025-06-18 09:26:35.951 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724?1750231595940 (::1): Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724
+[33m[W 2025-06-18 09:26:35.951 ServerApp](B[m wrote error: 'Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724'
+    Traceback (most recent call last):
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/tornado/web.py", line 1848, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/auth/decorator.py", line 73, in inner
+        return await out
+               ^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 508, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 539, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724)
+[33m[W 2025-06-18 09:26:35.958 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724?1750231595940 (8a85d27cf98a4a0bae5386d65af5eff2@::1) 9.15ms referer=http://localhost:8888/notebooks/scripts/alexnet_feat_extraction.ipynb
+[33m[W 2025-06-18 09:26:37.007 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724/channels?session_id=5e3b5e76-d3bb-4783-b7d6-acba7af6d359 (::1): Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724
+[33m[W 2025-06-18 09:26:37.035 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724/channels?session_id=5e3b5e76-d3bb-4783-b7d6-acba7af6d359 (8a85d27cf98a4a0bae5386d65af5eff2@::1) 30.20ms referer=None
+[33m[W 2025-06-18 09:26:37.041 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724?1750231597038 (::1): Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724
+[33m[W 2025-06-18 09:26:37.041 ServerApp](B[m wrote error: 'Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724'
+    Traceback (most recent call last):
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/tornado/web.py", line 1848, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/auth/decorator.py", line 73, in inner
+        return await out
+               ^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 508, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 539, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724)
+[33m[W 2025-06-18 09:26:37.041 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724?1750231597038 (8a85d27cf98a4a0bae5386d65af5eff2@::1) 0.92ms referer=http://localhost:8888/notebooks/scripts/alexnet_feat_extraction.ipynb
+[33m[W 2025-06-18 09:26:39.979 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724/channels?session_id=5e3b5e76-d3bb-4783-b7d6-acba7af6d359 (::1): Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724
+[33m[W 2025-06-18 09:26:39.982 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724/channels?session_id=5e3b5e76-d3bb-4783-b7d6-acba7af6d359 (8a85d27cf98a4a0bae5386d65af5eff2@::1) 4.14ms referer=None
+[33m[W 2025-06-18 09:26:39.989 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724?1750231599983 (::1): Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724
+[33m[W 2025-06-18 09:26:39.989 ServerApp](B[m wrote error: 'Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724'
+    Traceback (most recent call last):
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/tornado/web.py", line 1848, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/auth/decorator.py", line 73, in inner
+        return await out
+               ^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 508, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 539, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724)
+[33m[W 2025-06-18 09:26:39.991 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724?1750231599983 (8a85d27cf98a4a0bae5386d65af5eff2@::1) 3.87ms referer=http://localhost:8888/notebooks/scripts/alexnet_feat_extraction.ipynb
+[33m[W 2025-06-18 09:26:43.946 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724/channels?session_id=5e3b5e76-d3bb-4783-b7d6-acba7af6d359 (::1): Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724
+[33m[W 2025-06-18 09:26:43.949 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724/channels?session_id=5e3b5e76-d3bb-4783-b7d6-acba7af6d359 (8a85d27cf98a4a0bae5386d65af5eff2@::1) 5.27ms referer=None
+[33m[W 2025-06-18 09:26:43.958 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724?1750231603950 (::1): Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724
+[33m[W 2025-06-18 09:26:43.958 ServerApp](B[m wrote error: 'Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724'
+    Traceback (most recent call last):
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/tornado/web.py", line 1848, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/auth/decorator.py", line 73, in inner
+        return await out
+               ^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 508, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 539, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724)
+[33m[W 2025-06-18 09:26:43.960 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724?1750231603950 (8a85d27cf98a4a0bae5386d65af5eff2@::1) 3.47ms referer=http://localhost:8888/notebooks/scripts/alexnet_feat_extraction.ipynb
+[32m[I 2025-06-18 09:26:47.797 ServerApp](B[m Creating new notebook in /scripts
+[32m[I 2025-06-18 09:26:48.013 ServerApp](B[m Saving file at /scripts/Untitled.ipynb
+[32m[I 2025-06-18 09:26:48.081 ServerApp](B[m Kernel started: 65d88b73-abc7-4859-8e14-e6a9a9c2cf92
+[32m[I 2025-06-18 09:26:48.758 ServerApp](B[m Connecting to kernel 65d88b73-abc7-4859-8e14-e6a9a9c2cf92.
+[32m[I 2025-06-18 09:26:48.759 ServerApp](B[m Connecting to kernel 65d88b73-abc7-4859-8e14-e6a9a9c2cf92.
+[33m[W 2025-06-18 09:26:48.760 ServerApp](B[m The websocket_ping_timeout (90000) cannot be longer than the websocket_ping_interval (30000).
+    Setting websocket_ping_timeout=30000
+[32m[I 2025-06-18 09:26:48.795 ServerApp](B[m Connecting to kernel 65d88b73-abc7-4859-8e14-e6a9a9c2cf92.
+[32m[I 2025-06-18 09:26:48.807 ServerApp](B[m Connecting to kernel 65d88b73-abc7-4859-8e14-e6a9a9c2cf92.
+[33m[W 2025-06-18 09:26:54.948 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724/channels?session_id=5e3b5e76-d3bb-4783-b7d6-acba7af6d359 (::1): Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724
+[33m[W 2025-06-18 09:26:54.951 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724/channels?session_id=5e3b5e76-d3bb-4783-b7d6-acba7af6d359 (8a85d27cf98a4a0bae5386d65af5eff2@::1) 3.43ms referer=None
+[33m[W 2025-06-18 09:26:54.985 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724?1750231614951 (::1): Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724
+[33m[W 2025-06-18 09:26:54.985 ServerApp](B[m wrote error: 'Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724'
+    Traceback (most recent call last):
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/tornado/web.py", line 1848, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/auth/decorator.py", line 73, in inner
+        return await out
+               ^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 508, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 539, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724)
+[33m[W 2025-06-18 09:26:54.987 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724?1750231614951 (8a85d27cf98a4a0bae5386d65af5eff2@::1) 3.57ms referer=http://localhost:8888/notebooks/scripts/alexnet_feat_extraction.ipynb
+[33m[W 2025-06-18 09:26:58.969 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724/channels?session_id=5e3b5e76-d3bb-4783-b7d6-acba7af6d359 (::1): Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724
+[33m[W 2025-06-18 09:26:58.971 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724/channels?session_id=5e3b5e76-d3bb-4783-b7d6-acba7af6d359 (8a85d27cf98a4a0bae5386d65af5eff2@::1) 3.69ms referer=None
+[33m[W 2025-06-18 09:26:58.976 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724?1750231618971 (::1): Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724
+[33m[W 2025-06-18 09:26:58.976 ServerApp](B[m wrote error: 'Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724'
+    Traceback (most recent call last):
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/tornado/web.py", line 1848, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/auth/decorator.py", line 73, in inner
+        return await out
+               ^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 508, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 539, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724)
+[33m[W 2025-06-18 09:26:58.977 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724?1750231618971 (8a85d27cf98a4a0bae5386d65af5eff2@::1) 2.03ms referer=http://localhost:8888/notebooks/scripts/alexnet_feat_extraction.ipynb
+[33m[W 2025-06-18 09:27:43.022 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724/channels?session_id=5e3b5e76-d3bb-4783-b7d6-acba7af6d359 (::1): Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724
+[33m[W 2025-06-18 09:27:43.024 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724/channels?session_id=5e3b5e76-d3bb-4783-b7d6-acba7af6d359 (8a85d27cf98a4a0bae5386d65af5eff2@::1) 2.39ms referer=None
+[33m[W 2025-06-18 09:27:43.030 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724?1750231663025 (::1): Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724
+[33m[W 2025-06-18 09:27:43.030 ServerApp](B[m wrote error: 'Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724'
+    Traceback (most recent call last):
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/tornado/web.py", line 1848, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/auth/decorator.py", line 73, in inner
+        return await out
+               ^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 508, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/Users/tizianocausin/Desktop/virtual_envs/ponce_env/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 539, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: aec46fc3-6daa-49dd-addf-fffdf4609724)
+[33m[W 2025-06-18 09:27:43.031 ServerApp](B[m 404 GET /api/kernels/aec46fc3-6daa-49dd-addf-fffdf4609724?1750231663025 (8a85d27cf98a4a0bae5386d65af5eff2@::1) 1.97ms referer=http://localhost:8888/notebooks/scripts/alexnet_feat_extraction.ipynb
+[32m[I 2025-06-18 09:28:56.989 ServerApp](B[m Saving file at /scripts/plot_freq.ipynb
+[32m[I 2025-06-18 09:30:57.030 ServerApp](B[m Saving file at /scripts/plot_freq.ipynb
+[32m[I 2025-06-18 09:32:57.975 ServerApp](B[m Saving file at /scripts/plot_freq.ipynb
+[32m[I 2025-06-18 09:34:58.971 ServerApp](B[m Saving file at /scripts/plot_freq.ipynb
+[32m[I 2025-06-18 09:36:59.022 ServerApp](B[m Saving file at /scripts/plot_freq.ipynb
+[32m[I 2025-06-18 09:39:00.018 ServerApp](B[m Saving file at /scripts/plot_freq.ipynb
+[33m[W 2025-06-18 09:48:49.222 JupyterNotebookApp](B[m 404 GET /tree/python_scripts/scripts (8a85d27cf98a4a0bae5386d65af5eff2@::1) 63.03ms referer=None
+[32m[I 2025-06-18 09:51:04.964 ServerApp](B[m Saving file at /scripts/plot_freq.ipynb
+[32m[I 2025-06-18 09:53:06.021 ServerApp](B[m Saving file at /scripts/plot_freq.ipynb
+^C[32m[I 2025-06-18 10:10:19.818 ServerApp](B[m interrupted
+[32m[I 2025-06-18 10:10:19.830 ServerApp](B[m Serving notebooks from local directory: /Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts
+    1 active kernel
+    Jupyter Server 2.16.0 is running at:
+    http://localhost:8888/tree?token=aa2791add5323cbb72840effd9fae7dbd237ac00a3bbba44
+        http://127.0.0.1:8888/tree?token=aa2791add5323cbb72840effd9fae7dbd237ac00a3bbba44
+Shut down this Jupyter server (y/[n])? y
+[35m[C 2025-06-18 10:10:21.637 ServerApp](B[m Shutdown confirmed
+[32m[I 2025-06-18 10:10:21.652 ServerApp](B[m Shutting down 5 extensions
+[32m[I 2025-06-18 10:10:21.655 ServerApp](B[m Shutting down 1 kernel
+[32m[I 2025-06-18 10:10:21.668 ServerApp](B[m Kernel shutdown: 65d88b73-abc7-4859-8e14-e6a9a9c2cf92
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hjupyter notebook[16Drm scripts/plot_freq.py[23Djupyter notebook       [16D                [16Dggit fetch ; git merge[?2004l
+Enter passphrase for key '/Users/tizianocausin/.ssh/id_ed25519': 
+Enter passphrase for key '/Users/tizianocausin/.ssh/id_ed25519': 
+remote: Enumerating objects: 15, done.[K
+remote: Counting objects:   6% (1/15)[Kremote: Counting objects:  13% (2/15)[Kremote: Counting objects:  20% (3/15)[Kremote: Counting objects:  26% (4/15)[Kremote: Counting objects:  33% (5/15)[Kremote: Counting objects:  40% (6/15)[Kremote: Counting objects:  46% (7/15)[Kremote: Counting objects:  53% (8/15)[Kremote: Counting objects:  60% (9/15)[Kremote: Counting objects:  66% (10/15)[Kremote: Counting objects:  73% (11/15)[Kremote: Counting objects:  80% (12/15)[Kremote: Counting objects:  86% (13/15)[Kremote: Counting objects:  93% (14/15)[Kremote: Counting objects: 100% (15/15)[Kremote: Counting objects: 100% (15/15), done.[K
+remote: Compressing objects:  16% (1/6)[Kremote: Compressing objects:  33% (2/6)[Kremote: Compressing objects:  50% (3/6)[Kremote: Compressing objects:  66% (4/6)[Kremote: Compressing objects:  83% (5/6)[Kremote: Compressing objects: 100% (6/6)[Kremote: Compressing objects: 100% (6/6), done.[K
+remote: Total 9 (delta 3), reused 9 (delta 3), pack-reused 0 (from 0)[K
+Unpacking objects:  11% (1/9)Unpacking objects:  22% (2/9)Unpacking objects:  33% (3/9)Unpacking objects:  44% (4/9)Unpacking objects:  55% (5/9)Unpacking objects:  66% (6/9)Unpacking objects:  77% (7/9)Unpacking objects:  88% (8/9)Unpacking objects: 100% (9/9)Unpacking objects: 100% (9/9), 1.71 KiB | 146.00 KiB/s, done.
+From github.com:TizianoCausin01/exp_set
+   bf7f6ba..13ae53f  main       -> origin/main
+Updating bf7f6ba..13ae53f
+Fast-forward
+ python_scripts/src/sparsity_in_silico/__pycache__/__init__.cpython-311.pyc     | Bin [31m0[m -> [32m299[m bytes
+ python_scripts/src/sparsity_in_silico/__pycache__/sparsity_CNN.cpython-311.pyc | Bin [31m0[m -> [32m983[m bytes
+ python_scripts/src/sparsity_in_silico/sparsity_CNN.py                          |  11 [32m+++++[m[31m------[m
+ 3 files changed, 5 insertions(+), 6 deletions(-)
+ create mode 100644 python_scripts/src/sparsity_in_silico/__pycache__/__init__.cpython-311.pyc
+ create mode 100644 python_scripts/src/sparsity_in_silico/__pycache__/sparsity_CNN.cpython-311.pyc
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hggit  g  vvim ../,.  ../sr  ..        src[1m/[0m[0m/sparsity_in_silico[1m/[0m[0m/
+[J__init__.py      __pycache__/     sparsity_CNN.py  utils.py[A[0m[27m[24m[65Cvim src/sparsity_in_silico/[KSP
+[J[A[94C  sparsity_CNN.py[1m [0m[0m [?2004l
+[J[?1049h[>4;2m[?1h=[?2004h[?1004h[1;43r[?12h[?12l[22;2t[22;1t[27m[23m[29m[m[H[2J[?25l[43;1H"src/sparsity_in_silico/sparsity_CNN.py" 14L, 416B[2;1H▽[6n[2;1H  [3;1HPzz\[0%m[6n[3;1H           [1;1H[>c]10;?]11;?[1;1Himport torch
+import numpy as np[2;19H[K[3;1H[K[4;1Hdef response_prob(feats_dict):
+    p_feat_dict = {}
+    for k, v in feats_dict.items():[7;9Hn_neu = feats_dict[k][0].shape[8;9Hn_stim = len(feats_dict[k])[9;9Hstack_resp = np.stack(v, axis=1)[10;9Hfreq_fire = (stack_resp > 0).sum(axis=1)[11;9Hp_feat_dict[k] = freq_fire.astype(np.float32) / n_stim
+    return p_feat_dict[14;5H# end for k, v in feats_dict.items():
+[94m~                                                                                                                                              [16;1H~                                                                                                                                              [17;1H~                                                                                                                                              [18;1H~                                                                                                                                              [19;1H~                                                                                                                                              [20;1H~                                                                                                                                              [21;1H~                                                                                                                                              [22;1H~                                                                                                                                              [23;1H~                                                                                                                                              [24;1H~                                                                                                                                              [25;1H~                                                                                                                                              [26;1H~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [31;1H~                                                                                                                                              [32;1H~                                                                                                                                              [33;1H~                                                                                                                                              [34;1H~                                                                                                                                              [35;1H~                                                                                                                                              [36;1H~                                                                                                                                              [37;1H~                                                                                                                                              [38;1H~                                                                                                                                              [39;1H~                                                                                                                                              [40;1H~                                                                                                                                              [41;1H~                                                                                                                                              [42;1H~                                                                                                                                              [1;1H[?25h[?4m[27m[23m[29m[m[H[2J[?25l[1;1Himport torch
+import numpy as np
+
+def response_prob(feats_dict):
+    p_feat_dict = {}
+    for k, v in feats_dict.items():[7;9Hn_neu = feats_dict[k][0].shape[8;9Hn_stim = len(feats_dict[k])[9;9Hstack_resp = np.stack(v, axis=1)[10;9Hfreq_fire = (stack_resp > 0).sum(axis=1)[11;9Hp_feat_dict[k] = freq_fire.astype(np.float32) / n_stim
+    return p_feat_dict[14;5H# end for k, v in feats_dict.items():
+[94m~                                                                                                                                              [16;1H~                                                                                                                                              [17;1H~                                                                                                                                              [18;1H~                                                                                                                                              [19;1H~                                                                                                                                              [20;1H~                                                                                                                                              [21;1H~                                                                                                                                              [22;1H~                                                                                                                                              [23;1H~                                                                                                                                              [24;1H~                                                                                                                                              [25;1H~                                                                                                                                              [26;1H~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [31;1H~                                                                                                                                              [32;1H~                                                                                                                                              [33;1H~                                                                                                                                              [34;1H~                                                                                                                                              [35;1H~                                                                                                                                              [36;1H~                                                                                                                                              [37;1H~                                                                                                                                              [38;1H~                                                                                                                                              [39;1H~                                                                                                                                              [40;1H~                                                                                                                                              [41;1H~                                                                                                                                              [42;1H~                                                                                                                                              [m[43;1H"src/sparsity_in_silico/sparsity_CNN.py" 14L, 416B[1;1H[?25h
+
+
+def re[?25l[43;1H[K[43;1H:[?25hq[?25l[?2004l[>4;m[23;2t[23;1t[43;1H[K[43;1H[?1004l[?2004l[?1l>[?1049l[?25h[>4;m[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hggit add scripts[1m/[0m[0m/plot_freq.ipynb[1m [0m[0m [?2004l
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hggit commit .m  -m "Sr cript to plot resutls    lts of freq"[?2004l
+[main 9079327] Script to plot results of freq
+ 1 file changed, 137 insertions(+)
+ create mode 100644 python_scripts/scripts/plot_freq.ipynb
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hggit push orign in main[?2004l
+Enter passphrase for key '/Users/tizianocausin/.ssh/id_ed25519': 
+Enter passphrase for key '/Users/tizianocausin/.ssh/id_ed25519': 
+Enumerating objects: 8, done.
+Counting objects:  12% (1/8)Counting objects:  25% (2/8)Counting objects:  37% (3/8)Counting objects:  50% (4/8)Counting objects:  62% (5/8)Counting objects:  75% (6/8)Counting objects:  87% (7/8)Counting objects: 100% (8/8)Counting objects: 100% (8/8), done.
+Delta compression using up to 8 threads
+Compressing objects:  20% (1/5)Compressing objects:  40% (2/5)Compressing objects:  60% (3/5)Compressing objects:  80% (4/5)Compressing objects: 100% (5/5)Compressing objects: 100% (5/5), done.
+Writing objects:  20% (1/5)Writing objects:  40% (2/5)Writing objects:  60% (3/5)Writing objects:  80% (4/5)Writing objects: 100% (5/5)Writing objects: 100% (5/5), 90.91 KiB | 9.09 MiB/s, done.
+Total 5 (delta 3), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas:   0% (0/3)[Kremote: Resolving deltas:  33% (1/3)[Kremote: Resolving deltas:  66% (2/3)[Kremote: Resolving deltas: 100% (3/3)[Kremote: Resolving deltas: 100% (3/3), completed with 3 local objects.[K
+To github.com:TizianoCausin01/exp_set.git
+   13ae53f..9079327  main -> main
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hgit push origin main[16Dcommit -m "Script to plot results of freq"[42Dadd scripts/plot_freq.ipynb               [15D[31Dvim src/sparsity_in_silico/sparsity_CNN.py[?2004l
+[?1049h[>4;2m[?1h=[?2004h[?1004h[1;43r[?12h[?12l[22;2t[22;1t[27m[23m[29m[m[H[2J[?25l[43;1H"src/sparsity_in_silico/sparsity_CNN.py" 14L, 416B[2;1H▽[6n[2;1H  [3;1HPzz\[0%m[6n[3;1H           [1;1H[>c]10;?]11;?[1;1Himport torch
+import numpy as np[2;19H[K[3;1H[K[4;1Hdef response_prob(feats_dict):
+    p_feat_dict = {}
+    for k, v in feats_dict.items():[7;9Hn_neu = feats_dict[k][0].shape[8;9Hn_stim = len(feats_dict[k])[9;9Hstack_resp = np.stack(v, axis=1)[10;9Hfreq_fire = (stack_resp > 0).sum(axis=1)[11;9Hp_feat_dict[k] = freq_fire.astype(np.float32) / n_stim
+    return p_feat_dict[14;5H# end for k, v in feats_dict.items():
+[94m~                                                                                                                                              [16;1H~                                                                                                                                              [17;1H~                                                                                                                                              [18;1H~                                                                                                                                              [19;1H~                                                                                                                                              [20;1H~                                                                                                                                              [21;1H~                                                                                                                                              [22;1H~                                                                                                                                              [23;1H~                                                                                                                                              [24;1H~                                                                                                                                              [25;1H~                                                                                                                                              [26;1H~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [31;1H~                                                                                                                                              [32;1H~                                                                                                                                              [33;1H~                                                                                                                                              [34;1H~                                                                                                                                              [35;1H~                                                                                                                                              [36;1H~                                                                                                                                              [37;1H~                                                                                                                                              [38;1H~                                                                                                                                              [39;1H~                                                                                                                                              [40;1H~                                                                                                                                              [41;1H~                                                                                                                                              [42;1H~                                                                                                                                              [1;1H[?25h[?4m[27m[23m[29m[m[H[2J[?25l[1;1Himport torch
+import numpy as np
+
+def response_prob(feats_dict):
+    p_feat_dict = {}
+    for k, v in feats_dict.items():[7;9Hn_neu = feats_dict[k][0].shape[8;9Hn_stim = len(feats_dict[k])[9;9Hstack_resp = np.stack(v, axis=1)[10;9Hfreq_fire = (stack_resp > 0).sum(axis=1)[11;9Hp_feat_dict[k] = freq_fire.astype(np.float32) / n_stim
+    return p_feat_dict[14;5H# end for k, v in feats_dict.items():
+[94m~                                                                                                                                              [16;1H~                                                                                                                                              [17;1H~                                                                                                                                              [18;1H~                                                                                                                                              [19;1H~                                                                                                                                              [20;1H~                                                                                                                                              [21;1H~                                                                                                                                              [22;1H~                                                                                                                                              [23;1H~                                                                                                                                              [24;1H~                                                                                                                                              [25;1H~                                                                                                                                              [26;1H~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [31;1H~                                                                                                                                              [32;1H~                                                                                                                                              [33;1H~                                                                                                                                              [34;1H~                                                                                                                                              [35;1H~                                                                                                                                              [36;1H~                                                                                                                                              [37;1H~                                                                                                                                              [38;1H~                                                                                                                                              [39;1H~                                                                                                                                              [40;1H~                                                                                                                                              [41;1H~                                                                                                                                              [42;1H~                                                                                                                                              [m[43;1H"src/sparsity_in_silico/sparsity_CNN.py" 14L, 416B[1;1H[?25h
+
+
+
+
+
+
+
+
+
+
+
+
+[?25l[43;1H[1m-- INSERT --[m[43;13H[K[14;1H[?25h[?25l[14;5H[K[15;1H    # end for k, v in feats_dict.items():[15;42H[K[15;1H[?25h[14;1H[?25l[13;42r[42;1H
+[1;43r[42;1H[94m~                                                                                                                                              [13;1H[?25h
+[m    # end for k, v in feats_dict.item[?25ls[46m()[?25h[?25l([?25h[?25l)[?25h[?25l[m():[?25h[?25l[15;1H[K[15;1H[?25h[?25l[16;1H[K[16;1H[?25h[?25ldef response_prob(feats_dict):
+    p_feat_dict = {}[17;21H[K[18;1H    for k, v[18;13H[K[18;13H[?25h[?25l in feats_dict.items():
+        n_neu = feats_dict[k][0].size()[19;40H[K[20;1H    [20;5H[K[20;5H[?25h[?25l    n_stim = len(feats_dict[k])
+        freq_fire = torch.zeros(n_[21;35H[K[21;35H[?25h[?25lneu, dtype=torch.uint8)
+        stack_resp = torch.stack(v, dim=1[22;42H[K[22;42H[?25h[?25l)
+        freq_fire = (stack_resp > 0).sum(dim=1)[23;48H[K[24;1H        p_feat[24;15H[K[24;15H[?25h[?25l_dict[k] = freq_fire.float() / n_stim
+    return p_feat_dict[25;23H[K[25;23H[?25h[?25l[24;20H[46m[[mk[46m][?25h[?25l[m[k][23;23H[?25h[22;23H[21;23H[20;23H[19;23H[18;23H[?25l[17;19H[46m{}[?25h[?25l[m{}[16;23H[?25h[?25l[46m([10C)[16;19H[?25h[?25l[?25h[?25l[m_[46m([mfeats_dict[46m)[m:[16;19H[?25h[?25lt[46m([mfeats_dict[46m)[m:[16;20H[?25h[?25lo[46m([mfeats_dict[46m)[m:[16;21H[?25h[?25lr[46m([mfeats_dict[46m)[m:[16;22H[?25h[?25lc[46m([mfeats_dict[46m)[m:[16;23H[?25h[?25lh[46m([mfeats_dict[46m)[m:[16;24H[?25h[?25l([10C)[15;1H[?25h[14;24H[13;1H[12;23H[11;24H[10;24H[9;24H[8;24H[7;24H[6;24H[?25l[5;19H[46m{}[?25h[?25l[m{}[4;24H[?25h[?25l[46m([10C)[4;19H[?25h[?25l[?25h[?25l[m_[46m([mfeats_dict[46m)[m:[4;19H[?25h[?25ln[46m([mfeats_dict[46m)[m:[4;20H[?25h[?25lp[46m([mfeats_dict[46m)[m:[4;21H[?25h[43;1H[K[4;20H[?25lp([10C)[4;20H[?25h[?25l[43;1H:[?25hwq[?25l[?2004l[>4;m"src/sparsity_in_silico/sparsity_CNN.py" 25L, 815B written[23;2t[23;1t
+[?1004l[?2004l[?1l>[?1049l[?25h[>4;m[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hvvim scripts[1m/[0m[0m/
+[Jalexnet_feat_extraction.ipynb  initial_linear_regressions/    plot_freq.ipynb                
+alexnet_feat_extraction.py     leonardo_scripts/              [A[A[0m[27m[24m[65Cvim scripts/[Kale
+[J[A[80Cxnet_feat_extraction.py[1m [0m[0m [?2004l
+[J[?1049h[>4;2m[?1h=[?2004h[?1004h[1;43r[?12h[?12l[22;2t[22;1t[27m[23m[29m[m[H[2J[?25l[43;1H"scripts/alexnet_feat_extraction.py" [noeol] 127L, 3784B[2;1H▽[6n[2;1H  [3;1HPzz\[0%m[6n[3;1H           [1;1H[>c]10;?]11;?[1;1Himport torch
+import torchvision.transforms as transforms[2;44H[K[3;1Hfrom torch.utils.data import DataLoader[3;40H[K[4;1Hfrom torchvision import models
+from torchvision.datasets import ImageNet
+from torchvision import transforms
+import os
+import sys
+sys.path.append("/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts/src")
+from sparsity_in_silico.sparsity_CNN import response_prob
+#import imageio
+import numpy as np
+import h5py
+
+
+path2res = "/Users/tizianocausin/Library/CloudStorage/OneDrive-SISSA/data_repo/exp_set_res/silico"
+imagenet_path = "/Users/tizianocausin/Library/CloudStorage/OneDrive-SISSA/data_repo/exp_set_data/imagenet"
+#alexnet = models.alexnet(pretrained=True).eval()
+alexnet = models.alexnet(weights=True).eval()
+preprocess = transforms.Compose(
+    [[22;9Htransforms.ToPILImage(),[23;9Htransforms.Resize((224, 224)),[24;9Htransforms.ToTensor(),[25;9Htransforms.Normalize([26;13Hmean=[0.3806, 0.4242, 0.3794], std=[0.2447, 0.2732, 0.2561][27;9H),  # Normalization for pretrained model
+    ]
+)
+
+#reader = imageio.get_reader(path2vid)
+conv_layers = [
+    "conv_layer1",
+    "conv_layer4",
+    "conv_layer7",
+    "conv_layer9",
+    "conv_layer11",
+]
+conv_layers_idx = [1, 4, 7, 9, 11]
+
+fc_layers = ["fc_layer2", "fc_layer5"]
+fc_layers_idx = [2, 5][1;1H[?25h[?4m[27m[23m[29m[m[H[2J[?25l[1;1Himport torch
+import torchvision.transforms as transforms
+from torch.utils.data import DataLoader
+from torchvision import models
+from torchvision.datasets import ImageNet
+from torchvision import transforms
+import os
+import sys
+sys.path.append("/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts/src")
+from sparsity_in_silico.sparsity_CNN import response_prob
+#import imageio
+import numpy as np
+import h5py
+
+
+path2res = "/Users/tizianocausin/Library/CloudStorage/OneDrive-SISSA/data_repo/exp_set_res/silico"
+imagenet_path = "/Users/tizianocausin/Library/CloudStorage/OneDrive-SISSA/data_repo/exp_set_data/imagenet"
+#alexnet = models.alexnet(pretrained=True).eval()
+alexnet = models.alexnet(weights=True).eval()
+preprocess = transforms.Compose(
+    [[22;9Htransforms.ToPILImage(),[23;9Htransforms.Resize((224, 224)),[24;9Htransforms.ToTensor(),[25;9Htransforms.Normalize([26;13Hmean=[0.3806, 0.4242, 0.3794], std=[0.2447, 0.2732, 0.2561][27;9H),  # Normalization for pretrained model
+    ]
+)
+
+#reader = imageio.get_reader(path2vid)
+conv_layers = [
+    "conv_layer1",
+    "conv_layer4",
+    "conv_layer7",
+    "conv_layer9",
+    "conv_layer11",
+]
+conv_layers_idx = [1, 4, 7, 9, 11]
+
+fc_layers = ["fc_layer2", "fc_layer5"]
+fc_layers_idx = [2, 5]
+"scripts/alexnet_feat_extraction.py" [noeol] 127L, 3784B[1;1H[?25h
+
+
+
+
+
+
+
+
+[56C[?25l[43;1H[1m-- INSERT --[m[43;13H[K[10;57H[?25hb[?25l_[?25h[?25lt[?25h[?25lo[?25h[?25lr[?25h[?25lc[?25h[?25lh[?25h[43;1H[K[10;63H[?25l[?25h[1;1H[?25ltransform = transforms.Compose([
+    transforms.Resize(256),[2;28H[K[3;1H    transforms.CenterCrop(224),[3;32H[K[4;1H    transforms.ToTensor(),[4;27H[K[5;1H    transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                         std=[0.229, 0.224, 0.225])
+])[7;3H[K[8;1Hval_set = ImageNet(root=imagenet_path, split="val", transform=transform)[9;1H[K[10;1Hval_loader = DataLoader([10;25H[K[11;1H    val_set,[11;13H[K[12;1H    batch_size=1, 
+    shuffle=False,
+    num_workers=1
+)[16;1H[K[17;1Hfeats = {[17;10H[K[18;1H        "conv_layer1": [],[18;27H[K[19;1H        "conv_layer4": [],[19;27H[K[20;1H        "conv_layer7": [],[20;27H[K[21;5H    "conv_layer9": [],[22;9H"conv_layer11": [],[22;28H[K[23;9H"fc_layer2": [],[23;25H[K[24;9H"fc_layer5": [],[24;25H[K[25;5H}[25;9H[K[26;1Hwith torch.no_grad():  # Disable gradient tracking for evaluation[26;66H[K[27;5Hfor inputs, labels in val_loader:[27;38H[K[28;5H[K[29;1H [7Coutputs = alexnet(inputs)[11C# Forward pass[30;9H_, preds = torch.max(outputs, 1)  # Get predicted class indices[31;1H[K[32;1H        # Example: print first batch predictions
+        print(preds)
+        break  # Remove this to go through the whole dataset[35;5H[K[36;5H[K[37;1Hwith h5py.File(f"{path2res}/freq_alexnet.h5", "w") as f:
+# Iterate over dictionary items and save them in the HDF5 file
+    for key, value in feats.items():[40;9Hf.create_dataset[46m([m
+            key, data=value[41;28H[K[42;1H        [46m)[m  # Create a dataset for each key-value pair[42;9H[?25h[?25l[40;25H([42;9H)[41;9H[?25h[40;9H[39;9H[38;9H[37;9H[36;1H[35;1H[34;9H[33;9H[32;9H[31;1H[30;9H[29;9H[28;4H[27;9H[26;9H[?25l[17;9H[46m{[25;5H}[?25h[?25l[m[17;9H{[25;5H}[24;9H[?25h[23;9H[22;9H[21;9H[20;9H[19;9H[18;9H[?25l[17;9H[46m{[25;5H}[17;9H[?25h[?25l[m{[25;5H}[16;1H[?25h[?25l[10;24H[46m([15;1H)[?25h[?25l[m[10;24H([15;1H)[14;9H[?25h[13;9H[?25l[40;25H[46m([42;9H)[?25h[?25l[m[1;1Himport torch[1;13H[K[2;1Himport torchvision.transforms as transforms
+from torch.utils.data import DataLoader
+from torchvision import models
+from torchvision.datasets import ImageNet[5;42H[K[6;1Hfrom torchvision import transforms[6;35H[K[7;1Himport os
+import sys[8;11H[K[9;1Hsys.path.append("/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts/src")
+from sparsity_in_silico.sparsity_CNN import response_prob_torch
+#import imageio
+import numpy as np
+import h5py[13;12H[K[14;5H[K[15;1H[K[16;1Hpath2res = "/Users/tizianocausin/Library/CloudStorage/OneDrive-SISSA/data_repo/exp_set_res/silico"
+imagenet_path = "/Users/tizianocausin/Library/CloudStorage/OneDrive-SISSA/data_repo/exp_set_data/imagenet"
+#alexnet = models.alexnet(pretrained=True).eval()
+alexnet = models.alexnet(weights=True).eval()
+preprocess = transforms.Compose(
+    [[21;9H[K[22;9Htransforms.ToPILImage(),[23;9Htransforms.Resize((224, 224)),[24;9Htransforms.ToTensor(),
+        transforms.Normalize(
+            mean=[0.3806, 0.4242, 0.3794], std=[0.2447, 0.2732, 0.2561]
+        ),  # Normalization for pretrained model
+    ]
+)[29;9H[K[30;9H[K[31;1H#reader = imageio.get_reader(path2vid)
+conv_layers = [[32;16H[K[33;5H"conv_layer1",[33;19H[K[34;5H"conv_layer4",[34;19H[K[35;5H"conv_layer7",
+    "conv_layer9",
+    "conv_layer11",[37;20H[K[38;1H][38;3H[K[39;1Hconv_layers_idx = [1, 4, 7, 9, 11][39;35H[K[40;9H[K[41;1Hfc_layers = ["fc_layer2", "fc_layer5"]
+fc_layers_idx = [2, 5][42;23H[K[1;1H[?25h
+
+
+
+
+
+
+
+
+[?25l[43;1H/[?25hrespond[?25l[43;8H[K[43;8H[?25hse_pro[?25l[10;45H[?25h[?25l[43;1H[38;5;224msearch hit BOTTOM, continuing at TOP[10;45H[?25h[?25l[m[43;1H/response_pro [43;15H[K[43;1H[38;5;224msearch hit BOTTOM, continuing at TOP[10;45H[?25h[?25l[m[43;1H/response_pro [43;15H[K[43;1H[38;5;224msearch hit BOTTOM, continuing at TOP[10;45H[?25h[?25l[m[48;5;242mfrom sparsity_in_silico.sparsity_CNN import [mr[48;5;242mesponse_prob_torch [m[43;1H[1m-- VISUAL LINE --[m[43;18H[K[10;45H[?25h[?25l[9;1H[48;5;242msys.path.append("/Users/tizianocausin/Deskto[mp[48;5;242m/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts/src") [10;45Hr[9;45H[?25h[?25l[8;1Himport sys[9;45Hp[8;11H[?25h[?25l[m[43;1H3 fewer lines[1mE[m[43;14H[K[8;42r[8;1H[3M[1;43r[41;1Houtput_len_conv = [193600, 139968, 64896, 43264, 43264] # FIXME work out real outdims
+rand_idx_conv = [][43;1H[K[43;1H3 fewer lines[8;1H[?25h[?25l[43;1H[K[43;1H:[?25hwq[?25l[?2004l[>4;m"scripts/alexnet_feat_extraction.py" 124L, 3605B written[23;2t[23;1t
+[?1004l[?2004l[?1l>[?1049l[?25h[>4;m[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hvim scripts/alexnet_feat_extraction.py[33Drc/sparsity_in_silico/sparsity_CNN.py[37Dcripts/alexnet_feat_extraction.py    [38D                                      [38Dvvim sc   v  vvim leon    scripts[1m/[0m[0m/leonardo_scripts[1m/[0m[0m/
+[J__pycache__/                alexnet_feat_extraction.py  alexnet_prob_firing.py[A[0m[27m[24m[65Cvim scripts/leonardo_scripts/[K__pycache__[1m/[0m[0m            ale
+[J[A[97Cxnet_prob_firing.py[1m [0m[0m [?2004l
+[J[?1049h[>4;2m[?1h=[?2004h[?1004h[1;43r[?12h[?12l[22;2t[22;1t[27m[23m[29m[m[H[2J[?25l[43;1H"scripts/leonardo_scripts/alexnet_prob_firing.py" 17L, 593B[2;1H▽[6n[2;1H  [3;1HPzz\[0%m[6n[3;1H           [1;1H[>c]10;?]11;?[1;1Himport torch
+import sys[2;11H[K[3;1Hsys.path.append("/leonardo/home/userexternal/tcausin0/exp_set/python_scripts/src")[3;83H[K[4;1Hfrom sparsity_in_silico.sparsity_CNN import response_prob
+import h5py
+
+
+path2res = "/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico"
+with h5py.File(f"{path2res}/feats_alexnet.h5", 'r') as f:
+    p = response_prob(f)
+
+with h5py.File(f"{path2res}/prob_alexnet.h5", "w") as f:
+# Iterate over dictionary items and save them in the HDF5 file
+    for key, value in p.items():[15;9Hf.create_dataset([16;13Hkey, data=value[17;9H)  # Create a dataset for each key-value pair
+[94m~                                                                                                                                              [19;1H~                                                                                                                                              [20;1H~                                                                                                                                              [21;1H~                                                                                                                                              [22;1H~                                                                                                                                              [23;1H~                                                                                                                                              [24;1H~                                                                                                                                              [25;1H~                                                                                                                                              [26;1H~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [31;1H~                                                                                                                                              [32;1H~                                                                                                                                              [33;1H~                                                                                                                                              [34;1H~                                                                                                                                              [35;1H~                                                                                                                                              [36;1H~                                                                                                                                              [37;1H~                                                                                                                                              [38;1H~                                                                                                                                              [39;1H~                                                                                                                                              [40;1H~                                                                                                                                              [41;1H~                                                                                                                                              [42;1H~                                                                                                                                              [1;1H[?25h[?4m[27m[23m[29m[m[H[2J[?25l[1;1Himport torch
+import sys
+sys.path.append("/leonardo/home/userexternal/tcausin0/exp_set/python_scripts/src")
+from sparsity_in_silico.sparsity_CNN import response_prob
+import h5py
+
+
+path2res = "/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico"
+with h5py.File(f"{path2res}/feats_alexnet.h5", 'r') as f:
+    p = response_prob(f)
+
+with h5py.File(f"{path2res}/prob_alexnet.h5", "w") as f:
+# Iterate over dictionary items and save them in the HDF5 file
+    for key, value in p.items():[15;9Hf.create_dataset([16;13Hkey, data=value[17;9H)  # Create a dataset for each key-value pair
+[94m~                                                                                                                                              [19;1H~                                                                                                                                              [20;1H~                                                                                                                                              [21;1H~                                                                                                                                              [22;1H~                                                                                                                                              [23;1H~                                                                                                                                              [24;1H~                                                                                                                                              [25;1H~                                                                                                                                              [26;1H~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [31;1H~                                                                                                                                              [32;1H~                                                                                                                                              [33;1H~                                                                                                                                              [34;1H~                                                                                                                                              [35;1H~                                                                                                                                              [36;1H~                                                                                                                                              [37;1H~                                                                                                                                              [38;1H~                                                                                                                                              [39;1H~                                                                                                                                              [40;1H~                                                                                                                                              [41;1H~                                                                                                                                              [42;1H~                                                                                                                                              [m[43;1H"scripts/leonardo_scripts/alexnet_prob_firing.py" 17L, 593B[1;1H[?25h
+
+
+[56C[?25l[43;1H[1m-- INSERT --[m[43;13H[K[4;57H[?25hb[?25l_[?25h[?25ln[?25h[?25lp[?25h[5;12H
+
+[8;61H[9;58H[8;61H[7;1H[8;61H[9;58H[?25l[10;22H[46m([mf[46m)[?25h[?25l[?25h[?25l[?25h[?25l[?25h[?25l[mi[46m([mf[46m)[?25h[?25l([mf[46m)[m[10;25H[K[10;22H[?25h[?25l_[46m([mf[46m)[?25h[?25l[mn[46m([mf[46m)[?25h[?25l[mp[46m([mf[46m)[?25h[?25l[m(f)
+[?25h[12;25H[13;25H[43;1H[K[13;24H[?25l[?25h[?25l[43;1H:[?25hwq[?25l[?2004l[>4;m"scripts/leonardo_scripts/alexnet_prob_firing.py" 17L, 599B written[23;2t[23;1t
+[?1004l[?2004l[?1l>[?1049l[?25h[>4;m[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hvvim scripts/leonardo_scripts/alexnet_prob_firing.py              f 
+[Jalexnet_feat_extraction.py  alexnet_prob_firing.py[A[0m[27m[24m[65Cvim scripts/leonardo_scripts/alexnet_[Kfeat_extraction.py[1m [0m[0m [?2004l
+[J[?1049h[>4;2m[?1h=[?2004h[?1004h[1;43r[?12h[?12l[22;2t[22;1t[27m[23m[29m[m[H[2J[?25l[43;1H"scripts/leonardo_scripts/alexnet_feat_extraction.py" 125L, 3636B[2;1H▽[6n[2;1H  [3;1HPzz\[0%m[6n[3;1H           [1;1H[>c]10;?]11;?[1;1Himport torch
+import torchvision.transforms as transforms[2;44H[K[3;1Hfrom torch.utils.data import DataLoader[3;40H[K[4;1Hfrom torchvision import models
+from torchvision.datasets import ImageNet
+from torchvision import transforms
+import os
+import sys
+sys.path.append("/leonardo/home/userexternal/tcausin0/exp_set/python_scripts/src")
+from sparsity_in_silico.sparsity_CNN import response_prob
+#import imageio
+import numpy as np
+import h5py
+
+
+path2res = "/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico"
+imagenet_path = "/leonardo_work/Sis25_piasini/tcausin/exp_set_data/imagenet"
+#alexnet = models.alexnet(pretrained=True).eval()
+alexnet = models.alexnet(weights=True).eval()
+preprocess = transforms.Compose(
+    [[22;9Htransforms.ToPILImage(),[23;9Htransforms.Resize((224, 224)),[24;9Htransforms.ToTensor(),[25;9Htransforms.Normalize([26;13Hmean=[0.3806, 0.4242, 0.3794], std=[0.2447, 0.2732, 0.2561][27;9H),  # Normalization for pretrained model
+    ]
+)
+
+#reader = imageio.get_reader(path2vid)
+conv_layers = [
+    "conv_layer1",
+    "conv_layer4",
+    "conv_layer7",
+    "conv_layer9",
+    "conv_layer11",
+]
+conv_layers_idx = [1, 4, 7, 9, 11]
+
+fc_layers = ["fc_layer2", "fc_layer5"]
+fc_layers_idx = [2, 5][1;1H[?25h[?4m[27m[23m[29m[m[H[2J[?25l[1;1Himport torch
+import torchvision.transforms as transforms
+from torch.utils.data import DataLoader
+from torchvision import models
+from torchvision.datasets import ImageNet
+from torchvision import transforms
+import os
+import sys
+sys.path.append("/leonardo/home/userexternal/tcausin0/exp_set/python_scripts/src")
+from sparsity_in_silico.sparsity_CNN import response_prob
+#import imageio
+import numpy as np
+import h5py
+
+
+path2res = "/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico"
+imagenet_path = "/leonardo_work/Sis25_piasini/tcausin/exp_set_data/imagenet"
+#alexnet = models.alexnet(pretrained=True).eval()
+alexnet = models.alexnet(weights=True).eval()
+preprocess = transforms.Compose(
+    [[22;9Htransforms.ToPILImage(),[23;9Htransforms.Resize((224, 224)),[24;9Htransforms.ToTensor(),[25;9Htransforms.Normalize([26;13Hmean=[0.3806, 0.4242, 0.3794], std=[0.2447, 0.2732, 0.2561][27;9H),  # Normalization for pretrained model
+    ]
+)
+
+#reader = imageio.get_reader(path2vid)
+conv_layers = [
+    "conv_layer1",
+    "conv_layer4",
+    "conv_layer7",
+    "conv_layer9",
+    "conv_layer11",
+]
+conv_layers_idx = [1, 4, 7, 9, 11]
+
+fc_layers = ["fc_layer2", "fc_layer5"]
+fc_layers_idx = [2, 5]
+"scripts/leonardo_scripts/alexnet_feat_extraction.py" 125L, 3636B[1;1H[?25h
+
+
+
+
+
+
+[?25l[43;1H[K[43;1H/[?25hresponse[?25l[10;45H[?25h[?25l[43;1H[38;5;224msearch hit BOTTOM, continuing at TOP[10;45H[?25h[?25l[m[43;1H/response [43;11H[K[43;1H[38;5;224msearch hit BOTTOM, continuing at TOP[10;45H[?25h[?25l[m[48;5;242mfrom sparsity_in_silico.sparsity_CNN import [mr[48;5;242mesponse_prob [m[43;1H[1m-- VISUAL LINE --[m[43;18H[K[10;45H[?25h[?25l[9;1H[48;5;242msys.path.append("/leonardo/home/userexternal[m/[48;5;242mtcausin0/exp_set/python_scripts/src") [10;45Hr[9;45H[?25h[?25l[9;42r[m[9;1H[2M[1;43r[42;1Houtput_len_conv = [193600, 139968, 64896, 43264, 43264] # FIXME work out real outdims[43;1H[K[9;1H[?25h[?25l[43;1H:[?25hwq[?25l[?2004l[>4;m"scripts/leonardo_scripts/alexnet_feat_extraction.py" 123L, 3495B written[23;2t[23;1t
+[?1004l[?2004l[?1l>[?1049l[?25h[>4;m[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hggit add src[1m/[0m[0m/sparsity_in_silico[1m/[0m[0m [?2004l
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hggit add scripts/
+[Jalexnet_feat_extraction.ipynb  initial_linear_regressions/    plot_freq.ipynb                
+alexnet_feat_extraction.py     leonardo_scripts/              [A[A[0m[27m[24m[65Cgit add scripts/[K.[?2004l
+[J[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hggit add scripts[1m/[0m[0m/loe  eonardo_scripts[1m/[0m[0m/.[?2004l
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hggit cmm  ommit -m "A added function to compute in [?2004l
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hvvim ini   src[1m/[0m[0m/sparsity_in_silico[1m/[0m[0m/__
+[J__init__.py   __pycache__/[A[0m[27m[24m[65Cvim src/sparsity_in_silico/__[Kinit__.py[1m [0m[0m [?2004l
+[J[?1049h[>4;2m[?1h=[?2004h[?1004h[1;43r[?12h[?12l[22;2t[22;1t[27m[23m[29m[m[H[2J[?25l[43;1H"src/sparsity_in_silico/__init__.py" [noeol] 5L, 74B[2;1H▽[6n[2;1H  [3;1HPzz\[0%m[6n[3;1H           [1;1H[>c]10;?]11;?[1;1H__all__ = [
+  'response_prob'[2;18H[K[3;1H  ][3;4H[K[5;1Hfrom .sparsity_CNN import response_prob
+[94m~                                                                                                                                              [7;1H~                                                                                                                                              [8;1H~                                                                                                                                              [9;1H~                                                                                                                                              [10;1H~                                                                                                                                              [11;1H~                                                                                                                                              [12;1H~                                                                                                                                              [13;1H~                                                                                                                                              [14;1H~                                                                                                                                              [15;1H~                                                                                                                                              [16;1H~                                                                                                                                              [17;1H~                                                                                                                                              [18;1H~                                                                                                                                              [19;1H~                                                                                                                                              [20;1H~                                                                                                                                              [21;1H~                                                                                                                                              [22;1H~                                                                                                                                              [23;1H~                                                                                                                                              [24;1H~                                                                                                                                              [25;1H~                                                                                                                                              [26;1H~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [31;1H~                                                                                                                                              [32;1H~                                                                                                                                              [33;1H~                                                                                                                                              [34;1H~                                                                                                                                              [35;1H~                                                                                                                                              [36;1H~                                                                                                                                              [37;1H~                                                                                                                                              [38;1H~                                                                                                                                              [39;1H~                                                                                                                                              [40;1H~                                                                                                                                              [41;1H~                                                                                                                                              [42;1H~                                                                                                                                              [1;1H[?25h[?4m[27m[23m[29m[m[H[2J[?25l[1;1H__all__ = [
+  'response_prob'
+  ]
+
+from .sparsity_CNN import response_prob
+[94m~                                                                                                                                              [7;1H~                                                                                                                                              [8;1H~                                                                                                                                              [9;1H~                                                                                                                                              [10;1H~                                                                                                                                              [11;1H~                                                                                                                                              [12;1H~                                                                                                                                              [13;1H~                                                                                                                                              [14;1H~                                                                                                                                              [15;1H~                                                                                                                                              [16;1H~                                                                                                                                              [17;1H~                                                                                                                                              [18;1H~                                                                                                                                              [19;1H~                                                                                                                                              [20;1H~                                                                                                                                              [21;1H~                                                                                                                                              [22;1H~                                                                                                                                              [23;1H~                                                                                                                                              [24;1H~                                                                                                                                              [25;1H~                                                                                                                                              [26;1H~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [31;1H~                                                                                                                                              [32;1H~                                                                                                                                              [33;1H~                                                                                                                                              [34;1H~                                                                                                                                              [35;1H~                                                                                                                                              [36;1H~                                                                                                                                              [37;1H~                                                                                                                                              [38;1H~                                                                                                                                              [39;1H~                                                                                                                                              [40;1H~                                                                                                                                              [41;1H~                                                                                                                                              [42;1H~                                                                                                                                              [m[43;1H"src/sparsity_in_silico/__init__.py" [noeol] 5L, 74B[1;1H[?25h
+  'response_prob[?25l[43;1H[1m-- INSERT --[m[43;13H[K[2;17H[?25h[?25l_'[?25h[?25ln'[?25h[?25lp'[?25h'[?25l,[?25h[?25l [?25h[?25l'[?25h[?25lr[?25h[?25le[?25h[?25ls[?25h[?25lo[?25h[?25l[2;27H[K[2;27H[?25h[?25lp[?25h[?25lo[?25h[?25ln[?25h[?25ls[?25h[?25le[?25h[?25l_[?25h[?25lr[?25h[?25l[2;33H[K[2;33H[?25h[?25lp[?25h[?25lr[?25h[?25lo[?25h[?25lb[?25h[?25l_[?25h[?25lt[?25h[?25lo[?25h[?25lr[?25h[?25lc[?25h[?25lh[?25h[?25l'[?25h[43;1H[K[2;43H[?25l[?25h[?25l[43;1H1 change; before #2  14 seconds ago[2;21H[K[2;20H[?25h[?25l[43;1H[1m-- INSERT --[m[43;13H[K[2;20H[?25h'[?25l,[?25h[?25l [?25h[?25lr[?25h[?25le[?25h[?25lp[?25h[?25ls[?25h[?25lo[?25h[?25ln[?25h[?25l[2;28H[K[2;28H[?25h[?25l[2;27H[K[2;27H[?25h[?25l[2;26H[K[2;26H[?25h[?25l[2;25H[K[2;25H[?25h[?25ls[?25h[?25lp[?25h[?25lo[?25h[?25ln[?25h[?25ls[?25h[?25le[?25h[?25l_[?25h[?25lp[?25h[?25lr[?25h[?25lo[?25h[?25lb[?25h[?25l_[?25h[?25lt[?25h[?25lo[?25h[?25lr[?25h[?25lc[?25h[?25lh[?25h[?25l'[?25h[?25l'response_prob_torch'[2;24H[?25h[43;1H[K[2;23H[?25l[?25h[?25l[43;1H:[?25hwq[?25l[?25h[?25l[43;3H[K[43;3H[?25h[?25l[43;2H[K[43;2H[?25h [2;23H[?25l[1;11H[46m[
+
+[m  [46m][?25h[?25l[m[1;11H[
+
+  ]
+[?25h[5;23Hort response_pro[?25l[43;1H[1m-- INSERT --[5;39H[?25h[mb[?25l_[?25h[?25ln[?25h[?25lp[?25h[?25l,[?25h[?25l [?25h[?25lr[?25h[?25le[?25h[?25ls[?25h[?25lp[?25h[?25lo[?25h[?25ln[?25h[?25ls[?25h[?25le[?25h[?25l_[?25h[?25lp[?25h[?25lr[?25h[?25lo[?25h[?25lb[?25h[?25l_[?25h[?25lt[?25h[?25lr[?25h[?25lo[?25h[?25l[5;61H[K[5;61H[?25h[?25l[5;60H[K[5;60H[?25h[?25lo[?25h[?25lr[?25h[?25lc[?25h[?25lh[?25h[43;1H[K[5;63H[?25l[?25h[?25l[43;1H:[?25hwq[?25l[?2004l[>4;m"src/sparsity_in_silico/__init__.py" 5L, 125B written[23;2t[23;1t
+[?1004l[?2004l[?1l>[?1049l[?25h[>4;m[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hvim src/sparsity_in_silico/__init__.py[38D[P[37C [38D[P[36C [37D[P[35C [36Dg src/sparsity_in_silico/__init__.py[35Dgi src/sparsity_in_silico/__init__.py[35Dt src/sparsity_in_silico/__init__.py[35D[1C src/sparsity_in_silico/__init__.py[35D[P[34C [36D[1C src/sparsity_in_silico/__init__.py[35Da src/sparsity_in_silico/__init__.py[35Dd src/sparsity_in_silico/__init__.py[35Dd src/sparsity_in_silico/__init__.py[35D[?2004l
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hggit comit  mt -m "added funt ction to compute pr  freq in   in pa   n torch and np"[?2004l
+git: 'commt' is not a git command. See 'git --help'.
+
+The most similar command is
+	commit
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hgit commt -m "added function to compute freq in torch and np"[8D[9Dit -m "added function to compute freq in torch and np"[53D[?2004l
+[main 636a747] added function to compute freq in torch and np
+ 9 files changed, 95 insertions(+), 152 deletions(-)
+ create mode 100644 python_scripts/scripts/.DS_Store
+ create mode 100644 python_scripts/scripts/.ipynb_checkpoints/plot_freq-checkpoint.ipynb
+ delete mode 100644 python_scripts/scripts/cluster_scripts/alexnet_feat_extraction.py
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004hggit push oroigin     ign in main[?2004l
+Enter passphrase for key '/Users/tizianocausin/.ssh/id_ed25519': 
+Enumerating objects: 26, done.
+Counting objects:   3% (1/26)Counting objects:   7% (2/26)Counting objects:  11% (3/26)Counting objects:  15% (4/26)Counting objects:  19% (5/26)Counting objects:  23% (6/26)Counting objects:  26% (7/26)Counting objects:  30% (8/26)Counting objects:  34% (9/26)Counting objects:  38% (10/26)Counting objects:  42% (11/26)Counting objects:  46% (12/26)Counting objects:  50% (13/26)Counting objects:  53% (14/26)Counting objects:  57% (15/26)Counting objects:  61% (16/26)Counting objects:  65% (17/26)Counting objects:  69% (18/26)Counting objects:  73% (19/26)Counting objects:  76% (20/26)Counting objects:  80% (21/26)Counting objects:  84% (22/26)Counting objects:  88% (23/26)Counting objects:  92% (24/26)Counting objects:  96% (25/26)Counting objects: 100% (26/26)Counting objects: 100% (26/26), done.
+Delta compression using up to 8 threads
+Compressing objects:   6% (1/15)Compressing objects:  13% (2/15)Compressing objects:  20% (3/15)Compressing objects:  26% (4/15)Compressing objects:  33% (5/15)Compressing objects:  40% (6/15)Compressing objects:  46% (7/15)Compressing objects:  53% (8/15)Compressing objects:  60% (9/15)Compressing objects:  66% (10/15)Compressing objects:  73% (11/15)Compressing objects:  80% (12/15)Compressing objects:  86% (13/15)Compressing objects:  93% (14/15)Compressing objects: 100% (15/15)Compressing objects: 100% (15/15), done.
+Writing objects:   6% (1/15)Writing objects:  13% (2/15)Writing objects:  20% (3/15)Writing objects:  26% (4/15)Writing objects:  33% (5/15)Writing objects:  40% (6/15)Writing objects:  46% (7/15)Writing objects:  53% (8/15)Writing objects:  60% (9/15)Writing objects:  66% (10/15)Writing objects:  73% (11/15)Writing objects:  80% (12/15)Writing objects:  86% (13/15)Writing objects:  93% (14/15)Writing objects: 100% (15/15)Writing objects: 100% (15/15), 1.90 KiB | 1.90 MiB/s, done.
+Total 15 (delta 7), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas:   0% (0/7)[Kremote: Resolving deltas:  14% (1/7)[Kremote: Resolving deltas:  28% (2/7)[Kremote: Resolving deltas:  42% (3/7)[Kremote: Resolving deltas:  57% (4/7)[Kremote: Resolving deltas:  71% (5/7)[Kremote: Resolving deltas:  85% (6/7)[Kremote: Resolving deltas: 100% (7/7)[Kremote: Resolving deltas: 100% (7/7), completed with 6 local objects.[K
+To github.com:TizianoCausin01/exp_set.git
+   9079327..636a747  main -> main
+[1m[7m%[27m[1m[0m                                                                                                                                               ]7;file://Tiziano-Causin.local/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts[0m[27m[24m[J(ponce_env) (base) tizianocausin@Tiziano-Causin python_scripts % [K[?2004h
