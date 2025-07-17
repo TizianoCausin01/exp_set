@@ -1,0 +1,12 @@
+tiziano_local:
+  paths:
+    data_path: "/Users/tizianocausin/Library/CloudStorage/OneDrive-SISSA/data_repo/exp_set_data"
+    results_path: "/Users/tizianocausin/Library/CloudStorage/OneDrive-SISSA/data_repo/exp_set_res/silico"
+    src_path: "/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts/src"
+
+leonardo_cluster:
+  paths:
+    src_path: "/leonardo/home/userexternal/tcausin0/exp_set/python_scripts/src"
+    data_path: "/leonardo_work/Sis25_piasini/tcausin/exp_set_data"
+    results_path: "/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico"
+
