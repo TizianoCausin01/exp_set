@@ -27,7 +27,7 @@ def get_maxpool_evecs(data, layer_name, layer_shape):
     all_PCs_shape = (data.n_components,) + layer_shape
     evecs = data.components_
     unflat_evecs = np.reshape(evecs, all_PCs_shape)
-    if layer_name == 'avgpool' or 'classifier' in layer_name:
+    if layer_name == 'avgpool' or ('classifier' in layer_name):
         unflat_evecs = np.squeeze(unflat_evecs)
         return unflat_evecs # don't do anything, it's already flat
     else:
@@ -44,18 +44,18 @@ def sample_features(loader, feature_extractor, layer_name, batch_size, num_stim,
         counter += 1
         if counter*batch_size > num_stim:
             break
-        print(datetime.now().strftime("%H:%M:%S"), f"starting batch {counter}")
+        print(datetime.now().strftime("%H:%M:%S"), f"starting batch {counter}", flush=True)
         with torch.no_grad():
             inputs = inputs.to(device)
             feats = feature_extractor(inputs)[layer_name]
             if pooling== "maxpool":
-                if layer_name == 'avgpool' or 'classifier' in layer_name:
-                    pass # don't do anything, it's already flat
+                if layer_name == 'avgpool' or ('classifier' in layer_name):
+                    feats = feats.cpu().numpy()
                 else:
                     feats = np.max(feats.cpu().numpy(), axis=(2,3)) # pools the max in the feats
             elif pooling== "avgpool":
-                if layer_name == 'avgpool' or 'classifier' in layer_name:
-                    pass # don't do anything, it's already flat
+                if layer_name == 'avgpool' or ('classifier' in layer_name):
+                    feats = feats.cpu().numpy()
                 else:
                     feats = np.mean(feats.cpu().numpy(), axis=(2,3)) # pools the max in the feats
             elif pooling == "all":
@@ -73,7 +73,8 @@ def features_extraction_loop(layer_names, model_name, model, batch_size, num_ima
         if os.path.exists(save_path):
             print(
                 datetime.now().strftime("%H:%M:%S"),
-                f"PCA model already exists for {target_layer} at {save_path}",
+                f"features already exists for {target_layer} at {save_path}",
+                flush=True
             ) 
         else:
             loader = DataLoader(
@@ -81,7 +82,7 @@ def features_extraction_loop(layer_names, model_name, model, batch_size, num_ima
             batch_size=batch_size,
             num_workers=num_workers,
             pin_memory=True,
-            timeout=100,
+            timeout=500,
             )  # shuffle=True, took out bc I want my feats aligned
             
             feature_extractor = create_feature_extractor(
@@ -93,4 +94,5 @@ def features_extraction_loop(layer_names, model_name, model, batch_size, num_ima
             print(
                 datetime.now().strftime("%H:%M:%S"),
                 f"Saved features for {target_layer} at {save_path}",
+                flush=True
             )

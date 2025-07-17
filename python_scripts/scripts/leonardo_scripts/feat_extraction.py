@@ -20,19 +20,19 @@ from alignment.utils import sample_features, get_usual_transform, features_extra
 import argparse
 
 if __name__ == '__main__':
-	parser = argparse.ArgumentParser(description="")
-	parser.add_argument('--model_name', type=str, default='resnet18')
-	parser.add_argument('--num_images', type=int, default=0)
-	parser.add_argument('--batch_size', type=int, default=512)
-	parser.add_argument('--num_workers', type=int, default=2)
-	parser.add_argument('--pooling', type=str, default="all")
-	args = parser.parse_args()
+        parser = argparse.ArgumentParser(description="")
+        parser.add_argument('--model_name', type=str, default='resnet18')
+        parser.add_argument('--num_images', type=int, default=0)
+        parser.add_argument('--batch_size', type=int, default=512)
+        parser.add_argument('--num_workers', type=int, default=2)
+        parser.add_argument('--pooling', type=str, default="all")
+        args = parser.parse_args()
         imagenet_path = "/leonardo_work/Sis25_piasini/tcausin/exp_set_data/imagenet"
         imagenet_val_path = os.path.join(imagenet_path, "val")
         results_path = "/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico"
-	layer_names = get_relevant_output_layers(args.model_name)
-	device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-	transform = get_usual_transform()
-	model_cls = getattr(models, args.model_name)
-	model = model_cls(pretrained=True).to(device).eval()
-	features_extraction_loop(layer_names, args.model_name, model, args.batch_size, args.num_images, args.pooling, transform, args.num_workers, imagenet_val_path, results_path)
+        layer_names = get_relevant_output_layers(args.model_name)
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        transform = get_usual_transform()
+        model_cls = getattr(models, args.model_name)
+        model = model_cls(pretrained=True).to(device).eval()
+        features_extraction_loop(layer_names, args.model_name, model, args.batch_size, args.num_images, args.pooling, transform, args.num_workers, imagenet_val_path, results_path)
