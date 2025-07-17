@@ -20,10 +20,10 @@ def CCA_loop_within_mod(model_name, pooling, num_components, res_path):
     layers_RSA = np.zeros((len(layer_names),len(layer_names)))
     for layer_idx1 in range(len(layer_names)):
         for layer_idx2 in range(layer_idx1):
-            print(datetime.now().strftime("%H:%M:%S"), f"stating layers {target_layer1} vs {target_layer2}")
             target_layer1 = layer_names[layer_idx1]
             feats_path1 = f"{res_path}/imagenet_val_{model_name}_{target_layer1}_{pooling}_features.pkl"
             target_layer2 = layer_names[layer_idx2]
+            print(datetime.now().strftime("%H:%M:%S"), f"stating layers {target_layer1} vs {target_layer2}")
             feats_path2 = f"{res_path}/imagenet_val_{model_name}_{target_layer2}_{pooling}_features.pkl"
             save_path = f"{cca_dir}/cca_{model_name}_{num_components}_components_{target_layer1}_vs_{target_layer2}.pkl"
             if os.path.exists(save_path):
