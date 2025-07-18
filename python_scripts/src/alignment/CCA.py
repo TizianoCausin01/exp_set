@@ -59,9 +59,10 @@ def CCA_loop_within_mod(model_name, pooling, num_components, res_path):
     os.makedirs(cca_dir, exist_ok=True)
     layers_RSA = np.zeros((len(layer_names),len(layer_names)))
     for layer_idx1 in range(len(layer_names)):
+        target_layer1 = layer_names[layer_idx1]
+        feats_path1 = f"{res_path}/imagenet_val_{model_name}_{target_layer1}_{pooling}_features.pkl"
+        all_acts1 = joblib.load(feats_path1)
         for layer_idx2 in range(layer_idx1):
-            target_layer1 = layer_names[layer_idx1]
-            feats_path1 = f"{res_path}/imagenet_val_{model_name}_{target_layer1}_{pooling}_features.pkl"
             target_layer2 = layer_names[layer_idx2]
             print(datetime.now().strftime("%H:%M:%S"), f"stating layers {target_layer1} vs {target_layer2}")
             feats_path2 = f"{res_path}/imagenet_val_{model_name}_{target_layer2}_{pooling}_features.pkl"
@@ -73,7 +74,6 @@ def CCA_loop_within_mod(model_name, pooling, num_components, res_path):
                     flush=True
                 )
             else:
-                all_acts1 = joblib.load(feats_path1)
                 all_acts2 = joblib.load(feats_path2)
                 cca = CCA(n_components = num_components)
                 cca.fit(all_acts1, all_acts2)

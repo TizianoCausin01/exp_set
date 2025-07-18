@@ -286,7 +286,7 @@ def run_ipca_maxpool(
                     
                 pca.partial_fit(feats)
         save_name = (
-            f"imagenet_val_{model_name}_{layer_name}_max_pool_pca_model_{n_components}_PCs.pkl"
+            f"imagenet_val_{model_name}_{layer_name}_maxpool_pca_model_{n_components}_PCs.pkl"
         )
         path = os.path.join(results_path, save_name)
         joblib.dump(pca, path)
