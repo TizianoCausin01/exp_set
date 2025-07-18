@@ -19,8 +19,47 @@ def worker_init_fn(worker_id):
 
 def get_relevant_output_layers(model_name):
     """
-    Returns a list of brain-relevant layers to extract from a given model,
-    approximately mapping to V1, V4, and IT.
+    Name:
+        get_relevant_output_layers
+
+    Description:
+        Returns a list of layer names from a specified deep neural network model
+        that are approximately aligned with regions in the primate visual cortex
+        — namely V1, V4, and IT (inferotemporal cortex). These layers are selected
+        to enable brain-model comparisons or neuroscientific analyses of model representations.
+
+    Inputs:
+        model_name (str): 
+            The name of the model architecture. Supported models include:
+            - 'resnet18'
+            - 'resnet50'
+            - 'vgg16'
+            - 'alexnet'
+            - 'vit_b_16'
+
+    Outputs:
+        List[str]: 
+            A list of strings representing layer names in the model. These layers are chosen
+            based on their approximate correspondence to stages in the visual processing hierarchy
+            (e.g., early visual cortex V1, intermediate V4, and higher-level IT).
+
+    Example Usage:
+        >>> layers = get_relevant_output_layers('resnet18')
+        >>> print(layers)
+        ['conv1', 'layer1.0.relu_1', 'layer1.1.relu_1', ..., 'avgpool']
+
+        >>> layers = get_relevant_output_layers('vit_b_16')
+        >>> print(layers)
+        ['conv_proj', 'encoder.layers.encoder_layer_0.add_1', ..., 'heads.head']
+
+    Notes:
+        - The selected layers are meant to facilitate comparisons between model activations
+          and neural recordings across the ventral stream.
+        - If an unsupported model name is passed, the function raises a `ValueError`.
+        - These layer names correspond to PyTorch model definitions and are used for
+          feature extraction via tools like `torchvision.models.feature_extraction.create_feature_extractor`.
+        - For unlisted models, consider manually inspecting the model graph using
+          `torchvision.models.feature_extraction.get_graph_node_names(model)`.
     """
     if model_name == 'resnet18':
         return [
@@ -100,6 +139,49 @@ def get_relevant_output_layers(model_name):
 
 
 def get_layer_out_shape(feature_extractor, layer_name):
+
+    """
+    Name:
+        get_layer_out_shape
+
+    Description:
+        Computes the output shape (excluding batch size) of a specific layer 
+        from a given PyTorch feature extractor when applied to a dummy input 
+        image of size (1, 3, 224, 224).
+
+    Inputs:
+        feature_extractor (torch.nn.Module):
+            A PyTorch model (typically a feature extractor created via
+            torchvision.models.feature_extraction.create_feature_extractor)
+            which outputs a dictionary of intermediate activations.
+        
+        layer_name (str):
+            The name of the layer for which the output shape is desired. 
+            This must be one of the keys returned by the feature_extractor.
+
+    Outputs:
+        tuple:
+            A tuple representing the shape of the output tensor from the 
+            specified layer, excluding the batch dimension. For example,
+            (512, 7, 7) for a convolutional layer or (768,) for a transformer block.
+
+    Example Usage:
+        >>> from torchvision.models import resnet18
+        >>> from torchvision.models.feature_extraction import create_feature_extractor
+        >>> model = resnet18(pretrained=True).eval()
+        >>> feat_ext = create_feature_extractor(model, return_nodes=["layer1.0.relu_1"])
+        >>> shape = get_layer_out_shape(feat_ext, "layer1.0.relu_1")
+        >>> print(shape)
+        (64, 56, 56)
+
+    Notes:
+        - This function uses a dummy input of size (1, 3, 224, 224), which is 
+          standard for ImageNet models.
+        - It runs in no_grad() mode to prevent gradient tracking and reduce memory use.
+        - Ensure the `layer_name` matches exactly the name used in the return_nodes 
+          dictionary when creating the feature extractor.
+    """
+
     with torch.no_grad():
         tmp_shape = feature_extractor(torch.randn(1, 3, 224, 224))[
             layer_name

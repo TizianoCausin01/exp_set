@@ -14,6 +14,46 @@ from dim_redu_anns.utils import get_relevant_output_layers
 
 
 def CCA_loop_within_mod(model_name, pooling, num_components, res_path):
+
+    """
+    Name:
+        CCA_loop_within_mod
+
+    Description:
+        Performs Canonical Correlation Analysis (CCA) between all pairs of layers from a given model.
+        For each pair of layers, it loads precomputed activations (features), computes the CCA,
+        and saves the resulting projection weights and canonical correlation coefficients.
+        It also stores and saves a symmetric similarity matrix representing the mean CCA correlation
+        between all layer pairs.
+
+    Inputs:
+        model_name (str):
+            The name of the model architecture (e.g., 'resnet18', 'alexnet').
+        
+        pooling (str):
+            Pooling method used in feature extraction ('all', 'avgpool', 'maxpool').
+
+        num_components (int):
+            Number of CCA components to compute between each pair of layers.
+
+        res_path (str):
+            Root directory where extracted features and CCA results will be read from and written to.
+
+    Outputs:
+        None. Saves:
+            - CCA weights and canonical correlations for each pair of layers as `.pkl` files.
+            - A CSV file (`{model_name}_similarity_layers.csv`) with the mean CCA similarity
+              for each layer pair.
+
+    Example usage:
+        CCA_loop_within_mod("resnet18", "avgpool", 20, "./results")
+
+    Notes:
+        - This performs only the lower triangle of the layer-to-layer comparison matrix (layer2 < layer1).
+        - Assumes feature files have already been extracted and saved at:
+              {res_path}/imagenet_val_{model_name}_{layer}_{pooling}_features.pkl
+    """
+
     layer_names = get_relevant_output_layers(model_name)
     cca_dir = f"{res_path}/cca_{model_name}_{pooling}"
     os.makedirs(cca_dir, exist_ok=True)

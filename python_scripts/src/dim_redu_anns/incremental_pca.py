@@ -21,6 +21,48 @@ def run_ipca_pipeline(
     batch_size=512,
     num_workers=2,
 ):
+
+    """
+    Name:
+        run_ipca_pipeline
+
+    Description:
+        Runs an Incremental PCA (IPCA) pipeline over a specified set of layers from a pretrained 
+        CNN or vision transformer model (e.g., ResNet, VGG, ViT), using features extracted from 
+        the ImageNet validation set. The resulting PCA model is saved to disk for each layer.
+        The function skips layers for which PCA models already exist.
+
+    Inputs:
+        model_name (str): 
+            Name of the torchvision model to use (e.g., 'resnet18', 'resnet50', 'vgg16', 'alexnet', 'vit_b_16').
+        layers_to_extract (list or None): 
+            List of layer names to extract activations from. If None, defaults to brain-inspired layers via 
+            `get_relevant_output_layers(model_name)`.
+        n_components (int): 
+            Maximum number of PCA components to retain (limited by number of features per layer).
+        batch_size (int): 
+            Batch size to use for image loading and feature extraction.
+        num_workers (int): 
+            Number of subprocesses to use for data loading.
+
+    Outputs:
+        None. Saves a `.pkl` file for each layer containing the fitted IncrementalPCA model to disk.
+        Files are stored under:
+            /leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico/
+
+    Example Usage:
+        >>> run_ipca_pipeline(model_name='resnet18', n_components=512)
+
+    Notes:
+        - This function assumes access to the ImageNet validation set stored at:
+            /leonardo_work/Sis25_piasini/tcausin/exp_set_data/imagenet/val
+        - The function avoids recomputing PCA for layers that already have a saved model.
+        - Feature extraction is done one layer at a time, looping through the dataset for each layer separately.
+        - Uses `IncrementalPCA` from scikit-learn, making it scalable to large datasets.
+        - The function internally applies ImageNet-standard transforms before feeding images into the model.
+        - Activations are flattened (e.g., C×H×W → 1D vector) before PCA fitting.
+    """
+
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # === Paths ===
     imagenet_path = "/leonardo_work/Sis25_piasini/tcausin/exp_set_data/imagenet"
@@ -115,6 +157,53 @@ def run_ipca_maxpool(
     batch_size=512,
     num_workers=2,
 ):
+
+    """
+    Name:
+        run_ipca_maxpool
+
+    Description:
+        Extracts features from specified layers of a pretrained CNN on ImageNet validation images,
+        applies global max pooling (if applicable), and fits an Incremental PCA model per layer.
+        The PCA models are saved for later dimensionality-reduction-based analyses of model representations.
+
+    Inputs:
+        model_name (str): 
+            Name of the torchvision model to use (e.g., 'resnet18', 'resnet50', 'vgg16', 'alexnet').
+            Note: 'vit_b_16' is explicitly not supported.
+        layers_to_extract (list or None): 
+            List of layer names to extract activations from. If None, a predefined set of layers
+            corresponding to brain-like stages (e.g., V1, V4, IT) is used based on the model.
+        n_components (int): 
+            Number of principal components to keep in PCA.
+        batch_size (int): 
+            Batch size used for ImageNet validation data loading.
+        num_workers (int): 
+            Number of subprocesses to use for data loading.
+
+    Outputs:
+        None directly returned.
+        Saves fitted PCA models (as `.pkl` files) for each layer in a specified results directory.
+        PCA files are named with format:
+            `imagenet_val_{model_name}_{layer_name}_max_pool_pca_model_{n_components}_PCs.pkl`
+
+    Example Usage:
+        >>> run_ipca_maxpool(model_name='resnet18', n_components=500)
+
+    Notes:
+        - Uses torchvision pretrained models and ImageNet validation data.
+        - For convolutional layers, global max pooling is applied before PCA.
+        - Fully connected or already-pooled layers are passed through as-is.
+        - Uses IncrementalPCA to process data in batches, allowing for large-scale feature extraction.
+        - Skips layers for which a PCA model has already been computed and saved.
+        - Assumes access to the ImageNet dataset under:
+              /leonardo_work/Sis25_piasini/tcausin/exp_set_data/imagenet/val
+        - Output PCA models are saved under:
+              /leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico
+        - Custom layer mappings are defined via `get_relevant_output_layers`.
+        - The helper function `get_layer_out_shape` and `worker_init_fn` must be defined elsewhere in the codebase.
+    """
+
     if model_name == 'vit_b_16':
         raise ValueError(f"Model {model_name} not supported in run_ipca_maxpool")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
