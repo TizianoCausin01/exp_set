@@ -297,3 +297,78 @@ def run_ipca_pool(
             datetime.now().strftime("%H:%M:%S"),
             f"Saved PCA for {layer_name} ?~F~R {path}",
         )
+
+
+def offline_ipca_pool(
+    model_name="resnet18",
+    pooling="maxpool",
+    n_components=1000,
+    batch_size=512,
+    results_path="/Users/tizianocausin/OneDrive - SISSA/data_repo/exp_set_res/silico/",
+):
+
+    """
+    Perform Incremental PCA (IPCA) on pooled feature activations extracted from a given model's layers,
+    and save the fitted PCA model for each layer to disk.
+
+    This function assumes that pooled features have already been computed and saved as .pkl files.
+
+    Parameters:
+    ----------
+    model_name : str, default="resnet18"
+        The name of the CNN model from which features were extracted.
+        Used to determine the relevant layers and feature paths.
+
+    pooling : str, default="maxpool"
+        The type of pooling used when features were originally extracted ("maxpool" or "avgpool").
+
+    n_components : int, default=1000
+        The number of principal components to keep for dimensionality reduction.
+
+    batch_size : int, default=512
+        The number of feature vectors to process at once during incremental fitting.
+
+    results_path : str
+        Path to the directory containing the pooled feature files and where the PCA models will be saved.
+
+    Outputs:
+    -------
+    None
+        Saves fitted IncrementalPCA models (as .pkl files) to the specified `results_path`.
+
+    Notes:
+    -----
+    - This function skips layers for which a PCA model already exists.
+    - It loads pre-pooled features from disk (assumed to be joblib .pkl files).
+    - IPCA is used to avoid loading the full dataset into memory at once.
+    """
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    layers = get_relevant_output_layers(model_name)
+    for l in layers:
+        features_path = f"{results_path}/imagenet_val_{model_name}_{l}_{pooling}_features.pkl"
+        save_name = (
+            f"imagenet_val_{model_name}_{l}_{pooling}_pca_model_{n_components}_PCs.pkl"
+        )
+        save_path = os.path.join(results_path, save_name)
+        if os.path.exists(save_path):
+            print(
+                datetime.now().strftime("%H:%M:%S"),
+                f"PCA model already exists for {l} in {save_path}",
+            )
+        else:
+            feats = joblib.load(features_path)
+            data_dim = feats.shape
+            n_components_layer = min(n_components, data_dim[1])
+            pca = IncrementalPCA(n_components=n_components_layer)
+            for i_batch in range(0, data_dim[0], batch_size):
+                end = min(i_batch + step, data_dim[0])
+                chunk = feats[i_batch:end, :]
+                print(datetime.now().strftime("%H:%M:%S"), f"batch_start {i_batch} out of {data_dim[0]}", flush=True)
+                pca.partial_fit(feats)
+                
+            joblib.dump(pca, save_path)
+            print(
+                datetime.now().strftime("%H:%M:%S"),
+                f"Saved PCA for {l} in {save_path}",
+            )
