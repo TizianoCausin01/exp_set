@@ -13,11 +13,11 @@ from dim_redu_anns.utils import get_relevant_output_layers
 
 
 
-def CCA_loop_within_mod(model_name, pooling, num_components, res_path):
+def quickCCA_loop_within_mod(model_name, pooling, num_components, res_path):
 
     """
     Name:
-        CCA_loop_within_mod
+        quickCCA_loop_within_mod
 
     Description:
         Performs Canonical Correlation Analysis (CCA) between all pairs of layers from a given model.
@@ -94,7 +94,7 @@ def CCA_loop_within_mod(model_name, pooling, num_components, res_path):
     csv_save_path = f"{cca_dir}/{model_name}_similarity_layers.csv"
     np.savetxt(csv_save_path, layers_RSA, delimiter=",")
 
-def CCA_loop_within_modd(model_name, pooling, num_components, pca_option, res_path):
+def CCA_loop_within_mod(model_name, pooling, num_components, pca_option, res_path):
     layer_names = get_relevant_output_layers(model_name)
     cca_dir = f"{res_path}/cca_{model_name}_{pooling}"
     os.makedirs(cca_dir, exist_ok=True)
@@ -114,6 +114,7 @@ def CCA_loop_within_modd(model_name, pooling, num_components, pca_option, res_pa
             flush=True
         )
         if pca_option==True:
+            first_projection = False
             if all_acts1.shape[1] > 1000:
                 PCs_path1 =f"{res_path}/imagenet_val_{model_name}_{target_layer1}_{pooling}_pca_model_1000_PCs.pkl"
                 print(
@@ -132,7 +133,8 @@ def CCA_loop_within_modd(model_name, pooling, num_components, pca_option, res_pa
                      datetime.now().strftime("%H:%M:%S"),
                      f"finished backprojecting in PCs1",
                      flush=True
-                 ) 
+                )
+                first_projection = True
                  
         for layer_idx2 in range(layer_idx1):
             target_layer2 = layer_names[layer_idx2]
@@ -141,13 +143,13 @@ def CCA_loop_within_modd(model_name, pooling, num_components, pca_option, res_pa
             all_acts2 = joblib.load(feats_path2)
             save_path = f"{cca_dir}/cca_{model_name}_{num_components}_components_{target_layer1}_vs_{target_layer2}.pkl"
             if pca_option==True:
+                print("inside outer if", flush=True)
                 if all_acts2.shape[1] > 1000:
-                     PCs_path2 =f"{res_path}/imagenet_val_{model_name}_{target_layer2}_{pooling}_pca_model_1000_PCs.pkl"
-                     
-                     PCs2 = joblib.load(PCs_path2)
-                     all_acts2 = all_acts2 @ PCs2.components_.T
+                    PCs_path2 =f"{res_path}/imagenet_val_{model_name}_{target_layer2}_{pooling}_pca_model_1000_PCs.pkl"  
+                    PCs2 = joblib.load(PCs_path2)
+                    all_acts2 = all_acts2 @ PCs2.components_.T
                 
-                if all_acts1.shape[1] > 1000:
+                if first_projection == True:
                     save_path = f"{cca_dir}/cca_{model_name}_{num_components}_components_pca_{target_layer1}_vs_{target_layer2}.pkl"
             if os.path.exists(save_path):
                 print(

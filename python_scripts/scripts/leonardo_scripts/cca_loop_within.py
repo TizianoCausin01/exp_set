@@ -10,7 +10,7 @@ from torchvision.models.feature_extraction import (
 from datetime import datetime
 sys.path.append("/leonardo/home/userexternal/tcausin0/exp_set/python_scripts/src")
 from dim_redu_anns.utils import get_relevant_output_layers
-from alignment.CCA import CCA_loop_within_modd
+from alignment.CCA import CCA_loop_within_mod
 import argparse
 
 if __name__ == '__main__':
@@ -20,4 +20,4 @@ if __name__ == '__main__':
         parser.add_argument('--num_components', type=int, default=50)
         args = parser.parse_args()
         res_path = "/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico"
-        CCA_loop_within_modd(args.model_name, args.pooling, args.num_components,True, res_path)
+        CCA_loop_within_mod(args.model_name, args.pooling, args.num_components,True, res_path)
