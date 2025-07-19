@@ -164,7 +164,7 @@ def CCA_loop_within_modd(model_name, pooling, num_components, pca_option, res_pa
                 cca.fit(all_acts1, all_acts2)
                 print(
                      datetime.now().strftime("%H:%M:%S"),
-                     f"finished CCA fit in PCs1",
+                     f"finished CCA fit",
                      flush=True
                 ) 
                 weights_dict = {}
