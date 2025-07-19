@@ -13,8 +13,9 @@
 cd /leonardo/home/userexternal/tcausin0/exp_set/python_scripts/scripts/leonardo_scripts
 module load python/3.11.6--gcc--8.5.0
 source ~/virtual_envs/ponce_env/bin/activate
-python maxpool_PCA.py \
+python pooling_PCA.py \
   --model_name $1 \
-  --n_components $2 \
+  --pooling $2
+  --n_components $3 \
   --batch_size 1024 \
   --num_workers $SLURM_NTASKS 

@@ -150,8 +150,9 @@ def run_ipca_pipeline(
         )
 
 
-def run_ipca_maxpool(
+def run_ipca_pool(
     model_name="resnet18",
+    pooling="maxpool",
     layers_to_extract=None,
     n_components=1000,
     batch_size=512,
@@ -204,8 +205,6 @@ def run_ipca_maxpool(
         - The helper function `get_layer_out_shape` and `worker_init_fn` must be defined elsewhere in the codebase.
     """
 
-    if model_name == 'vit_b_16':
-        raise ValueError(f"Model {model_name} not supported in run_ipca_maxpool")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # === Paths ===
     imagenet_path = "/leonardo_work/Sis25_piasini/tcausin/exp_set_data/imagenet"
@@ -282,11 +281,15 @@ def run_ipca_maxpool(
                 if layer_name == 'avgpool' or 'classifier' in layer_name:
                     pass # don't do anything, it's already flat
                 else:
-                    feats = np.max(feats, axis=(2,3)) # pools the max in the feats
-                    
+                    if pooling == "maxpool":
+                        feats = np.max(feats, axis=(2,3)) # pools the max in the feats
+                    elif pooling == "avgpool":
+                        feats = np.mean(feats, axis=(2,3))
+                        
                 pca.partial_fit(feats)
+        
         save_name = (
-            f"imagenet_val_{model_name}_{layer_name}_maxpool_pca_model_{n_components}_PCs.pkl"
+            f"imagenet_val_{model_name}_{layer_name}_{pooling}_pca_model_{n_components}_PCs.pkl"
         )
         path = os.path.join(results_path, save_name)
         joblib.dump(pca, path)
