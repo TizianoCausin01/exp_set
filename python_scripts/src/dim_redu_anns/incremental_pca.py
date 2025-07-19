@@ -362,7 +362,7 @@ def offline_ipca_pool(
             n_components_layer = min(n_components, data_dim[1])
             pca = IncrementalPCA(n_components=n_components_layer)
             for i_batch in range(0, data_dim[0], batch_size):
-                end = min(i_batch + step, data_dim[0])
+                end = min(i_batch + batch_size, data_dim[0])
                 chunk = feats[i_batch:end, :]
                 print(datetime.now().strftime("%H:%M:%S"), f"batch_start {i_batch} out of {data_dim[0]}", flush=True)
                 pca.partial_fit(feats)
