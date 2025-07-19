@@ -146,13 +146,23 @@ def CCA_loop_within_modd(model_name, pooling, num_components, pca_option, res_pa
                      
                      PCs2 = joblib.load(PCs_path2)
                      all_acts2 = all_acts2 @ PCs2.components_.T
-                     save_path = f"{cca_dir}/cca_{model_name}_{num_components}_components_pca_{target_layer1}_vs_{target_layer2}.pkl"
+                
+                if all_acts1.shape[1] > 1000:
+                    save_path = f"{cca_dir}/cca_{model_name}_{num_components}_components_pca_{target_layer1}_vs_{target_layer2}.pkl"
             if os.path.exists(save_path):
                 print(
                     datetime.now().strftime("%H:%M:%S"),
                     f"CCA already exists for {target_layer1} vs {target_layer2}  at {save_path}",
                     flush=True
                 )
+                weights_dict = joblib.load(save_path)
+                d1 = all_acts1 @ weights_dict["W1"]
+                d2 = all_acts2 @ weights_dict["W2"]
+                coefs_CCA = np.array([
+                    np.corrcoef(d1[:, i], d2[:, i])[0, 1] for i in range(d1.shape[1])
+                ])
+                layers_RSA[layer_idx1, layer_idx2] = np.mean(coefs_CCA)
+                print(datetime.now().strftime("%H:%M:%S"), f"{target_layer1} vs {target_layer2} corr {np.round(np.mean(coefs_CCA), 3)}", flush=True)
                 
             else:
                 print(
