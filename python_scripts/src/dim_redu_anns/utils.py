@@ -131,7 +131,7 @@ def get_relevant_output_layers(model_name):
             'encoder.ln',                                     # final transformer output
             'heads.head'                                      # classification head ← IT
         ]
-    if model_name == 'mobilenet_v3_large':
+    if 'mobilenet_v3_large' in model_name:
         return ["features.6.block.0", "features.15.block.0", "features.6.block.1", "features.15.block.1", "features.6.block.2", "features.15.block.2", "features.6.block.3", "features.15.block.3", "classifier.0", "classifier.3"]
     raise ValueError(f"Model {model_name} not supported in `get_relevant_output_layers()`.")
     # else:
