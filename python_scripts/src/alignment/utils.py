@@ -1,4 +1,4 @@
-import os
+import os, yaml, sys
 import numpy as np 
 from datetime import datetime
 import joblib
@@ -9,6 +9,8 @@ from torchvision.models.feature_extraction import (
     create_feature_extractor,
     get_graph_node_names,
 )
+
+
 
 
 def get_usual_transform():
@@ -104,7 +106,7 @@ def get_maxpool_evecs(data, layer_name, layer_shape):
         max_evecs = np.max(unflat_evecs, axis=(2,3)) # pools the max in the feats
         return max_evecs
 
-def sample_features(loader, feature_extractor, layer_name, batch_size, num_stim, pooling="all"):
+def sample_features(loader, feature_extractor,model_name, layer_name, batch_size, num_stim, pooling="all"):
 
     """
     Name:
@@ -270,7 +272,7 @@ def features_extraction_loop(layer_names, model_name, model, batch_size, num_ima
             feature_extractor = create_feature_extractor(
                 model, return_nodes=[target_layer]
             )
-            all_feats = sample_features(loader, feature_extractor, target_layer, batch_size, num_images, pooling)
+            all_feats = sample_features(loader, feature_extractor,model_name, target_layer, batch_size, num_images, pooling)
             all_acts = np.concatenate(all_feats, axis=0)
             joblib.dump(all_acts, save_path)
             print(
