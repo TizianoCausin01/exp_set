@@ -33,6 +33,11 @@ if __name__ == '__main__':
         layer_names = get_relevant_output_layers(args.model_name)
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         transform = get_usual_transform()
+        # add something like if  mobilenet_v3 in model_name blabla
+        # if last letter model_name == 1
+        # else 
+        # turn model_name into a list and add all the necessary conditions in the auxiliary functions
+        # then in the next ones i don't think it's needed as we won't have to load the real model
         model_cls = getattr(models, args.model_name)
         model = model_cls(pretrained=True).to(device).eval()
         features_extraction_loop(layer_names, args.model_name, model, args.batch_size, args.num_images, args.pooling, transform, args.num_workers, imagenet_val_path, results_path)
