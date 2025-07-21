@@ -163,15 +163,21 @@ def sample_features(loader, feature_extractor, layer_name, batch_size, num_stim,
             inputs = inputs.to(device)
             feats = feature_extractor(inputs)[layer_name]
             if pooling== "maxpool":
-                if layer_name == 'avgpool' or ('classifier' in layer_name):
+                if layer_name == 'avgpool' or ('classifier' in layer_name) or (layer_name == "heads.head"):
                     feats = feats.cpu().numpy()
                 else:
-                    feats = np.max(feats.cpu().numpy(), axis=(2,3)) # pools the max in the feats
+                    if model_name == "vit_b_16" and layer_name != "conv_proj":
+                        feats = np.max(feats.cpu().numpy(), axis=0) # pools the max in the feats
+                    else:
+                        feats = np.max(feats.cpu().numpy(), axis=(2,3)) # pools the max in the feats
             elif pooling== "avgpool":
-                if layer_name == 'avgpool' or ('classifier' in layer_name):
+                if layer_name == 'avgpool' or ('classifier' in layer_name) or (layer_name == "heads.head"):
                     feats = feats.cpu().numpy()
                 else:
-                    feats = np.mean(feats.cpu().numpy(), axis=(2,3)) # pools the max in the feats
+                    if model_name == "vit_b_16" and layer_name != "conv_proj":
+                        feats = np.mean(feats.cpu().numpy(), axis=0) # pools the max in the feats
+                    else:
+                        feats = np.mean(feats.cpu().numpy(), axis=(2,3)) # pools the max in the feats
             elif pooling == "all":
                 feats = feats.view(feats.size(0), -1).cpu().numpy()
             all_feats.append(feats)
