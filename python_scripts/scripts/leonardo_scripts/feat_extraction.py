@@ -42,9 +42,9 @@ if __name__ == '__main__':
             model_name_ = "mobilenet_v3_large"
             model_cls = getattr(models, model_name_)
             if args.mobilenet_opt == 1:
-                model = model_cls(weights=MobileNet_V3_Large_Weights.IMAGENET1K_V1)
+                model = model_cls(weights=MobileNet_V3_Large_Weights.IMAGENET1K_V1).to(device).eval()
             elif args.mobilenet_opt == 2: 
-                model = model_cls(weights=MobileNet_V3_Large_Weights.IMAGENET1K_V2)
+                model = model_cls(weights=MobileNet_V3_Large_Weights.IMAGENET1K_V2).to(device).eval()
             else:
                 raise ValueError("mobilenet_opt not supported")
         features_extraction_loop(layer_names, args.model_name, model, args.batch_size, args.num_images, args.pooling, transform, args.num_workers, imagenet_val_path, results_path)

@@ -169,15 +169,18 @@ def sample_features(loader, feature_extractor,model_name, layer_name, batch_size
                     feats = feats.cpu().numpy()
                 else:
                     if model_name == "vit_b_16" and layer_name != "conv_proj":
-                        feats = np.max(feats.cpu().numpy(), axis=0) # pools the max in the feats
+                        feats = np.max(feats.cpu().numpy(), axis=1) # pools the max in the feats
                     else:
                         feats = np.max(feats.cpu().numpy(), axis=(2,3)) # pools the max in the feats
             elif pooling== "avgpool":
                 if layer_name == 'avgpool' or ('classifier' in layer_name) or (layer_name == "heads.head"):
                     feats = feats.cpu().numpy()
+                    if layer_name == "avgpool":
+                        feats = feats.squeeze()
+                        print(feats.shape, flush=True)
                 else:
                     if model_name == "vit_b_16" and layer_name != "conv_proj":
-                        feats = np.mean(feats.cpu().numpy(), axis=0) # pools the max in the feats
+                        feats = np.mean(feats.cpu().numpy(), axis=1) # pools the max in the feats
                     else:
                         feats = np.mean(feats.cpu().numpy(), axis=(2,3)) # pools the max in the feats
             elif pooling == "all":

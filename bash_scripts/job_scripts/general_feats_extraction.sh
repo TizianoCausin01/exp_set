@@ -11,6 +11,6 @@
 # #SBATCH --job-name=giordano_alexnet_PCA
 #SBATCH --output=/leonardo/home/userexternal/tcausin0/output_jobs/%x.%j.out   # file name will be *job_name*.*job_id*
 cd /leonardo/home/userexternal/tcausin0/exp_set/python_scripts/scripts/leonardo_scripts
-module load python/3.11.6--gcc--8.5.0
+module load python
 source ~/virtual_envs/ponce_env/bin/activate
 python feat_extraction.py --model_name $1 --num_images $2 --batch_size $3 --num_workers $SLURM_NTASKS --pooling $4 --mobilenet_opt $5
