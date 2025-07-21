@@ -26,6 +26,7 @@ if __name__ == '__main__':
         parser.add_argument('--batch_size', type=int, default=512)
         parser.add_argument('--num_workers', type=int, default=2)
         parser.add_argument('--pooling', type=str, default="all")
+        parser.add_argument('--mobilenet_opt', type=int, default=0)
         args = parser.parse_args()
         imagenet_path = "/leonardo_work/Sis25_piasini/tcausin/exp_set_data/imagenet"
         imagenet_val_path = os.path.join(imagenet_path, "val")
@@ -33,11 +34,17 @@ if __name__ == '__main__':
         layer_names = get_relevant_output_layers(args.model_name)
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         transform = get_usual_transform()
-        # add something like if  mobilenet_v3 in model_name blabla
-        # if last letter model_name == 1
-        # else 
-        # turn model_name into a list and add all the necessary conditions in the auxiliary functions
-        # then in the next ones i don't think it's needed as we won't have to load the real model
-        model_cls = getattr(models, args.model_name)
-        model = model_cls(pretrained=True).to(device).eval()
+        if args.mobilenet_opt == 0:
+            model_cls = getattr(models, args.model_name)
+            model = model_cls(pretrained=True).to(device).eval()
+        else:
+            from torchvision.models import MobileNet_V3_Large_Weights
+            model_name_ = "mobilenet_v3_large"
+            model_cls = getattr(models, model_name_)
+            if args.mobilenet_opt == 1:
+                model = model_cls(weights=MobileNet_V3_Large_Weights.IMAGENET1K_V1)
+            elif args.mobilenet_opt == 2: 
+                model = model_cls(weights=MobileNet_V3_Large_Weights.IMAGENET1K_V2)
+            else:
+                raise ValueError("mobilenet_opt not supported")
         features_extraction_loop(layer_names, args.model_name, model, args.batch_size, args.num_images, args.pooling, transform, args.num_workers, imagenet_val_path, results_path)
