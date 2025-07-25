@@ -75,7 +75,7 @@ def quickCCA_loop_within_mod(model_name, pooling, num_components, res_path):
                 )
             else:
                 all_acts2 = joblib.load(feats_path2)
-                cca = CCA(n_components = num_components)
+                cca = CCA(n_components = num_components, max_iter=1000)
                 cca.fit(all_acts1, all_acts2)
                 weights_dict = {}
                 weights_dict["W1"] = cca.x_weights_  # shape: (n_features1, n_components)
@@ -172,7 +172,7 @@ def CCA_loop_within_mod(model_name, pooling, num_components, pca_option, res_pat
                      f"starting CCA",
                      flush=True
                 ) 
-                cca = CCA(n_components = num_components)
+                cca = CCA(n_components = num_components, max_iter=1000)
                 cca.fit(all_acts1, all_acts2)
                 print(
                      datetime.now().strftime("%H:%M:%S"),
@@ -279,7 +279,7 @@ def CCA_loop_between_mod(model_names, pooling, num_components, pca_option, res_p
                      f"starting CCA",
                      flush=True
                 )
-                cca = CCA(n_components = num_components)
+                cca = CCA(n_components = min(num_components, all_acts1.shape[1], all_acts2.shape[1]), max_iter=1000)
                 cca.fit(all_acts1, all_acts2)
                 print(
                      datetime.now().strftime("%H:%M:%S"),
