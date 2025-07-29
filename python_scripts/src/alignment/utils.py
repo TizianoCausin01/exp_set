@@ -9,6 +9,8 @@ from torchvision.models.feature_extraction import (
     create_feature_extractor,
     get_graph_node_names,
 )
+sys.path.append("..")
+from dim_redu_anns.utils import get_layer_out_shape
 
 
 
@@ -192,15 +194,20 @@ def sample_features(loader, feature_extractor,model_name, layer_name, batch_size
                     else:
                         feats = np.mean(feats.cpu().numpy(), axis=(2,3)) # pools the max in the feats
             elif pooling == "ran":
-                feats = feats.view(feats.size(0), -1).cpu().numpy()
-                feats = feats[:, rand_idx]
+                if layer_name == 'avgpool' or ('classifier' in layer_name) or (layer_name == "heads.head"):
+                    feats = feats.cpu().numpy()
+                    if layer_name == "avgpool":
+                        feats = feats.squeeze()
+                else:
+                    feats = feats.view(feats.size(0), -1).cpu().numpy()
+                    feats = feats[:, rand_idx]
             elif pooling == "all":
                 feats = feats.view(feats.size(0), -1).cpu().numpy()
             all_feats.append(feats)
     return all_feats
 
 
-def features_extraction_loop(layer_names, model_name, model, batch_size, num_images, pooling, transform, num_workers, imagenet_val_path, results_path):
+def features_extraction_loop(layer_names, model_name, model, batch_size, num_images, pooling, transform, num_workers, imagenet_val_path, results_path, rand_perc=10):
 
     """
     Name:
@@ -286,7 +293,7 @@ def features_extraction_loop(layer_names, model_name, model, batch_size, num_ima
             feature_extractor = create_feature_extractor(
                 model, return_nodes=[target_layer]
             )
-            all_feats = sample_features(loader, feature_extractor,model_name, target_layer, batch_size, num_images, pooling)
+            all_feats = sample_features(loader, feature_extractor,model_name, target_layer, batch_size, num_images, pooling, rand_perc)
             all_acts = np.concatenate(all_feats, axis=0)
             joblib.dump(all_acts, save_path)
             print(

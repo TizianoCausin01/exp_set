@@ -13,4 +13,4 @@
 cd /leonardo/home/userexternal/tcausin0/exp_set/python_scripts/scripts/leonardo_scripts
 module load python
 source ~/virtual_envs/ponce_env/bin/activate
-python feat_extraction.py --model_name $1 --num_images $2 --batch_size $3 --num_workers $SLURM_NTASKS --pooling $4 --mobilenet_opt $5
+python feat_extraction.py --model_name $1 --num_images $2 --batch_size $3 --num_workers $SLURM_NTASKS --pooling $4 --rand_perc $5 --mobilenet_opt $6

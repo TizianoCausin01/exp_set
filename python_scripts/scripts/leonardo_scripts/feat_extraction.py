@@ -25,7 +25,8 @@ if __name__ == '__main__':
         parser.add_argument('--num_images', type=int, default=0)
         parser.add_argument('--batch_size', type=int, default=512)
         parser.add_argument('--num_workers', type=int, default=2)
-        parser.add_argument('--pooling', type=str, default="all")
+        parser.add_argument('--pooling', type=str, default="all")       
+        parser.add_argument('--rand_perc', type=int, default=10)
         parser.add_argument('--mobilenet_opt', type=int, default=0)
         args = parser.parse_args()
         imagenet_path = "/leonardo_work/Sis25_piasini/tcausin/exp_set_data/imagenet"
@@ -47,4 +48,4 @@ if __name__ == '__main__':
                 model = model_cls(weights=MobileNet_V3_Large_Weights.IMAGENET1K_V2).to(device).eval()
             else:
                 raise ValueError("mobilenet_opt not supported")
-        features_extraction_loop(layer_names, args.model_name, model, args.batch_size, args.num_images, args.pooling, transform, args.num_workers, imagenet_val_path, results_path)
+        features_extraction_loop(layer_names, args.model_name, model, args.batch_size, args.num_images, args.pooling, transform, args.num_workers, imagenet_val_path, results_path, rand_perc=args.rand_perc)
