@@ -106,7 +106,7 @@ def get_maxpool_evecs(data, layer_name, layer_shape):
         max_evecs = np.max(unflat_evecs, axis=(2,3)) # pools the max in the feats
         return max_evecs
 
-def sample_features(loader, feature_extractor,model_name, layer_name, batch_size, num_stim, pooling="all"):
+def sample_features(loader, feature_extractor,model_name, layer_name, batch_size, num_stim, pooling="all", rand_perc=10):
 
     """
     Name:
@@ -155,6 +155,11 @@ def sample_features(loader, feature_extractor,model_name, layer_name, batch_size
     if num_stim == 0:
         num_stim = len(loader.dataset)
     counter = 0
+    if pooling == "ran":
+        layer_shape = get_layer_out_shape(feature_extractor, layer_name)
+        out_dim = np.prod(layer_shape) 
+        rand_idx = np.random.choice(np.arange(out_dim), size=out_dim // rand_perc, replace=False)
+
     all_feats = []
     for inputs, _ in loader:
         counter += 1
@@ -186,6 +191,9 @@ def sample_features(loader, feature_extractor,model_name, layer_name, batch_size
                         feats = np.mean(feats.cpu().numpy(), axis=1) # pools the max in the feats
                     else:
                         feats = np.mean(feats.cpu().numpy(), axis=(2,3)) # pools the max in the feats
+            elif pooling == "ran":
+                feats = feats.view(feats.size(0), -1).cpu().numpy()
+                feats = feats[:, rand_idx]
             elif pooling == "all":
                 feats = feats.view(feats.size(0), -1).cpu().numpy()
             all_feats.append(feats)
