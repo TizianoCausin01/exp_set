@@ -10,3 +10,10 @@ leonardo_cluster:
     data_path: "/leonardo_work/Sis25_piasini/tcausin/exp_set_data"
     results_path: "/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico"
 
+o2_cluster:
+  paths:
+    src_path: "/home/tic569/exp_set/python_scripts/src"
+    data_path: "/n/scratch/users/t/tic569/exp_set_data"
+    results_path: "/n/scratch/users/t/tic569/exp_set_res/silico"
+
+
