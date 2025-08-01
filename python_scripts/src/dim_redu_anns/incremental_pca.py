@@ -372,3 +372,57 @@ def offline_ipca_pool(
                 datetime.now().strftime("%H:%M:%S"),
                 f"Saved PCA for {l} in {save_path}",
             )
+
+
+def get_top_n_dimensions(model_name, model, loader, extreme_n_imgs, top_n_PCs, num_stim, batch_size, paths):
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    layers = get_relevant_output_layers(model_name)
+    if num_stim == 0:
+        num_stim = 50000
+    for target_layer in layers:
+        counter = 0
+        top_save_path = f"{paths["results_path"]}/{model_name}_{target_layer}_top_{extreme_n_imgs}_{top_n_PCs}_PCs.csv"
+        bottom_save_path = f"{paths["results_path"]}/{model_name}_{target_layer}_bottom_{extreme_n_imgs}_{top_n_PCs}_PCs.csv"
+        feature_extractor = create_feature_extractor(
+        model, return_nodes=[target_layer]
+        )
+        if os.path.exists(top_save_path) & os.path.exists(bottom_save_path):
+            print("top PCs already exist for alexnet")
+        else:
+            PCs_path = f"{paths["results_path"]}/imagenet_val_{model_name}_{target_layer}_pca_model_1000_PCs.pkl"
+            PCs = joblib.load(PCs_path).components_
+            target_PCs = PCs[:top_n_PCs]
+            for inputs, _ in loader:
+                counter += 1
+                if counter*batch_size > num_stim:
+                    break
+                # if counter*batch_size > num_stim:
+                print(datetime.now().strftime("%H:%M:%S"), f"starting batch {counter}", flush=True)
+                with torch.no_grad():
+                    inputs = inputs.to(device)
+                    feats = feature_extractor(inputs)[target_layer]
+                    feats = feats.view(feats.size(0), -1).cpu().numpy()
+                    current_dim_redu_feats = feats @ target_PCs.T
+                    try:
+                        all_dim_redu_feats = np.concatenate([all_dim_redu_feats, current_dim_redu_feats], axis=0)
+                    except NameError:
+                        all_dim_redu_feats = current_dim_redu_feats
+                    # end try 
+                # end with torch.no_grad():
+            # end for inputs, _ in loader:
+            top_n_all = []
+            bottom_n_all = []
+            print(datetime.now().strftime("%H:%M:%S"), f"finished passing stimuli", flush=True)
+            for d in range(top_n_PCs):
+                curr_dim = all_dim_redu_feats[:,d]
+                idx = np.argsort(curr_dim)
+                bottom_n_cd = idx[:extreme_n_imgs]
+                top_n_cd = idx[extreme_n_imgs:]
+                top_n_all.append(top_n_cd)
+                bottom_n_all.append(bottom_n_cd)
+            # end for d in range(top_n_PCs):
+            top_to_save = np.stack(top_n_all, axis=0)
+            bottom_to_save = np.stack(bottom_n_all, axis=0)
+            print(datetime.now().strftime("%H:%M:%S"), f"saved files", flush=True)
+        # end for target_layer in layers:
+    # end if os.path.exists(top_save_path) & os.path.exists(bottom_save_path):
