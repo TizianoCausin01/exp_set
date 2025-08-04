@@ -35,7 +35,7 @@ if __name__ == '__main__':
         parser.add_argument('--num_workers', type=int, default=1)
         args = parser.parse_args()
         
-        imagenet_val_path = f"{paths["data_path"]}/imagenet/val"
+        imagenet_val_path = f"{paths['data_path']}/imagenet/val"
         transform = get_usual_transform()
         
         loader = DataLoader(

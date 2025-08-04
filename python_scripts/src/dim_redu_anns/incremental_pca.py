@@ -381,8 +381,8 @@ def get_top_n_dimensions(model_name, model, loader, extreme_n_imgs, top_n_PCs, n
         num_stim = 50000
     for target_layer in layers:
         counter = 0
-        top_save_path = f"{paths["results_path"]}/{model_name}_{target_layer}_top_{extreme_n_imgs}_{top_n_PCs}_PCs.csv"
-        bottom_save_path = f"{paths["results_path"]}/{model_name}_{target_layer}_bottom_{extreme_n_imgs}_{top_n_PCs}_PCs.csv"
+        top_save_path = f"{paths["results_path"]}/{model_name}_{target_layer}_top_{extreme_n_imgs}_imgs_{top_n_PCs}_PCs.csv"
+        bottom_save_path = f"{paths["results_path"]}/{model_name}_{target_layer}_bottom_{extreme_n_imgs}_imgs_{top_n_PCs}_PCs.csv"
         feature_extractor = create_feature_extractor(
         model, return_nodes=[target_layer]
         )
@@ -423,6 +423,8 @@ def get_top_n_dimensions(model_name, model, loader, extreme_n_imgs, top_n_PCs, n
             # end for d in range(top_n_PCs):
             top_to_save = np.stack(top_n_all, axis=0)
             bottom_to_save = np.stack(bottom_n_all, axis=0)
+            np.savetxt(top_save_path, top_to_save, delimiter=",", fmt='%d')
+            np.savetxt(bottom_save_path, bottom_to_save, delimiter=",", fmt='%d')
             print(datetime.now().strftime("%H:%M:%S"), f"saved files", flush=True)
         # end for target_layer in layers:
     # end if os.path.exists(top_save_path) & os.path.exists(bottom_save_path):
