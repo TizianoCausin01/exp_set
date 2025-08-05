@@ -108,7 +108,7 @@ def get_maxpool_evecs(data, layer_name, layer_shape):
         max_evecs = np.max(unflat_evecs, axis=(2,3)) # pools the max in the feats
         return max_evecs
 
-def sample_features(loader, feature_extractor,model_name, layer_name, batch_size, num_stim, pooling="all", rand_perc=10):
+def sample_features(loader, feature_extractor,model_name, layer_name, batch_size, num_stim, results_path, pooling="all", rand_perc=10):
 
     """
     Name:
@@ -161,7 +161,10 @@ def sample_features(loader, feature_extractor,model_name, layer_name, batch_size
         layer_shape = get_layer_out_shape(feature_extractor, layer_name)
         out_dim = np.prod(layer_shape) 
         rand_idx = np.random.choice(np.arange(out_dim), size=out_dim // rand_perc, replace=False)
-
+    elif pooling == "PCs":
+        PCs_path = f"{results_path}/imagenet_val_{model_name}_{layer_name}_pca_model_1000_PCs.pkl"
+        PCs = joblib.load(PCs_path).components_
+    # end if pooling == "ran":
     all_feats = []
     for inputs, _ in loader:
         counter += 1
@@ -203,6 +206,9 @@ def sample_features(loader, feature_extractor,model_name, layer_name, batch_size
                     feats = feats[:, rand_idx]
             elif pooling == "all":
                 feats = feats.view(feats.size(0), -1).cpu().numpy()
+            elif pooling == "PCs":                
+                feats = feats.view(feats.size(0), -1).cpu().numpy()
+                feats = feats@PCs.T
             all_feats.append(feats)
     return all_feats
 
@@ -293,7 +299,7 @@ def features_extraction_loop(layer_names, model_name, model, batch_size, num_ima
             feature_extractor = create_feature_extractor(
                 model, return_nodes=[target_layer]
             )
-            all_feats = sample_features(loader, feature_extractor,model_name, target_layer, batch_size, num_images, pooling, rand_perc)
+            all_feats = sample_features(loader, feature_extractor,model_name, target_layer, batch_size, num_images, results_path, pooling, rand_perc)
             all_acts = np.concatenate(all_feats, axis=0)
             joblib.dump(all_acts, save_path)
             print(
