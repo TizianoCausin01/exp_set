@@ -161,7 +161,7 @@ def sample_features(loader, feature_extractor,model_name, layer_name, batch_size
         layer_shape = get_layer_out_shape(feature_extractor, layer_name)
         out_dim = np.prod(layer_shape) 
         rand_idx = np.random.choice(np.arange(out_dim), size=out_dim // rand_perc, replace=False)
-    elif pooling == "PCs":
+    elif pooling == "PC_pool":
         PCs_path = f"{results_path}/imagenet_val_{model_name}_{layer_name}_pca_model_1000_PCs.pkl"
         PCs = joblib.load(PCs_path).components_
     # end if pooling == "ran":
@@ -206,7 +206,7 @@ def sample_features(loader, feature_extractor,model_name, layer_name, batch_size
                     feats = feats[:, rand_idx]
             elif pooling == "all":
                 feats = feats.view(feats.size(0), -1).cpu().numpy()
-            elif pooling == "PCs":                
+            elif pooling == "PC_pool":                
                 feats = feats.view(feats.size(0), -1).cpu().numpy()
                 feats = feats@PCs.T
             all_feats.append(feats)

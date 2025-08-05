@@ -387,7 +387,7 @@ def get_top_n_dimensions(model_name, model, loader, extreme_n_imgs, top_n_PCs, n
         model, return_nodes=[target_layer]
         )
         if os.path.exists(top_save_path) & os.path.exists(bottom_save_path):
-            print("top PCs already exist for alexnet")
+            print(datetime.now().strftime("%H:%M:%S"), f"top PCs already exist for {target_layer}")
         else:
             PCs_path = f"{paths["results_path"]}/imagenet_val_{model_name}_{target_layer}_pca_model_1000_PCs.pkl"
             PCs = joblib.load(PCs_path).components_
@@ -417,7 +417,7 @@ def get_top_n_dimensions(model_name, model, loader, extreme_n_imgs, top_n_PCs, n
                 curr_dim = all_dim_redu_feats[:,d]
                 idx = np.argsort(curr_dim)
                 bottom_n_cd = idx[:extreme_n_imgs]
-                top_n_cd = idx[extreme_n_imgs:]
+                top_n_cd = idx[-extreme_n_imgs:]
                 top_n_all.append(top_n_cd)
                 bottom_n_all.append(bottom_n_cd)
             # end for d in range(top_n_PCs):
@@ -425,6 +425,8 @@ def get_top_n_dimensions(model_name, model, loader, extreme_n_imgs, top_n_PCs, n
             bottom_to_save = np.stack(bottom_n_all, axis=0)
             np.savetxt(top_save_path, top_to_save, delimiter=",", fmt='%d')
             np.savetxt(bottom_save_path, bottom_to_save, delimiter=",", fmt='%d')
-            print(datetime.now().strftime("%H:%M:%S"), f"saved files", flush=True)
+            print(datetime.now().strftime("%H:%M:%S"), f"saved files at {top_save_path}", flush=True)
+            del all_dim_redu_feats
         # end for target_layer in layers:
     # end if os.path.exists(top_save_path) & os.path.exists(bottom_save_path):
+
