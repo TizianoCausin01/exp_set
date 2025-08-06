@@ -123,6 +123,7 @@ def run_ipca_pipeline(
             datasets.ImageFolder(imagenet_val_path, transform=transform),
             batch_size=batch_size,
             num_workers=num_workers,
+            shuffle=True,
             pin_memory=True,
             worker_init_fn=worker_init_fn,
             timeout=500,
