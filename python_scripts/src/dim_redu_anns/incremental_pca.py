@@ -12,9 +12,10 @@ from datetime import datetime
 import torch
 import os
 from .utils import get_relevant_output_layers, worker_init_fn, get_layer_out_shape
-
+from alignment.utils import get_usual_transform
 
 def run_ipca_pipeline(
+    paths,
     model_name="resnet18",
     layers_to_extract=None,
     n_components=1000,
@@ -65,18 +66,11 @@ def run_ipca_pipeline(
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # === Paths ===
-    imagenet_path = "/leonardo_work/Sis25_piasini/tcausin/exp_set_data/imagenet"
+    imagenet_path = f"{paths['data_path']}/imagenet"
     imagenet_val_path = os.path.join(imagenet_path, "val")
-    results_path = "/leonardo_work/Sis25_piasini/tcausin/exp_set_res/silico"
+    results_path = paths['results_path']
     # === Transforms & Dataloader ===
-    transform = transforms.Compose(
-        [
-            transforms.Resize(256),
-            transforms.CenterCrop(224),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-        ]
-    )
+    transform = get_usual_transform()
     # === Load model ===
     model_cls = getattr(models, model_name)
     model = model_cls(pretrained=True).to(device).eval()
@@ -92,7 +86,8 @@ def run_ipca_pipeline(
         if os.path.exists(path):
             print(
                 datetime.now().strftime("%H:%M:%S"),
-                f"PCA model already exists for {layer} → {path}",
+                f"PCA model already exists for {layer} in {path}",
+                flush=True,
             )
         else:
             remaining_layers.append(layer)
@@ -100,18 +95,20 @@ def run_ipca_pipeline(
         print(
             datetime.now().strftime("%H:%M:%S"),
             "All PCA models already exist. Nothing to do.",
+            flush=True,
         )
         return
     print(
         datetime.now().strftime("%H:%M:%S"),
         f"Model: {model_name} | Layers to process: {len(remaining_layers)}",
+        flush=True,
     )
 
     # === Loop over layers separately ===
-    print(datetime.now().strftime("%H:%M:%S"), "Using multiple passes (1 per layer)...")
+    print(datetime.now().strftime("%H:%M:%S"), "Using multiple passes (1 per layer)...", flush=True)
     for layer_name in remaining_layers:
         print(
-            datetime.now().strftime("%H:%M:%S"), f"Fitting PCA for layer: {layer_name}"
+            datetime.now().strftime("%H:%M:%S"), f"Fitting PCA for layer: {layer_name}", flush=True
         )
         feature_extractor = create_feature_extractor(
             model, return_nodes=[layer_name]
@@ -128,25 +125,26 @@ def run_ipca_pipeline(
             num_workers=num_workers,
             pin_memory=True,
             worker_init_fn=worker_init_fn,
-            timeout=100,
+            timeout=500,
         )  # shuffle=True, took out bc I want my feats aligned
         counter = 0
         for inputs, _ in loader:
             counter += 1
-            print(datetime.now().strftime("%H:%M:%S"), f"starting batch {counter}")
+            print(datetime.now().strftime("%H:%M:%S"), f"starting batch {counter}", flush=True)
             with torch.no_grad():
                 inputs = inputs.to(device)
                 feats = feature_extractor(inputs)[layer_name]
                 feats = feats.view(feats.size(0), -1).cpu().numpy()
                 pca.partial_fit(feats)
         save_name = (
-            f"imagenet_val_{model_name}_{layer_name}_pca_model_{n_components}_PCs.pkl"
+            f"imagenet_val_{model_name}_{layer_name}_pca_model_{n_components}_PCs.pkl" 
         )
         path = os.path.join(results_path, save_name)
         joblib.dump(pca, path)
         print(
             datetime.now().strftime("%H:%M:%S"),
-            f"Saved PCA for {layer_name} ?~F~R {path}",
+            f"Saved PCA for {layer_name} at {path}", 
+            flush=True,
         )
 
 
