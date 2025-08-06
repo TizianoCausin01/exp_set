@@ -13,9 +13,8 @@ from torchvision.models.feature_extraction import (
                 )
 from torchvision import transforms, datasets, models
 
-
 def worker_init_fn(worker_id):
-    print(datetime.now().strftime("%H:%M:%S"), f":builder: Worker {worker_id} started")
+    print(datetime.now().strftime("%H:%M:%S"), f"Worker {worker_id} started")
 
 def get_relevant_output_layers(model_name):
     """
