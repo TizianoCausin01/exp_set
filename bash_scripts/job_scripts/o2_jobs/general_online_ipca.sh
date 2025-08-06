@@ -8,7 +8,7 @@
 #SBATCH --mem=250G 
 # #SBATCH --account=       # account name 
 # #SBATCH --partition=priority # partition name 
-#SBATCH --job-name=online_pca 
+#SBATCH --job-name=online_ipca 
 #SBATCH --output=/home/tic569/output_jobs/%x.%j.out   # file name will be *job_name*.*job_id* 
 cd /home/tic569/exp_set/python_scripts/scripts 
 module load conda/miniforge3/24.11.3-0 
