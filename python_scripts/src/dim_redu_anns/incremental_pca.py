@@ -12,7 +12,6 @@ from datetime import datetime
 import torch
 import os
 from .utils import get_relevant_output_layers, worker_init_fn, get_layer_out_shape
-from alignment.utils import get_usual_transform
 
 def run_ipca_pipeline(
     paths,
@@ -63,7 +62,7 @@ def run_ipca_pipeline(
         - The function internally applies ImageNet-standard transforms before feeding images into the model.
         - Activations are flattened (e.g., C×H×W → 1D vector) before PCA fitting.
     """
-
+    from alignment.utils import get_usual_transform
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # === Paths ===
     imagenet_path = f"{paths['data_path']}/imagenet"
@@ -379,6 +378,7 @@ def get_top_n_dimensions(model_name, model, loader, extreme_n_imgs, top_n_PCs, n
     if num_stim == 0:
         num_stim = 50000
     for target_layer in layers:
+        all_dim_redu_feats = None
         counter = 0
         top_save_path = f"{paths["results_path"]}/{model_name}_{target_layer}_top_{extreme_n_imgs}_imgs_{top_n_PCs}_PCs.csv"
         bottom_save_path = f"{paths["results_path"]}/{model_name}_{target_layer}_bottom_{extreme_n_imgs}_imgs_{top_n_PCs}_PCs.csv"
@@ -389,8 +389,11 @@ def get_top_n_dimensions(model_name, model, loader, extreme_n_imgs, top_n_PCs, n
             print(datetime.now().strftime("%H:%M:%S"), f"top PCs already exist for {target_layer}")
         else:
             PCs_path = f"{paths["results_path"]}/imagenet_val_{model_name}_{target_layer}_pca_model_1000_PCs.pkl"
+            print("PCs_path:", PCs_path, flush=True)
             PCs = joblib.load(PCs_path).components_
+            print("PCs shape", PCs.shape, flush=True)
             target_PCs = PCs[:top_n_PCs]
+            print("target_PCs shape", target_PCs.shape, flush=True)
             for inputs, _ in loader:
                 counter += 1
                 if counter*batch_size > num_stim:
@@ -402,11 +405,13 @@ def get_top_n_dimensions(model_name, model, loader, extreme_n_imgs, top_n_PCs, n
                     feats = feature_extractor(inputs)[target_layer]
                     feats = feats.view(feats.size(0), -1).cpu().numpy()
                     current_dim_redu_feats = feats @ target_PCs.T
-                    try:
-                        all_dim_redu_feats = np.concatenate([all_dim_redu_feats, current_dim_redu_feats], axis=0)
-                    except NameError:
+                    if all_dim_redu_feats is None: 
                         all_dim_redu_feats = current_dim_redu_feats
-                    # end try 
+                        print("all_dim_redu_feats.shape", all_dim_redu_feats.shape, flush=True)
+                    else:
+                        all_dim_redu_feats = np.concatenate([all_dim_redu_feats, current_dim_redu_feats], axis=0)
+                        print("all_dim_redu_feats.shape", all_dim_redu_feats.shape, flush=True)
+                    # end if all_dim_redu_feats is None: 
                 # end with torch.no_grad():
             # end for inputs, _ in loader:
             top_n_all = []
@@ -414,9 +419,15 @@ def get_top_n_dimensions(model_name, model, loader, extreme_n_imgs, top_n_PCs, n
             print(datetime.now().strftime("%H:%M:%S"), f"finished passing stimuli", flush=True)
             for d in range(top_n_PCs):
                 curr_dim = all_dim_redu_feats[:,d]
+                print("curr_dim.shape",curr_dim.shape, flush=True)
                 idx = np.argsort(curr_dim)
+                print("indices:", idx, flush=True)
                 bottom_n_cd = idx[:extreme_n_imgs]
-                top_n_cd = idx[-extreme_n_imgs:]
+                print("bottom indices:", bottom_n_cd, flush=True)
+                print("bottom activations: ", curr_dim[bottom_n_cd])
+                top_n_cd = idx[-extreme_n_imgs:][::-1]
+                print("top indices:", top_n_cd, flush=True)
+                print("top activations: ", curr_dim[top_n_cd])
                 top_n_all.append(top_n_cd)
                 bottom_n_all.append(bottom_n_cd)
             # end for d in range(top_n_PCs):
@@ -425,7 +436,6 @@ def get_top_n_dimensions(model_name, model, loader, extreme_n_imgs, top_n_PCs, n
             np.savetxt(top_save_path, top_to_save, delimiter=",", fmt='%d')
             np.savetxt(bottom_save_path, bottom_to_save, delimiter=",", fmt='%d')
             print(datetime.now().strftime("%H:%M:%S"), f"saved files at {top_save_path}", flush=True)
-            del all_dim_redu_feats
         # end for target_layer in layers:
     # end if os.path.exists(top_save_path) & os.path.exists(bottom_save_path):
 

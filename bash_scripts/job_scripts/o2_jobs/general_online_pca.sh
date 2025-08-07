@@ -2,12 +2,12 @@
 #SBATCH --nodes=1 
 #SBATCH --time=24:00:00 
 #SBATCH --ntasks=4 # number of processes 
-#SBATCH -p gpu_quad
-#SBATCH --gres=gpu:rtx8000:1
+# #SBATCH -p gpu_quad
+# #SBATCH --gres=gpu:rtx8000:1
 #SBATCH --cpus-per-task=1 
 #SBATCH --mem=250G 
 # #SBATCH --account=       # account name 
-# #SBATCH --partition=priority # partition name 
+#SBATCH --partition=priority # partition name 
 #SBATCH --job-name=online_pca 
 #SBATCH --output=/home/tic569/output_jobs/%x.%j.out   # file name will be *job_name*.*job_id* 
 cd /home/tic569/exp_set/python_scripts/scripts 

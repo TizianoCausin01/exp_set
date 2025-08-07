@@ -13,7 +13,6 @@ from datetime import datetime
 import torch
 import os
 from .utils import get_relevant_output_layers, worker_init_fn, get_layer_out_shape
-from alignment.utils import get_usual_transform
 
 def run_pca_pipeline(
     paths,
@@ -64,7 +63,7 @@ def run_pca_pipeline(
         - The function internally applies ImageNet-standard transforms before feeding images into the model.
         - Activations are flattened (e.g., C×H×W → 1D vector) before PCA fitting.
     """
-
+    from alignment.utils import get_usual_transform
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # === Paths ===
     imagenet_path = f"{paths['data_path']}/imagenet"
@@ -142,6 +141,7 @@ def run_pca_pipeline(
                 inputs = inputs.to(device)
                 feats = feature_extractor(inputs)[layer_name]
                 feats = feats.view(feats.size(0), -1).cpu().numpy()
+                feats = feats.astype(np.float16)
                 tot_feats.append(feats)
             print(datetime.now().strftime("%H:%M:%S"), f"finished batch {counter}, data matrix len {len(tot_feats)}, size of the batch {feats.nbytes/10**9} Gb, max mem by now {max_rss_mb} Mb", flush=True)
         #end for inputs, _ in loader:

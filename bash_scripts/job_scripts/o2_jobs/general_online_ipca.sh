@@ -2,8 +2,9 @@
 #SBATCH --nodes=1 
 #SBATCH --time=24:00:00 
 #SBATCH --ntasks=4 # number of processes 
-#SBATCH -p gpu_quad
-#SBATCH --gres=gpu:rtx8000:1
+#SBATCH -p priority # gpu_quad
+# #SBATCH --gres=gpu:1
+# #SBATCH --gres=gpu:rtx8000:1
 #SBATCH --cpus-per-task=1 
 #SBATCH --mem=250G 
 # #SBATCH --account=       # account name 
