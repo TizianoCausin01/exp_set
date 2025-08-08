@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --nodes=1 
 #SBATCH --time=24:00:00 
-#SBATCH --ntasks=4 # number of processes 
+#SBATCH --ntasks=1 # number of processes 
 # #SBATCH -p gpu_quad
 # #SBATCH --gres=gpu:rtx8000:1
 #SBATCH --cpus-per-task=1 
