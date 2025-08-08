@@ -22,6 +22,7 @@ def sum_for_var(batch):
     curr_sum = np.sum(batch, axis=0)
     curr_sum_sq = np.sum(batch**2, axis=0)
     return curr_sum, curr_sum_sq
+#EOF
 
 def variance(tot_sum, tot_sum_sq, n):
     E_X = tot_sum / n
@@ -30,8 +31,12 @@ def variance(tot_sum, tot_sum_sq, n):
     #var_per_dim = tot_sum_sq/(n) - (tot_sum /(n))**2 # var(X) = E[X^2] - E[X]^2 , n-1 for the number of stimuli, np.mean along the features
     # in case you wanted an overall summary statistics, it'd just np.mean(var_per_dim), the average of the variance across the dimensions
     return var_per_dim 
+#EOF
 
 def variance_estimation_loop(feature_extractor, target_layer, loader, num_stim, batch_size):
+    if num_stim == 0:
+        num_stim = 50000
+    # if num_stim == 0:
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     d = get_layer_out_shape(feature_extractor, target_layer)
     tot_s = np.zeros(np.prod(d))
@@ -55,3 +60,4 @@ def variance_estimation_loop(feature_extractor, target_layer, loader, num_stim, 
     var = variance(tot_s, tot_ss, num_stim)
     print("average variance", np.mean(var))
     return var
+#EOF
