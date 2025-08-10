@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --nodes=1
-#SBATCH --time=1:00:00
+#SBATCH --time=3:00:00
 #SBATCH --ntasks=1 # number of processes
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=250G

@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #SBATCH --nodes=1
-#SBATCH --time=1:00:00
+#SBATCH --time=10:00:00
 #SBATCH --ntasks=1 # number of processes
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=250G
+#SBATCH --mem=100G
 # #SBATCH --account=       # account name
 #SBATCH --partition=short # partition name
 #SBATCH --job-name=running_max
