@@ -1,6 +1,8 @@
 from mpi4py import MPI
 import numpy as np
-from sklearn.decomposition import IncrementalPCA
+
+# from sklearn.decomposition import IncrementalPCA
+from sklearn.cross_decomposition import CCA
 import joblib
 from torchvision.models.feature_extraction import (
     create_feature_extractor,
@@ -12,7 +14,12 @@ from collections import defaultdict
 from datetime import datetime
 import torch
 import os
-from dim_redu_anns.utils import get_relevant_output_layers, worker_init_fn, get_layer_out_shape
+from dim_redu_anns.utils import (
+    get_relevant_output_layers,
+    worker_init_fn,
+    get_layer_out_shape,
+)
+
 
 def print_wise(mex, rank=None):
     if rank == None:
@@ -29,7 +36,6 @@ def print_wise(mex, rank=None):
 # EOF
 
 
-
 def parallel_setup():
     comm = MPI.COMM_WORLD  # Get the global communicator
     rank = comm.Get_rank()  # Get the rank (ID) of the current process
@@ -40,10 +46,9 @@ def parallel_setup():
 def master_workers_queue(task_list, func, *args, **kwargs):
     comm, rank, size = parallel_setup()
     root = 0
-    tot_n = len(task_list) -1
+    tot_n = len(task_list) - 1
     next_to_do = 0
     if rank == 0:
-        # TODO check these passages with the indices... they're tricky
         for dst in range(1, size):
             comm.send(
                 np.int32(next_to_do), dest=dst, tag=11
@@ -72,8 +77,7 @@ def master_workers_queue(task_list, func, *args, **kwargs):
         while True:
             data = comm.recv(source=0, tag=11)  # Receive data from process with rank 0
             print_wise(f"received: {data}", rank=rank)
-            #func(*args, **kwargs)
-            func(task_list, data)
+            func(rank, task_list[data], *args)
             if data == np.int32(-1):
                 break
             comm.send(
@@ -84,115 +88,177 @@ def master_workers_queue(task_list, func, *args, **kwargs):
     print_wise("finished", rank=rank)
 
 
-def run_parallel_ipca(
-    paths,
-    model_name="resnet18",
-    layers_to_extract=None,
-    n_components=1000,
-    batch_size=512,
-    num_workers=2,
-):
+# def run_parallel_ipca(
+#     paths,
+#     model_name="resnet18",
+#     layers_to_extract=None,
+#     n_components=1000,
+#     batch_size=512,
+#     num_workers=2,
+# ):
 
-    from alignment.utils import get_usual_transform
+#     from alignment.utils import get_usual_transform
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    # === Paths ===
-    imagenet_path = f"{paths['data_path']}/imagenet"
-    imagenet_val_path = os.path.join(imagenet_path, "val")
-    results_path = paths["results_path"]
-    # === Transforms & Dataloader ===
-    transform = get_usual_transform()
-    # === Load model and loader ===
-    model_cls = getattr(models, model_name)
-    model = model_cls(pretrained=True).to(device).eval()
-    loader = DataLoader(
-        datasets.ImageFolder(imagenet_val_path, transform=transform),
-        batch_size=batch_size,
-        num_workers=num_workers,
-        shuffle=True,
-        pin_memory=True,
-        worker_init_fn=worker_init_fn,
-        timeout=500,
+#     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+#     # === Paths ===
+#     imagenet_path = f"{paths['data_path']}/imagenet"
+#     imagenet_val_path = os.path.join(imagenet_path, "val")
+#     results_path = paths["results_path"]
+#     # === Transforms & Dataloader ===
+#     transform = get_usual_transform()
+#     # === Load model and loader ===
+#     model_cls = getattr(models, model_name)
+#     model = model_cls(pretrained=True).to(device).eval()
+#     loader = DataLoader(
+#         datasets.ImageFolder(imagenet_val_path, transform=transform),
+#         batch_size=batch_size,
+#         num_workers=num_workers,
+#         shuffle=True,
+#         pin_memory=True,
+#         worker_init_fn=worker_init_fn,
+#         timeout=500,
+#     )
+#     if layers_to_extract is None:
+#         layers_to_extract = get_relevant_output_layers(model_name)
+#     # Filter out already done layers
+#     remaining_layers = []
+#     for layer in layers_to_extract:
+#         save_name = (
+#             f"imagenet_val_{model_name}_{layer}_pca_model_{n_components}_PCs.pkl"
+#         )
+#         path = os.path.join(results_path, save_name)
+#         if os.path.exists(path):
+#             print(
+#                 datetime.now().strftime("%H:%M:%S"),
+#                 f"PCA model already exists for {layer} in {path}",
+#                 flush=True,
+#             )
+#         else:
+#             remaining_layers.append(layer)
+#     if len(remaining_layers) == 0:
+#         print(
+#             datetime.now().strftime("%H:%M:%S"),
+#             "All PCA models already exist. Nothing to do.",
+#             flush=True,
+#         )
+#         return
+#     print(
+#         datetime.now().strftime("%H:%M:%S"),
+#         f"Model: {model_name} | Layers to process: {len(remaining_layers)}",
+#         flush=True,
+#     )
+
+#     # === Loop over layers separately ===
+#     print(
+#         datetime.now().strftime("%H:%M:%S"),
+#         "Using multiple passes (1 per layer)...",
+#         flush=True,
+#     )
+#     for layer_name in remaining_layers:
+#         ipca_core(
+#             model, model_name, layer_name, n_components, loader, results_path, device
+#         )
+#     # for layer_name in remaining_layers:
+
+
+# def ipca_core(
+#     model, model_name, layer_name, n_components, loader, results_path, rank, device
+# ):
+#     print(
+#         datetime.now().strftime("%H:%M:%S"),
+#         f"rank {rank} Fitting PCA for layer: {layer_name}",
+#         flush=True,
+#     )
+#     feature_extractor = create_feature_extractor(model, return_nodes=[layer_name]).to(
+#         device
+#     )
+#     tmp_shape = get_layer_out_shape(feature_extractor, layer_name)
+#     n_features = np.prod(tmp_shape)  # [C, H, W] -> C*H*W
+#     n_components_layer = min(n_features, n_components)  # Limit to number of features
+#     pca = IncrementalPCA(n_components=n_components_layer)
+
+#     counter = 0
+#     for inputs, _ in loader:
+#         counter += 1
+#         print(
+#             datetime.now().strftime("%H:%M:%S"),
+#             f"{rank} starting batch {counter}",
+#             flush=True,
+#         )
+#         with torch.no_grad():
+#             inputs = inputs.to(device)
+#             feats = feature_extractor(inputs)[layer_name]
+#             feats = feats.view(feats.size(0), -1).cpu().numpy()
+#             pca.partial_fit(feats)
+#     save_name = (
+#         f"imagenet_val_{model_name}_{layer_name}_pca_model_{n_components}_PCs.pkl"
+#     )
+#     path = os.path.join(results_path, save_name)
+#     joblib.dump(pca, path)
+#     print(
+#         datetime.now().strftime("%H:%M:%S"),
+#         f"Saved PCA for {layer_name} at {path}",
+#         flush=True,
+#     )
+
+
+def get_perms(model_names):
+    all_perms = []
+    layer_names = [get_relevant_output_layers(m) for m in model_names]
+    for i in layer_names[0]:
+        for j in layer_names[1]:
+            all_perms.append([i, j])
+        # end for j in layer_names[1]:
+    # end for j in layer_names[1]:
+    return all_perms
+# EOF
+
+def CCA_core(rank, layer_names, model_names, pooling, num_components, paths):
+
+    cca_dir = (
+        f"{paths['results_path']}/cca_{model_names[0]}_vs_{model_names[1]}_{pooling}"
     )
-    if layers_to_extract is None:
-        layers_to_extract = get_relevant_output_layers(model_name)
-    # Filter out already done layers
-    remaining_layers = []
-    for layer in layers_to_extract:
-        save_name = (
-            f"imagenet_val_{model_name}_{layer}_pca_model_{n_components}_PCs.pkl"
+    target_layer1 = layer_names[0]
+    target_layer2 = layer_names[1]
+    os.makedirs(cca_dir, exist_ok=True)
+    save_path = f"{cca_dir}/cca_{model_names[0]}_vs_{model_names[1]}_{num_components}_components_pca_{target_layer1}_vs_{target_layer2}.pkl"
+    if os.path.exists(save_path):
+        print_wise(
+            f"CCA already exists for {target_layer1} vs {target_layer2}  at {save_path}",
+            rank=rank,
         )
-        path = os.path.join(results_path, save_name)
-        if os.path.exists(path):
-            print(
-                datetime.now().strftime("%H:%M:%S"),
-                f"PCA model already exists for {layer} in {path}",
-                flush=True,
+    else:
+        print_wise(f"starting layers {target_layer1} vs {target_layer2}", rank=rank)
+        feats_path1 = f"{paths['results_path']}/imagenet_val_{model_names[0]}_{target_layer1}_{pooling}_features.pkl"
+        all_acts1 = joblib.load(feats_path1)
+        feats_path2 = f"{paths['results_path']}/imagenet_val_{model_names[1]}_{target_layer2}_{pooling}_features.pkl"
+        all_acts2 = joblib.load(feats_path2)
+        print_wise(f"finished loading feats, size {all_acts1.shape} {all_acts2.shape} , starting CCA", rank=rank)
+        try:
+            cca = CCA(
+                n_components=min(
+                    num_components, all_acts1.shape[1], all_acts2.shape[1]
+                ),
+                max_iter=1000,
             )
-        else:
-            remaining_layers.append(layer)
-    if len(remaining_layers) == 0:
-        print(
-            datetime.now().strftime("%H:%M:%S"),
-            "All PCA models already exist. Nothing to do.",
-            flush=True,
-        )
-        return
-    print(
-        datetime.now().strftime("%H:%M:%S"),
-        f"Model: {model_name} | Layers to process: {len(remaining_layers)}",
-        flush=True,
-    )
-
-    # === Loop over layers separately ===
-    print(
-        datetime.now().strftime("%H:%M:%S"),
-        "Using multiple passes (1 per layer)...",
-        flush=True,
-    )
-    for layer_name in remaining_layers:
-        ipca_core(
-            model, model_name, layer_name, n_components, loader, results_path, device
-        )
-    # for layer_name in remaining_layers:
-
-
-def ipca_core(
-    model, model_name, layer_name, n_components, loader, results_path, rank, device
-):
-    print(
-        datetime.now().strftime("%H:%M:%S"),
-        f"rank {rank} Fitting PCA for layer: {layer_name}",
-        flush=True,
-    )
-    feature_extractor = create_feature_extractor(model, return_nodes=[layer_name]).to(
-        device
-    )
-    tmp_shape = get_layer_out_shape(feature_extractor, layer_name)
-    n_features = np.prod(tmp_shape)  # [C, H, W] -> C*H*W
-    n_components_layer = min(n_features, n_components)  # Limit to number of features
-    pca = IncrementalPCA(n_components=n_components_layer)
-
-    counter = 0
-    for inputs, _ in loader:
-        counter += 1
-        print(
-            datetime.now().strftime("%H:%M:%S"),
-            f"{rank} starting batch {counter}",
-            flush=True,
-        )
-        with torch.no_grad():
-            inputs = inputs.to(device)
-            feats = feature_extractor(inputs)[layer_name]
-            feats = feats.view(feats.size(0), -1).cpu().numpy()
-            pca.partial_fit(feats)
-    save_name = (
-        f"imagenet_val_{model_name}_{layer_name}_pca_model_{n_components}_PCs.pkl"
-    )
-    path = os.path.join(results_path, save_name)
-    joblib.dump(pca, path)
-    print(
-        datetime.now().strftime("%H:%M:%S"),
-        f"Saved PCA for {layer_name} at {path}",
-        flush=True,
-    )
+            cca.fit(all_acts1, all_acts2)
+            print("finished CCA fitting", rank=rank)
+            weights_dict = {}
+            weights_dict["W1"] = cca.x_weights_  # shape: (n_features1, n_components)
+            weights_dict["W2"] = cca.y_weights_  # shape: (n_features2, n_components)
+            # 3. Project the data manually (optional, equivalent to fit_transform)
+            d1 = all_acts1 @ weights_dict["W1"]
+            d2 = all_acts2 @ weights_dict["W2"]
+            coefs_CCA = np.array(
+                [np.corrcoef(d1[:, i], d2[:, i])[0, 1] for i in range(d1.shape[1])]
+            )
+            weights_dict["coefs"] = coefs_CCA
+            joblib.dump(weights_dict, save_path)
+            print_wise(
+                f"{target_layer1} vs {target_layer2} corr {np.round(np.mean(coefs_CCA), 3)}"
+            )
+        except np.linalg.LinAlgError as e:
+            print_wise(
+                f"SVD did not converge: {e} for {target_layer1} vs {target_layer2}",
+                rank=rank,
+            )
