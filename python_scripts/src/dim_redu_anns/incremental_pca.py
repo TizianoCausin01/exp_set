@@ -357,6 +357,8 @@ def offline_ipca_pool(
         else:
             feats = joblib.load(features_path)
             data_dim = feats.shape
+            r_idx = np.random.permutation(data_dim[0])
+            feats = feats[r_idx, :]
             n_components_layer = min(n_components, data_dim[1])
             pca = IncrementalPCA(n_components=n_components_layer)
             for i_batch in range(0, data_dim[0], batch_size):
