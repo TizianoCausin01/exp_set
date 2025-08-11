@@ -260,3 +260,34 @@ def CCA_core(rank, layer_names, model_names, pooling, num_components, paths):
                 f"SVD did not converge: {e} for {target_layer1} vs {target_layer2}",
                 rank=rank,
             )
+
+
+def sample_features_core(rank, layer_name, model_name, model, loader, device, paths):
+    counter = 0
+    save_path = f"{paths['results_path']}/imagenet_val_{model_name}_{layer_name}_PC_pool_features.pkl"
+    if os.path.exists(save_path):
+        print_wise(f"{save_path} already exists", rank=rank)
+        return
+    # end if os.path.exists(save_path):
+    PCs_path = f"{paths['results_path']}/imagenet_val_{model_name}_{layer_name}_pca_model_1000_PCs.pkl"
+    PCs = joblib.load(PCs_path).components_
+    feature_extractor = create_feature_extractor(model, return_nodes=[layer_name]).to(
+        device
+    )
+    all_feats = []
+    for inputs, _ in loader:
+        counter += 1
+        print_wise(f"starting batch {counter}", rank=rank)
+        with torch.no_grad():
+            inputs = inputs.to(device)
+            feats = feature_extractor(inputs)[layer_name]
+            feats = feats.view(feats.size(0), -1).cpu().numpy()
+            feats = feats @ PCs.T
+            all_feats.append(feats)
+    # end for inputs, _ in loader:
+    all_acts = np.concatenate(all_feats, axis=0)
+    joblib.dump(all_acts, save_path)
+    print_wise(f"Saved features for {layer_name} at {save_path}", rank=rank)
+
+
+# EOF
