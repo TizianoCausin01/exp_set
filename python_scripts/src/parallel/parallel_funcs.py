@@ -77,17 +77,16 @@ def master_workers_queue(task_list, func, *args, **kwargs):
         while True:
             data = comm.recv(source=0, tag=11)  # Receive data from process with rank 0
             print_wise(f"received: {data}", rank=rank)
-            func(rank, task_list[data], *args)
             if data == np.int32(-1):
                 break
+            func(rank, task_list[data], *args)
             comm.send(
                 np.int32(1), dest=root, tag=11
             )  # Send data to process with rank 1
             print_wise(f"free again", rank=rank)
 
     print_wise("finished", rank=rank)
-
-
+    MPI.Finalize()
 # def run_parallel_ipca(
 #     paths,
 #     model_name="resnet18",
