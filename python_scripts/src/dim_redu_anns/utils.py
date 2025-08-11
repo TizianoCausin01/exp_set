@@ -183,8 +183,10 @@ def get_layer_out_shape(feature_extractor, layer_name):
           dictionary when creating the feature extractor.
     """
 
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     with torch.no_grad():
-        tmp_shape = feature_extractor(torch.randn(1, 3, 224, 224))[
+        in_proxy = torch.randn(1, 3, 224, 224).to(device)
+        tmp_shape = feature_extractor(in_proxy)[
             layer_name
         ].shape [1:]
     return tmp_shape
