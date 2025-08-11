@@ -1,7 +1,7 @@
 from mpi4py import MPI
 import numpy as np
 
-# from sklearn.decomposition import IncrementalPCA
+from sklearn.decomposition import IncrementalPCA
 from sklearn.cross_decomposition import CCA
 import joblib
 from torchvision.models.feature_extraction import (
@@ -161,45 +161,37 @@ def master_workers_queue(task_list, func, *args, **kwargs):
 #     # for layer_name in remaining_layers:
 
 
-# def ipca_core(
-#     model, model_name, layer_name, n_components, loader, results_path, rank, device
-# ):
-#     print(
-#         datetime.now().strftime("%H:%M:%S"),
-#         f"rank {rank} Fitting PCA for layer: {layer_name}",
-#         flush=True,
-#     )
-#     feature_extractor = create_feature_extractor(model, return_nodes=[layer_name]).to(
-#         device
-#     )
-#     tmp_shape = get_layer_out_shape(feature_extractor, layer_name)
-#     n_features = np.prod(tmp_shape)  # [C, H, W] -> C*H*W
-#     n_components_layer = min(n_features, n_components)  # Limit to number of features
-#     pca = IncrementalPCA(n_components=n_components_layer)
+def ipca_core(rank, layer_name, model_name, n_components, model, loader, device, paths):
 
-#     counter = 0
-#     for inputs, _ in loader:
-#         counter += 1
-#         print(
-#             datetime.now().strftime("%H:%M:%S"),
-#             f"{rank} starting batch {counter}",
-#             flush=True,
-#         )
-#         with torch.no_grad():
-#             inputs = inputs.to(device)
-#             feats = feature_extractor(inputs)[layer_name]
-#             feats = feats.view(feats.size(0), -1).cpu().numpy()
-#             pca.partial_fit(feats)
-#     save_name = (
-#         f"imagenet_val_{model_name}_{layer_name}_pca_model_{n_components}_PCs.pkl"
-#     )
-#     path = os.path.join(results_path, save_name)
-#     joblib.dump(pca, path)
-#     print(
-#         datetime.now().strftime("%H:%M:%S"),
-#         f"Saved PCA for {layer_name} at {path}",
-#         flush=True,
-#     )
+    save_name = (
+        f"imagenet_val_{model_name}_{layer_name}_pca_model_{n_components}_PCs.pkl"
+    )
+    path = os.path.join(paths["results_path"], save_name)
+    if os.path.exists(path):
+        print_wise(f"{path} already exists")
+    else:
+        print_wise(f"Fitting PCA for layer: {layer_name}", rank=rank)
+        feature_extractor = create_feature_extractor(
+            model, return_nodes=[layer_name]
+        ).to(device)
+        tmp_shape = get_layer_out_shape(feature_extractor, layer_name)
+        n_features = np.prod(tmp_shape)  # [C, H, W] -> C*H*W
+        n_components_layer = min(
+            n_features, n_components
+        )  # Limit to number of features
+        pca = IncrementalPCA(n_components=n_components_layer)
+        counter = 0
+        for inputs, _ in loader:
+            counter += 1
+            print_wise(f"starting batch {counter}", rank=rank)
+            with torch.no_grad():
+                inputs = inputs.to(device)
+                feats = feature_extractor(inputs)[layer_name]
+                feats = feats.view(feats.size(0), -1).cpu().numpy()
+                pca.partial_fit(feats)
+
+        joblib.dump(pca, path)
+        print_wise(f"Saved PCA for {layer_name} at {path}", rank=rank)
 
 
 def get_perms(model_names):
@@ -211,7 +203,10 @@ def get_perms(model_names):
         # end for j in layer_names[1]:
     # end for j in layer_names[1]:
     return all_perms
+
+
 # EOF
+
 
 def CCA_core(rank, layer_names, model_names, pooling, num_components, paths):
 
@@ -233,7 +228,10 @@ def CCA_core(rank, layer_names, model_names, pooling, num_components, paths):
         all_acts1 = joblib.load(feats_path1)
         feats_path2 = f"{paths['results_path']}/imagenet_val_{model_names[1]}_{target_layer2}_{pooling}_features.pkl"
         all_acts2 = joblib.load(feats_path2)
-        print_wise(f"finished loading feats, size {all_acts1.shape} {all_acts2.shape} , starting CCA", rank=rank)
+        print_wise(
+            f"finished loading feats, size {all_acts1.shape} {all_acts2.shape} , starting CCA",
+            rank=rank,
+        )
         try:
             cca = CCA(
                 n_components=min(
