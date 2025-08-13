@@ -3,6 +3,7 @@ tiziano_local:
     data_path: "/Users/tizianocausin/Library/CloudStorage/OneDrive-SISSA/data_repo/exp_set_data"
     results_path: "/Users/tizianocausin/Library/CloudStorage/OneDrive-SISSA/data_repo/exp_set_res/silico"
     src_path: "/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts/src"
+    PonceLab_path: "/Volumes/PonceLab/Stimuli/2025_diverseset"
 
 leonardo_cluster:
   paths:
