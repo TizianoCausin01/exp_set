@@ -46,7 +46,7 @@ def parallel_setup():
 def master_workers_queue(task_list, func, *args, **kwargs):
     comm, rank, size = parallel_setup()
     root = 0
-    tot_n = len(task_list) - 1
+    tot_n = len(task_list)
     next_to_do = 0
     if rank == 0:
         for dst in range(1, size):
@@ -227,6 +227,9 @@ def CCA_core(rank, layer_names, model_names, pooling, num_components, paths):
         all_acts1 = joblib.load(feats_path1)
         feats_path2 = f"{paths['results_path']}/imagenet_val_{model_names[1]}_{target_layer2}_{pooling}_features.pkl"
         all_acts2 = joblib.load(feats_path2)
+        min_samples_num = min(all_acts1.shape[0],all_acts2.shape[0])
+        all_acts1 = all_acts1[:min_samples_num, :]
+        all_acts2 = all_acts2[:min_samples_num, :]
         print_wise(
             f"finished loading feats, size {all_acts1.shape} {all_acts2.shape} , starting CCA",
             rank=rank,
@@ -239,7 +242,7 @@ def CCA_core(rank, layer_names, model_names, pooling, num_components, paths):
                 max_iter=1000,
             )
             cca.fit(all_acts1, all_acts2)
-            print("finished CCA fitting", rank=rank)
+            print_wise("finished CCA fitting", rank=rank)
             weights_dict = {}
             weights_dict["W1"] = cca.x_weights_  # shape: (n_features1, n_components)
             weights_dict["W2"] = cca.y_weights_  # shape: (n_features2, n_components)
