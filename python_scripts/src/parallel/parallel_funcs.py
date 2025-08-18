@@ -239,7 +239,7 @@ def CCA_core(rank, layer_names, model_names, pooling, num_components, paths):
                 n_components=min(
                     num_components, all_acts1.shape[1], all_acts2.shape[1]
                 ),
-                max_iter=1000,
+                max_iter=5000,
             )
             cca.fit(all_acts1, all_acts2)
             print_wise("finished CCA fitting", rank=rank)
