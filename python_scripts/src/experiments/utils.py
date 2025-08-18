@@ -1,7 +1,8 @@
 import joblib
 import numpy as np
 import os, sys
-from pref_viewing.utils import get_extreme_k
+from pref_viewing.utils import get_extreme_k, plot_imgs
+from parallel.parallel_funcs import print_wise
 
 def project_on(data, basis):
     return data@basis.T

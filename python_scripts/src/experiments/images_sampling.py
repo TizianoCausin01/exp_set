@@ -11,9 +11,9 @@ def save_imgs_PCs(data, model_name, layer_name, loader,pooling, num_dim, k, path
     counter = 0
     model_save_name, layer_save_name = map_on_savenames(model_name, layer_name) 
     if pooling == "PC_pool":
-        final_dir = "{model_save_name}_{layer_save_name}"
+        final_dir = f"{model_save_name}_{layer_save_name}"
     else:
-        final_dir = "{model_save_name}_{layer_save_name}_{pooling}"
+        final_dir = f"{model_save_name}_{layer_save_name}_{pooling}"
     # end if pooling == "PC_pool":
     root_dir = f"{paths['PonceLab_path']}/2025_diverseset/{final_dir}"
     win_root_dir = fr"{paths['win_PonceLab_path']}\2025_diverseset\{final_dir}"
@@ -24,7 +24,7 @@ def save_imgs_PCs(data, model_name, layer_name, loader,pooling, num_dim, k, path
 
     for d in range(num_dim):
         for extreme in ["top", "bottom"]:
-            img_idx, img_list = get_k_imgs(data[:, d], loader, k, d, extreme, show_opt=False)
+            img_idx, img_list = get_k_imgs(data, loader, k, d, extreme, show_opt=False)
             for idx in range(len(img_list)):
                 path2save = f"{root_dir}/net_{model_save_name}_layer_{layer_save_name}_pc{d}_{extreme}_{idx}_{counter}.png"
                 win_path2save = fr"{win_root_dir}\net_{model_save_name}_layer_{layer_save_name}_pc{d}_{extreme}_{idx}_{counter}.png"
@@ -68,7 +68,7 @@ def save_imgs_CCs(data, model_name1, model_name2, layer_name1, layer_name2, load
     provenance = []
     for d in range(num_dim):
         for extreme in ["top", "bottom"]:
-            img_idx, img_list = get_k_imgs(data[:, d], loader, k, d, extreme, show_opt=False)
+            img_idx, img_list = get_k_imgs(data, loader, k, d, extreme, show_opt=False)
             for idx in range(len(img_list)):
                 path2save = f"{root_dir}/net_{model_save_name1}+{model_save_name2}_layer_{layer_save_name1}+{layer_save_name2}_pc{d}_{extreme}_{idx}_{counter}.png"
                 win_path2save = fr"{win_root_dir}\net_{model_save_name1}+{model_save_name2}_layer_{layer_save_name1}+{layer_save_name2}_pc{d}_{extreme}_{idx}_{counter}.png"
