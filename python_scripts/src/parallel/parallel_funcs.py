@@ -1,3 +1,4 @@
+import sys
 from mpi4py import MPI
 import numpy as np
 
@@ -14,11 +15,15 @@ from collections import defaultdict
 from datetime import datetime
 import torch
 import os
+
+sys.path.append("..")
 from dim_redu_anns.utils import (
     get_relevant_output_layers,
     worker_init_fn,
     get_layer_out_shape,
 )
+from alignment.utils import get_usual_transform
+from alignment.CKA import cka_minibatch, cka_batch_collection
 
 
 def print_wise(mex, rank=None):
@@ -41,6 +46,31 @@ def parallel_setup():
     rank = comm.Get_rank()  # Get the rank (ID) of the current process
     size = comm.Get_size()  # Get the total number of processes
     return comm, rank, size
+
+
+def setup_full_dataloader(batch_size, paths):
+    # Each process loads the *entire* dataset
+    comm = MPI.COMM_WORLD
+    rank = comm.Get_rank()
+
+    transform = get_usual_transform()
+    imagenet_val_path = f"{paths['data_path']}/imagenet/val"
+    dataset = datasets.ImageFolder(imagenet_val_path, transform=transform)
+
+    loader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        num_workers=0,  # safest with MPI
+        pin_memory=True,
+        shuffle=True,  # each process shuffles independently
+    )
+
+    print(
+        f"Rank {rank}: dataset length = {len(dataset)} "
+        f"({len(loader)} batches of size {batch_size})"
+    )
+
+    return loader
 
 
 def master_workers_queue(task_list, func, *args, **kwargs):
@@ -156,7 +186,7 @@ def CCA_core(rank, layer_names, model_names, pooling, num_components, paths):
         all_acts1 = joblib.load(feats_path1)
         feats_path2 = f"{paths['results_path']}/imagenet_val_{model_names[1]}_{target_layer2}_{pooling}_features.pkl"
         all_acts2 = joblib.load(feats_path2)
-        min_samples_num = min(all_acts1.shape[0],all_acts2.shape[0])
+        min_samples_num = min(all_acts1.shape[0], all_acts2.shape[0])
         all_acts1 = all_acts1[:min_samples_num, :]
         all_acts2 = all_acts2[:min_samples_num, :]
         print_wise(
@@ -222,3 +252,61 @@ def sample_features_core(rank, layer_name, model_name, model, loader, device, pa
 
 
 # EOF
+
+
+def batch_cka_core(
+    rank,
+    layer_names,
+    model_names,
+    model1,
+    model2,
+    loader,
+    n_batches,
+    cov_or_gram,
+    device,
+    paths,
+):
+    feature_extractor1 = create_feature_extractor(
+        model1, return_nodes=[layer_names[0]]
+    ).to(device)
+    feature_extractor2 = create_feature_extractor(
+        model2, return_nodes=[layer_names[1]]
+    ).to(device)
+    xy_tot = 0
+    xx_tot = 0
+    yy_tot = 0
+    counter = 0
+    for inputs, _ in loader:
+        counter += 1
+        if counter > n_batches:
+            break
+        print_wise(f"running batch {counter}", rank=rank)
+        # print_wise(f"starting batch {counter}", rank=rank)
+        with torch.no_grad():
+            inputs = inputs.to(device)
+            feats1 = feature_extractor1(inputs)[layer_names[0]]
+            feats2 = feature_extractor2(inputs)[layer_names[1]]
+
+            if cov_or_gram == "gram":
+                feats1 = feats1.view(feats1.size(0), -1).cpu().numpy()
+                feats2 = feats2.view(feats2.size(0), -1).cpu().numpy()
+            elif cov_or_gram == "cov":
+                feats1 = feats1.view(feats1.size(0), -1).cpu().numpy().T
+                feats2 = feats2.view(feats2.size(0), -1).cpu().numpy().T
+
+            xy, xx, yy = cka_minibatch(feats1, feats2)
+            xy_tot += xy
+            xx_tot += xx
+            yy_tot += yy
+    cka_final = cka_batch_collection(xy, xx, yy)
+    print_wise(f"batch cka : {cka_final}", rank=rank)
+    return cka_final
+
+
+def perm2idx(rank, task, model_names):
+    layers_m1 = get_relevant_output_layers(model_names[0])
+    layers_m2 = get_relevant_output_layers(model_names[1])
+    idx0 = np.where([task[0] == l for l in layers_m1])[0]
+    idx1 = np.where([task[1] == l for l in layers_m2])[0]
+    idx = [idx0.item(), idx1.item()]
+    return idx

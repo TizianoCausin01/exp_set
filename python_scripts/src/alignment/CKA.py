@@ -65,8 +65,8 @@ def cka_minibatch(X, Y, kernel="linear", **kwargs):
         K = X @ X.T
         L = Y @ Y.T
     else:
-        K = pairwise_kernels(X_batch, metric=kernel, **kwargs)
-        L = pairwise_kernels(Y_batch, metric=kernel, **kwargs)
+        K = pairwise_kernels(X, metric=kernel, **kwargs)
+        L = pairwise_kernels(Y, metric=kernel, **kwargs)
     
     hsic_xy = hsic_unbiased(K, L)
     hsic_xx = hsic_unbiased(K, K)
