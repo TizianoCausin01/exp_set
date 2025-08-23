@@ -2,7 +2,7 @@ from datetime import datetime
 import numpy as np
 import torch
 from dim_redu_anns.utils import get_relevant_output_layers, get_layer_out_shape
-
+from parallel.parallel_funcs import print_wise
 def compute_prob(data, bin_width):
     bins = np.arange(0, np.max(data), bin_width)
     counts, edges = np.histogram(data, bins=bins, density=True)
@@ -61,3 +61,25 @@ def variance_estimation_loop(feature_extractor, target_layer, loader, num_stim, 
     print("average variance", np.mean(var))
     return var
 #EOF
+
+
+
+
+
+
+def features_sampling(loader, test_feature_extractor, test_layer, random_neu_idx):
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    counter = 0
+    all_feats = []
+    for inputs, _ in loader:
+        counter += 1
+#        print_wise(f"starting batch {counter}")
+        with torch.no_grad():
+            inputs = inputs.to(device)
+            feats = test_feature_extractor(inputs)[test_layer]
+            feats = feats.view(feats.size(0), -1).cpu().numpy()
+            feats = feats[:, random_neu_idx]
+            all_feats.append(feats)
+    # end for inputs, _ in loader:
+    all_acts = np.concatenate(all_feats, axis=0)
+    return all_acts
