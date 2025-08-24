@@ -1,5 +1,6 @@
 import os, yaml, sys
 import joblib
+import numpy as np
 ENV = os.getenv("MY_ENV", "dev")
 with open("../../config.yaml", "r") as f:
     config = yaml.safe_load(f)
@@ -13,7 +14,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="")
     parser.add_argument('--model_name', type=str)
     parser.add_argument('--layer_name', type=str)
-    parser.add_argument('--n_clusters', type=int)
+    parser.add_argument('--n_samples', type=int)
     parser.add_argument('--test_model', type=str)
     parser.add_argument('--test_layer', type=str)
     parser.add_argument('--batch_size', type=int)
@@ -22,9 +23,9 @@ if __name__ == '__main__':
     
     pooling="PC_pool"
     d1 = joblib.load(f"{paths['results_path']}/imagenet_val_{args.model_name}_{args.layer_name}_{pooling}_features.pkl") 
-    n_samples = d1.shape[0]
-    max_n_clusters = n_samples//1000
-    n_clusters_per_level = [max_n_clusters // (2 ** i) for i in range(args.n_clusters)]
+    n_clusters_per_level = [5000]
+    mid_level = (np.log10(n_clusters_per_level[0]) + np.log10(args.n_samples))/2
+    n_clusters_per_level.extend([int(np.round(10**mid_level)), args.n_samples])
     print(n_clusters_per_level)
 
     paths = paths

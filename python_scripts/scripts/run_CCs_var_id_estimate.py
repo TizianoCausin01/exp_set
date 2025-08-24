@@ -1,5 +1,6 @@
 import os, yaml, sys
 import joblib
+import numpy as np
 ENV = os.getenv("MY_ENV", "dev")
 with open("../../config.yaml", "r") as f:
     config = yaml.safe_load(f)
@@ -16,7 +17,7 @@ if __name__ == '__main__':
     parser.add_argument('--layer_name1', type=str)
     parser.add_argument('--model_name2', type=str)
     parser.add_argument('--layer_name2', type=str)
-    parser.add_argument('--n_levels', type=int)
+    parser.add_argument('--n_samples', type=int)
     parser.add_argument('--test_model', type=str)
     parser.add_argument('--test_layer', type=str)
     parser.add_argument('--batch_size', type=int)
@@ -28,8 +29,9 @@ if __name__ == '__main__':
 
     d1, d2 = project_onto_CCs(args.model_name1, args.model_name2, args.layer_name1, args.layer_name2, pooling, 100, paths)
     n_samples = d1.shape[0]
-    max_n_clusters = n_samples//1000
-    n_clusters_per_level = [max_n_clusters // (2 ** i) for i in range(args.n_levels)]
+    n_clusters_per_level = [5000]
+    mid_level = (np.log10(n_clusters_per_level[0]) + np.log10(args.n_samples))/2
+    n_clusters_per_level.extend([int(np.round(10**mid_level)), args.n_samples])
     print(n_clusters_per_level)
 
     ID_var_estimate(args.model_name1, args.layer_name1, d1, n_clusters_per_level, args.test_model, args.test_layer, args.neurons_perc, args.batch_size, paths, alignment=True, model_name2=args.model_name2, layer_name2=args.layer_name2)
