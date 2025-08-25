@@ -91,7 +91,7 @@ def ID_var_estimate(model_name, layer_name, feats_projection, n_clusters_per_lev
     to_save_random = {'variance' : rand_var,  'PCA' : rand_pca, 'sample_imgs' : random_idx, 'sample_neurons' : random_neu_idx}
     if alignment == True:
         kmeans_path = f"{paths['results_path']}/sampling_comparisons/kmeans_CCs_{model_name}+{model_name2}_{layer_name}+{layer_name2}_test_{test_network}_{test_layer}_{n_clusters_per_level[-1]}_samples_{neurons_perc}perc_neurons.pkl" 
-        random_path = f"{paths['results_path']}/sampling_comparisons/random_PCs_{model_name}+{model_name2}_{layer_name}+{layer_name2}_test_{test_network}_{test_layer}_{n_clusters_per_level[-1]}_samples_{neurons_perc}perc_neurons.pkl" 
+        random_path = f"{paths['results_path']}/sampling_comparisons/random_CCs_{model_name}+{model_name2}_{layer_name}+{layer_name2}_test_{test_network}_{test_layer}_{n_clusters_per_level[-1]}_samples_{neurons_perc}perc_neurons.pkl" 
     else:
         kmeans_path = f"{paths['results_path']}/sampling_comparisons/kmeans_PCs_{model_name}_{layer_name}_test_{test_network}_{test_layer}_{n_clusters_per_level[-1]}_samples_{neurons_perc}perc_neurons.pkl" 
         random_path = f"{paths['results_path']}/sampling_comparisons/random_PCs_{model_name}_{layer_name}_test_{test_network}_{test_layer}_{n_clusters_per_level[-1]}_samples_{neurons_perc}perc_neurons.pkl"
