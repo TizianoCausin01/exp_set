@@ -7,7 +7,7 @@ from torchvision.models.feature_extraction import (
     create_feature_extractor,
     get_graph_node_names,
 )
-from dadapy import data
+#from dadapy import data
 from sklearn.decomposition import PCA
 import joblib
 from dim_redu_anns.utils import get_layer_out_shape
@@ -68,25 +68,27 @@ def ID_var_estimate(model_name, layer_name, feats_projection, n_clusters_per_lev
     all_acts_kmeans = features_sampling(loader_kmeans, test_feature_extractor, test_layer, random_neu_idx)
     all_acts_rand = features_sampling(loader_random, test_feature_extractor, test_layer, random_neu_idx)
                                       
-    _data_kmeans = data.Data(all_acts_kmeans)
-    id_twoNN_kmeans, _, r = _data_kmeans.compute_id_2NN()
+#    _data_kmeans = data.Data(all_acts_kmeans)
+#    id_twoNN_kmeans, _, r = _data_kmeans.compute_id_2NN()
 
 
     kmeans_pca = PCA(n_components=min(rand_neu_num, img_num))
     kmeans_pca.fit(all_acts_kmeans)
-    kmeans_var = np.var(all_acts_kmeans)
+    kmeans_var = np.mean(np.var(all_acts_kmeans, axis=1))
     kmeans_dyn_range = np.mean(np.max(all_acts_kmeans, axis=0))
-    _data_rand = data.Data(all_acts_rand)
-    id_twoNN_rand, _, r = _data_rand.compute_id_2NN()
+#    _data_rand = data.Data(all_acts_rand)
+#    id_twoNN_rand, _, r = _data_rand.compute_id_2NN()
     rand_pca = PCA(n_components=min(rand_neu_num, img_num))
     rand_pca.fit(all_acts_rand)
-    rand_var = np.var(all_acts_rand)
+    rand_var = np.mean(np.var(all_acts_rand, axis=1))
     rand_dyn_range = np.mean(np.max(all_acts_rand, axis=0))
     print("variance : \n", "kmeans : ", kmeans_var, "\n random : ",  rand_var)
-    print("ID : \n", "kmeans : ", id_twoNN_kmeans, "\n random : ",  id_twoNN_rand)
+#    print("ID : \n", "kmeans : ", id_twoNN_kmeans, "\n random : ",  id_twoNN_rand)
     print("dynamic range : \n", "kmeans : ", kmeans_dyn_range, "\n random : ",  rand_dyn_range)
-    to_save_kmeans = {'variance' : kmeans_var, 'ID' : id_twoNN_kmeans, 'PCA' : kmeans_pca, 'sample_imgs' : representatives, 'sample_neurons' : random_neu_idx}
-    to_save_random = {'variance' : rand_var, 'ID' : id_twoNN_rand, 'PCA' : rand_pca, 'sample_imgs' : random_idx, 'sample_neurons' : random_neu_idx}
+    #to_save_kmeans = {'variance' : kmeans_var, 'ID' : id_twoNN_kmeans, 'PCA' : kmeans_pca, 'sample_imgs' : representatives, 'sample_neurons' : random_neu_idx}
+    #to_save_random = {'variance' : rand_var, 'ID' : id_twoNN_rand, 'PCA' : rand_pca, 'sample_imgs' : random_idx, 'sample_neurons' : random_neu_idx}
+    to_save_kmeans = {'variance' : kmeans_var, 'PCA' : kmeans_pca, 'sample_imgs' : representatives, 'centroids' : C, 'sample_neurons' : random_neu_idx}
+    to_save_random = {'variance' : rand_var,  'PCA' : rand_pca, 'sample_imgs' : random_idx, 'sample_neurons' : random_neu_idx}
     if alignment == True:
         kmeans_path = f"{paths['results_path']}/sampling_comparisons/kmeans_CCs_{model_name}+{model_name2}_{layer_name}+{layer_name2}_test_{test_network}_{test_layer}_{n_clusters_per_level[-1]}_samples_{neurons_perc}perc_neurons.pkl" 
         random_path = f"{paths['results_path']}/sampling_comparisons/random_PCs_{model_name}+{model_name2}_{layer_name}+{layer_name2}_test_{test_network}_{test_layer}_{n_clusters_per_level[-1]}_samples_{neurons_perc}perc_neurons.pkl" 

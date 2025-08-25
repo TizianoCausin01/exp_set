@@ -119,6 +119,82 @@ def master_workers_queue(task_list, func, *args, **kwargs):
     MPI.Finalize()
 
 
+
+def master_merger_queue(task_list, paths, func, *args, **kwargs):
+    comm, rank, size = parallel_setup()
+    root = 0
+    merger = 1
+    tot_n = len(task_list)
+    next_to_do = 0
+    if rank == 0:
+        for dst in range(2, size):
+            print_wise(f"sending stuff", rank=rank)
+            comm.send(
+                np.int32(next_to_do), dest=dst, tag=11
+            )  # Send data to process with rank 1
+            next_to_do += 1
+            print_wise(f"computed {next_to_do}", rank=rank)
+            if next_to_do == tot_n:
+                break
+            # end if done_by_now+1 > tot_n:
+
+        # spotlight = np.zeros(size - 1)  # one means the process is free
+        while next_to_do < tot_n:
+            status = MPI.Status()
+            d = comm.recv(source=MPI.ANY_SOURCE, tag=MPI.ANY_TAG, status=status)
+            src = status.Get_source()
+            tag = status.Get_tag()
+            comm.send(
+                np.int32(next_to_do), dest=src, tag=11
+            )  # Send data to process with rank 1
+            next_to_do += 1
+            print_wise(f"received from {src} , root : {next_to_do}", rank=rank)
+        for i in range(2, size):
+            comm.send(np.int32(-1), dest=i, tag=11)  # Send data to process with rank 1
+
+    elif rank == 1:
+        model_names = args[0]
+        paths = args[7]
+        n_batches = args[4]
+        gram_or_cov = args[5]
+        w, h = len(get_relevant_output_layers(model_names[0])), len(
+            get_relevant_output_layers(model_names[1])
+        )  # n layers of model_names[0] and model_names[1]
+        cka_mat = np.zeros((w, h))
+
+        counter = 0
+        while counter < tot_n:
+            status = MPI.Status()
+            d = comm.recv(source=MPI.ANY_SOURCE, tag=MPI.ANY_TAG, status=status)
+            counter += 1
+            print_wise(f"received {d}, {counter} tasks already processed", rank=rank)
+            cka_mat[d[0], d[1]] = d[2]
+            print(cka_mat)
+        csv_save_path = f"{paths['results_path']}/cka_{model_names[0]}_{model_names[1]}_{n_batches}_batches_{gram_or_cov}.csv"
+        np.savetxt(csv_save_path, cka_mat, delimiter=",")
+
+    else:
+        model_names = args[0]
+        while True:
+            data = comm.recv(source=0, tag=11)  # Receive data from process with rank 0
+            print_wise(f"received: {data}", rank=rank)
+            if data == np.int32(-1):
+                break
+            print_wise(f"starting cka...", rank=rank)
+            res = func(rank, task_list[data], *args)
+            to_send = perm2idx(rank, task_list[data], model_names)
+            to_send.append(res)
+            comm.send(to_send, dest=merger, tag=11)  # Send data to process with rank 1
+            comm.send(
+                np.int32(1), dest=root, tag=11
+            )  # Send data to process with rank 1
+            print_wise(f"free again", rank=rank)
+
+    print_wise("finished", rank=rank)
+    MPI.Finalize()
+
+
+
 def ipca_core(rank, layer_name, model_name, n_components, model, loader, device, paths):
 
     save_name = (
@@ -198,7 +274,7 @@ def CCA_core(rank, layer_names, model_names, pooling, num_components, paths):
                 n_components=min(
                     num_components, all_acts1.shape[1], all_acts2.shape[1]
                 ),
-                max_iter=5000,
+                max_iter=10000,
             )
             cca.fit(all_acts1, all_acts2)
             print_wise("finished CCA fitting", rank=rank)
@@ -310,3 +386,13 @@ def perm2idx(rank, task, model_names):
     idx1 = np.where([task[1] == l for l in layers_m2])[0]
     idx = [idx0.item(), idx1.item()]
     return idx
+
+
+def diag_perms(model_name):
+    layers = get_relevant_output_layers(model_name)
+    perms = []
+    for l in layers:
+        perms.append([l, l])
+
+    return perms
+    
