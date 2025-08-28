@@ -58,6 +58,19 @@ def get_usual_transform():
     return transform
 
 
+def get_transform_to_show():
+    transform_to_show = transforms.Compose(
+        [
+            transforms.Resize(256),
+            transforms.CenterCrop(224),
+            transforms.ToTensor(),
+        ]
+    )
+
+    return transform_to_show
+
+
+
 def get_maxpool_evecs(data, layer_name, layer_shape):
 
     """

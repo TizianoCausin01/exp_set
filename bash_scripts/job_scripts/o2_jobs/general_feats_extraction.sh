@@ -2,7 +2,7 @@
 
 #SBATCH --nodes=1
 #SBATCH --time=24:00:00
-#SBATCH --ntasks=1 # number of processes
+#SBATCH --ntasks=8 # number of processes
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=250G
 # #SBATCH --account=       # account name

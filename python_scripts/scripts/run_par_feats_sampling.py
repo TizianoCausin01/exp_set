@@ -30,7 +30,7 @@ if __name__ == "__main__":
         datasets.ImageFolder(imagenet_val_path, transform=transform),
         batch_size=args.batch_size,
         num_workers=1,
-        shuffle=True,
+        shuffle=False,
         pin_memory=True,
         timeout=500,
     )      
