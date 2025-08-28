@@ -27,7 +27,6 @@ import torch
 from torch.utils.data import DataLoader, DistributedSampler
 from torchvision import datasets, models
 
-# TODO create a function that takes as input the layers and returns the position and then create cka core
 
 import torch.distributed as dist
 from torch.utils.data import DataLoader
