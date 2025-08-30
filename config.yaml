@@ -5,6 +5,7 @@ tiziano_local:
     src_path: "/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/python_scripts/src"
     PonceLab_path: "/Volumes/PonceLab/Stimuli"
     win_PonceLab_path: 'N:\PonceLab\Stimuli'
+    neural_data_path: "/Users/tizianocausin/Library/CloudStorage/OneDrive-SISSA/data_repo/exp_set_data/data_monkey"
 
 leonardo_cluster:
   paths:
@@ -16,6 +17,5 @@ o2_cluster:
   paths:
     src_path: "/home/tic569/exp_set/python_scripts/src"
     data_path: "/n/scratch/users/t/tic569/exp_set_data"
-    results_path: "/n/scratch/users/t/tic569/exp_set_res/silico"
-
-
+    results_path: "/n/data1/hms/neurobio/ponce/lab/exp_set_res/silico"
+    neural_data_path: "/n/data1/hms/neurobio/ponce/lab/exp_set_data/data_monkey"

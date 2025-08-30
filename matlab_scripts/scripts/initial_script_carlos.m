@@ -1,4 +1,5 @@
-addpath("C:\Users\ponce\OneDrive\Desktop\exp_set\matlab_scripts\support-files") % adds the function sem
+% addpath("C:\Users\ponce\OneDrive\Desktop\exp_set\matlab_scripts\support-files") % adds the function sem
+addpath("/Users/tizianocausin/Desktop/backUp20240609/summer2025/ponce_lab/exp_set/matlab_scripts/support-files")
 if ~exist('Stats','var')
     load("N:\Data-Ephys-MAT\Diablito-11082025-002_Stats.mat",'data'); % loads the datamat
     Stats = data; % structure with fields related to the experiment
