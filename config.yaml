@@ -16,6 +16,6 @@ leonardo_cluster:
 o2_cluster:
   paths:
     src_path: "/home/tic569/exp_set/python_scripts/src"
-    data_path: "/n/scratch/users/t/tic569/exp_set_data"
-    results_path: "/n/data1/hms/neurobio/ponce/lab/exp_set_res/silico"
+    data_path: "/n/data1/hms/neurobio/ponce/lab/tiziano_exp_set/exp_set_data"
+    results_path: "/n/data1/hms/neurobio/ponce/lab/tiziano_exp_set/exp_set_res/silico"
     neural_data_path: "/n/data1/hms/neurobio/ponce/lab/exp_set_data/data_monkey"
