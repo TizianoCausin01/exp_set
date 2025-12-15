@@ -1,0 +1,7 @@
+turning face
+face going to be occluded
+occluded face going to be uncovered
+face that moves towards the center
+face that moves from center to outside
+monkey locomotion
+
